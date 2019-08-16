@@ -1,10 +1,10 @@
 {
-  "name": "react-pusher-hooks",
+  "name": "use-pusher",
   "version": "1.0.0",
   "description": "exposes useChannel and useTrigger hooks for react apps",
   "author": "@mayteio",
   "license": "MIT",
-  "repository": "@mayteio/react-pusher-hooks",
+  "repository": "@mayteio/use-pusher",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -21,26 +21,43 @@
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "dequal": "^1.0.0",
+    "invariant": "^2.2.4"
+  },
   "peerDependencies": {
-    "react": "^16.8.6"
+    "pusher-js": "^5.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.3.1",
+    "@testing-library/react": "^9.1.2",
+    "pusher-js": "^5.0.0",
+    "react-dom": "^16.8.6",
+    "@testing-library/react-hooks": "^2.0.1",
+    "@types/invariant": "^2.2.30",
     "@types/jest": "^23.3.13",
+    "@types/pusher-js": "^4.2.2",
     "@types/react": "^16.7.22",
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
+    "jest-fetch-mock": "^2.1.2",
+    "pusher-js-mock": "^0.2.0",
     "react": "^16.8.6",
     "react-scripts": "^3.0.1",
+    "react-test-renderer": "^16.9.0",
     "rollup": "^1.1.2",
-    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-typescript2": "^0.19.2",
     "rollup-plugin-url": "^2.1.0",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.2.4"
   }
 }
