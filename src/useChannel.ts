@@ -10,11 +10,7 @@ import { useChannelOptions } from "./types";
  * Subscribe to channel events
  *
  * @example
- * useChannel(
- *   "my-channel",
- *   "my-event",
- *   (message) => console.log(message)
- * )
+ *
  */
 
 export function useChannel(

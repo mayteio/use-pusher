@@ -10,7 +10,7 @@ export const __PusherConsumer = __PusherContext.Consumer;
 
 /**
  * Provider for the pusher service in an app
- * @param props
+ * @param props Config for Pusher client
  */
 export function PusherProvider({
   clientKey,

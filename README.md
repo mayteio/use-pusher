@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-yarn add react-pusher-hooks
+yarn add use-pusher
 ```
 
 ## Usage

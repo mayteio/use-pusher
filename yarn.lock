@@ -992,6 +992,13 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^12.0.9"
 
+"@michaelfoidl/barrel-dts@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@michaelfoidl/barrel-dts/-/barrel-dts-1.0.2.tgz#3a64e7527e9f3117bfd5ce99b0768e9b0a03ee81"
+  integrity sha512-dJB59S4Q0i8/zAr2xRwcDrF0c0fb3HCyGySr09wZPKXYFDz3JSa7aYsF74R+hCSzIp+Bm4SHQDIW8tRkssZ9yA==
+  dependencies:
+    commander "~2.20.0"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -8833,6 +8840,13 @@ rollup-plugin-commonjs@^9.2.0:
     magic-string "^0.25.2"
     resolve "^1.10.0"
     rollup-pluginutils "^2.6.0"
+
+rollup-plugin-dts@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-dts/-/rollup-plugin-dts-1.1.6.tgz#dc081b62491aba5a200c566dd7d61b4cdc65f72b"
+  integrity sha512-CqrI0viXojw3ufqFyfJjoyM/zibcvBTr6Ky3BGK9jfuT79hn32PifLwusulC0z3TG0QW6tPfDCb3JI5EOaSjRg==
+  optionalDependencies:
+    "@babel/code-frame" "^7.5.5"
 
 rollup-plugin-node-resolve@^4.0.0:
   version "4.2.4"

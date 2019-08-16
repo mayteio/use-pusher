@@ -8,6 +8,7 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
+  "types": "./dist/index.d.ts",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
@@ -16,10 +17,7 @@
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c",
-    "start": "rollup -c -w",
-    "prepare": "yarn run build",
-    "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "start": "rollup -c -w"
   },
   "dependencies": {
     "dequal": "^1.0.0",
@@ -36,8 +34,6 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.3.1",
     "@testing-library/react": "^9.1.2",
-    "pusher-js": "^5.0.0",
-    "react-dom": "^16.8.6",
     "@testing-library/react-hooks": "^2.0.1",
     "@types/invariant": "^2.2.30",
     "@types/jest": "^23.3.13",
@@ -46,13 +42,16 @@
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
     "jest-fetch-mock": "^2.1.2",
+    "pusher-js": "^5.0.0",
     "pusher-js-mock": "^0.2.0",
     "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-scripts": "^3.0.1",
     "react-test-renderer": "^16.9.0",
     "rollup": "^1.1.2",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-dts": "^1.1.6",
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-typescript2": "^0.19.2",
