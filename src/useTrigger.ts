@@ -41,7 +41,12 @@ export function useTrigger() {
     [client, triggerEndpoint]
   );
 
-  if (!client.config.auth) {
+  if (!client) {
+    console.warn("No client supplied to provider yet. Probably initialising.");
+    return undefined;
+  }
+
+  if (!client && !client.config.auth) {
     console.warn(
       "No auth parameters provided to <PusherProvider />. Event will be unauthenticated."
     );

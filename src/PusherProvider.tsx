@@ -31,6 +31,7 @@ export function PusherProvider({
   // when the options passed to the provider change,
   // create a new instance of pusher
   const [pusherClient, setPusherClient] = useState();
+
   useEffect(() => {
     setPusherClient(new Pusher(clientKey, pusherOptions));
   }, useDeepCompareMemoize([clientKey, pusherOptions]));
