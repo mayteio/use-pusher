@@ -9,6 +9,9 @@ export interface PusherContextValues {
 
 export interface PusherProviderProps extends Config {
   clientKey: string;
+  cluster: string;
+  authEndpoint?: string;
+  auth?: any;
   triggerEndpoint?: string;
   children: ReactNode;
 }
