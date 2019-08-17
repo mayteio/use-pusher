@@ -1,8 +1,17 @@
 {
   "name": "use-pusher",
   "version": "1.0.1",
-  "description": "exposes useChannel and useTrigger hooks for react apps",
+  "description": "A wrapper around pusher-js for easy-as hooks in React.",
   "author": "@mayteio",
+  "keywords": [
+    "react",
+    "react-hooks",
+    "pusher",
+    "channels",
+    "pusher-js",
+    "websockets",
+    "realtime messaging"
+  ],
   "license": "MIT",
   "repository": "@mayteio/use-pusher",
   "main": "dist/index.js",
@@ -16,7 +25,9 @@
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c",
-    "start": "rollup -c -w"
+    "start": "rollup -c -w",
+    "types": "dts-bundle-generator -o ./dist/index.d.ts ./src/index.ts --external-imports=react,pusher-js",
+    "docs": "typedoc --out ./docs ./src --exclude */**/__tests__/*,mocks"
   },
   "dependencies": {
     "dequal": "^1.0.0",
@@ -56,6 +67,7 @@
     "rollup-plugin-typescript2": "^0.19.2",
     "rollup-plugin-url": "^2.1.0",
     "ts-jest": "^24.0.2",
+    "typedoc": "^0.15.0",
     "typescript": "^3.2.4"
   }
 }

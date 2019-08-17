@@ -59,7 +59,7 @@ const Example = () => {
 
 ## `useTrigger`
 
-A helper function to create a **server triggered** event. BYO server. Pass in `triggerEndpoint` prop to `<PusherProvider />`. Any auth headers from config.auth.headers automatically get passed to the `fetch` call.
+A helper function to create a **server triggered** event. BYO server (See [Trigger Server](#trigger-server) below). Pass in `triggerEndpoint` prop to `<PusherProvider />`. Any auth headers from config.auth.headers automatically get passed to the `fetch` call.
 
 ```tsx
 import {useTrigger} from 'use-pusher`;
@@ -92,7 +92,7 @@ const Example = () => {
 
 ## Trigger Server
 
-In order to trigger an event, you'll have to create a simple lambda (or an express server that's your thing) that handles. Below is a short lambda that can handle your triggered events.
+In order to trigger an event, you'll have to create a simple lambda (or an express server if that's your thing) that handles. Below is a short lambda that can handle your triggered events.
 
 ```tsx
 import Pusher from "pusher";
@@ -113,7 +113,7 @@ export async function handler(event) {
 
 Though normally you'd want to add some sort of authentication here.
 
-> I don't want a server though
+> _I don't want a server though_
 
 I hear ya. If you're feeling audacious, you can use [client events](https://pusher.com/docs/channels/using_channels/events#triggering-client-events) to push directly from the client, though this isn't recommended because security (thus no hook):
 
