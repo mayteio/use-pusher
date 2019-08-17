@@ -30,11 +30,12 @@ export default {
     resolve(),
     typescript({
       rollupCommonJSResolveHack: true,
-      clean: true
+      clean: true,
+      exclude: ["./src/__tests__/*"]
     }),
     babel({
       extensions: [".tsx"],
-      exclude: "node_modules/**",
+      exclude: ["node_modules/**", "./src/__tests__"],
       presets: ["@babel/env", "@babel/preset-react"]
     }),
     commonjs()
