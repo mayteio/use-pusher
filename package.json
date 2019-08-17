@@ -1,6 +1,6 @@
 {
   "name": "use-pusher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "exposes useChannel and useTrigger hooks for react apps",
   "author": "@mayteio",
   "license": "MIT",
