@@ -1,5 +1,5 @@
-import { Config } from "pusher-js";
-import { ReactNode } from "react";
+import { Config, AuthConfig } from "pusher-js";
+import * as React from "react";
 
 export interface PusherContextValues {
   client?: any | undefined;
@@ -11,9 +11,9 @@ export interface PusherProviderProps extends Config {
   clientKey: string;
   cluster: string;
   authEndpoint?: string;
-  auth?: any;
+  auth?: AuthConfig;
   triggerEndpoint?: string;
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export interface useChannelOptions {
