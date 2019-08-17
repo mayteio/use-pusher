@@ -27,7 +27,7 @@
     "build": "rollup -c",
     "start": "rollup -c -w",
     "types": "dts-bundle-generator -o ./dist/index.d.ts ./src/index.ts --external-imports=react,pusher-js",
-    "docs": "typedoc --out ./docs ./src --exclude */**/__tests__/*,mocks"
+    "docs": "typedoc --options ./typedoc.js ./src"
   },
   "dependencies": {
     "dequal": "^1.0.0",
@@ -69,5 +69,12 @@
     "ts-jest": "^24.0.2",
     "typedoc": "^0.15.0",
     "typescript": "^3.2.4"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "./src/index.ts",
+      "./src/mocks.ts",
+      "./src/types.ts"
+    ]
   }
 }

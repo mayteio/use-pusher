@@ -2,13 +2,15 @@
 
 > Easy as hooks that integrate with the [pusher-js](https://github.com/pusher/pusher-js) library.
 
-[![NPM](https://img.shields.io/npm/v/react-pusher-hooks.svg)](https://www.npmjs.com/package/react-pusher-hooks) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/use-pusher.svg)](https://www.npmjs.com/package/react-pusher-hooks) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
 yarn add use-pusher
 ```
+
+##### [API Reference/Docs](https://mayteio.github.io/use-pusher/)
 
 ## Usage
 
@@ -133,10 +135,6 @@ const Example = () => {
 ## Typescript
 
 This project was built using typescript, so types are built-in. Yeeeew!
-
-## API Reference
-
-TODO
 
 ## License
 
