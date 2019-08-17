@@ -21,8 +21,8 @@ export function useChannel(
   channelName: string,
   eventName?: string,
   onEvent?: (message: any) => void,
-  options?: useChannelOptions,
-  dependencies?: any[]
+  dependencies?: any[],
+  options?: useChannelOptions
 ) {
   // errors for missing arguments
   invariant(channelName, "channelName required to subscribe to a channel");
