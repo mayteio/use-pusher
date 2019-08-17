@@ -1,6 +1,6 @@
 {
   "name": "use-pusher",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A wrapper around pusher-js for easy-as hooks in React.",
   "author": "@mayteio",
   "keywords": [
@@ -30,9 +30,9 @@
     "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "types": "dts-bundle-generator -o ./dist/index.d.ts ./src/index.ts --external-imports=react,pusher-js",
+    "types": "dts-bundle-generator -o ./dist/index.d.ts ./src/index.ts --external-imports pusher-js",
     "docs": "typedoc --options ./typedoc.js ./src",
-    "release": "yarn test && yarn build && yarn publish"
+    "release": "yarn test && yarn build && yarn types && yarn publish"
   },
   "dependencies": {
     "dequal": "^1.0.0",
@@ -55,6 +55,7 @@
     "@types/pusher-js": "^4.2.2",
     "@types/react": "^16.7.22",
     "cross-env": "^5.2.0",
+    "dts-bundle-generator": "^3.2.0",
     "gh-pages": "^2.0.1",
     "jest-fetch-mock": "^2.1.2",
     "pusher-js": "^5.0.0",
