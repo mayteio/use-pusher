@@ -1,17 +1,23 @@
 import { useCallback } from "react";
 import { usePusher } from "./usePusher";
 import invariant from "invariant";
+import { useChannel } from "./useChannel";
 
 /**
  * Trigger events hook
  *
  * @example
  *
- * const trigger = useTrigger();
- * trigger('my-channel', 'my-event', {message: 'hello'});
+ * const trigger = useTrigger('my-channel');
+ * trigger('my-event', {message: 'hello'});
  */
-export function useTrigger() {
+export function useTrigger(channelName: string) {
   const { client, triggerEndpoint } = usePusher();
+
+  // subscribe to the channel we'll be triggering to.
+  useChannel(channelName);
+
+  invariant(channelName, "No channel specified to trigger to.");
 
   invariant(
     triggerEndpoint,
@@ -22,33 +28,26 @@ export function useTrigger() {
    * Memoized trigger function
    */
   const trigger = useCallback(
-    (channelName: string, eventName: string, data: any) => {
+    (eventName: string, data: any) => {
       const fetchOptions: RequestInit = {
         method: "POST",
         body: JSON.stringify({ channelName, eventName, data })
       };
 
-      if (client.config && client.config.auth) {
-        fetchOptions.headers = client.config.auth.headers;
+      if (client.current.config && client.current.config.auth) {
+        fetchOptions.headers = client.current.config.auth.headers;
       }
 
-      if (triggerEndpoint) {
-        return fetch(triggerEndpoint, fetchOptions);
-      }
-
-      return Promise.reject("No trigger endpoint specified");
+      // forcing triggerEndpoint to exist for TS here
+      // because invariant will throw during dev
+      return fetch(triggerEndpoint!, fetchOptions);
     },
-    [client, triggerEndpoint]
+    [client, triggerEndpoint, channelName]
   );
 
-  if (!client) {
-    console.warn("No client supplied to provider yet. Probably initialising.");
-    return undefined;
-  }
-
-  if (!client && !client.config.auth) {
+  if (!client.current.config.auth || !client.current.config.authEndpoint) {
     console.warn(
-      "No auth parameters provided to <PusherProvider />. Event will be unauthenticated."
+      "No auth parameters supplied to <PusherProvider />. Your events will be unauthenticated."
     );
   }
 

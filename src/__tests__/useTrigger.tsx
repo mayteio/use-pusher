@@ -19,6 +19,8 @@ beforeEach(() => {
 
 test("should push event to trigger endpoint without authentication and warn", async () => {
   (fetch as FetchMock).mockResponseOnce("success");
+  jest.spyOn(global.console, "warn");
+
   const props = {
     clientKey: "client-key",
     cluster: "ap4",
@@ -28,13 +30,17 @@ test("should push event to trigger endpoint without authentication and warn", as
   const wrapper = ({ children }: any) => (
     <PusherProvider {...props}>{children}</PusherProvider>
   );
-  const { result } = renderHook(() => useTrigger(), { wrapper });
+  const { result } = renderHook(() => useTrigger("my-channel"), { wrapper });
 
-  const res = await result
-    .current("my-channel", "my-event", "test")
-    .then(res => res.text());
+  const trigger = result.current;
+
+  const res = await trigger("my-event", "test").then(res => res.text());
   expect(fetch as FetchMock).toHaveBeenCalledTimes(1);
   expect(res).toBe("success");
+
+  expect(global.console.warn).toHaveBeenCalledWith(
+    "No auth parameters supplied to <PusherProvider />. Your events will be unauthenticated."
+  );
 });
 
 test("should push event to trigger endpoint with authentication", async () => {
@@ -52,7 +58,7 @@ test("should push event to trigger endpoint with authentication", async () => {
   const wrapper = ({ children }: any) => (
     <PusherProvider {...props}>{children}</PusherProvider>
   );
-  const { result } = renderHook(() => useTrigger(), { wrapper });
+  const { result } = renderHook(() => useTrigger("my-channel"), { wrapper });
 
   const expectedOptions = {
     method: "POST",
@@ -64,9 +70,9 @@ test("should push event to trigger endpoint with authentication", async () => {
     headers: { Authorization: "Bearer token" }
   };
 
-  const res = await result
-    .current("my-channel", "my-event", "test")
-    .then(res => res.text());
+  const trigger = result.current;
+
+  const res = await trigger("my-event", "test").then((res: any) => res.text());
 
   expect(fetch as FetchMock).toHaveBeenCalledTimes(1);
   expect(fetch as FetchMock).toHaveBeenCalledWith(
@@ -75,4 +81,17 @@ test("should push event to trigger endpoint with authentication", async () => {
   );
 
   expect(res).toBe("success");
+});
+
+test("should throw an error when trigger endpoint wasn't provided (JS only, TS catches it.)", () => {
+  const wrapper = ({ children }: any) => (
+    <PusherProvider clientKey="a" cluster="b">
+      {children}
+    </PusherProvider>
+  );
+
+  const { result } = renderHook(() => useTrigger("my-channel"), { wrapper });
+  expect(result.error.message).toBe(
+    "No trigger endpoint specified to <PusherProvider />. Cannot trigger an event."
+  );
 });
