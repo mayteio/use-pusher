@@ -14,6 +14,8 @@ yarn add use-pusher
 
 ## Usage
 
+### ⚠️ Still a WIP. Not production ready yet.
+
 You must wrap your app with a `PusherProvider` and pass it config props for [pusher-js](https://github.com/pusher/pusher-js) initialisation initialisation.
 
 ```tsx

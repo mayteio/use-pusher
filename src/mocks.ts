@@ -34,4 +34,6 @@ export class PusherMock {
 
   subscribe = jest.fn(() => new ChannelMock());
   unsubscribe = jest.fn();
+
+  disconnect = jest.fn();
 }

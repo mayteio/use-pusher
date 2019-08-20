@@ -13,6 +13,7 @@ export interface PusherProviderProps extends Config {
   authEndpoint?: string;
   auth?: AuthConfig;
   triggerEndpoint?: string;
+  defer?: boolean;
   children: React.ReactNode;
 }
 
