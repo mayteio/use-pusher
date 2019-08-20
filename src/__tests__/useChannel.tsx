@@ -26,10 +26,14 @@ test("should fill default options", () => {
   const wrapper = ({ children }: any) => (
     <PusherProvider {...config}>{children}</PusherProvider>
   );
-  const { result, unmount } = renderHook(() => useChannel("my-channel"), {
-    wrapper
-  });
+  const { result, unmount, rerender } = renderHook(
+    () => useChannel("my-channel"),
+    {
+      wrapper
+    }
+  );
 
+  rerender();
   const { channel } = result.current;
   expect(Object.keys(channel.callbacks)).toHaveLength(0);
 
@@ -78,6 +82,8 @@ test("should subscribe to channel as prop changes", () => {
   expect(onEvent).toHaveBeenCalledTimes(1);
   expect(onEvent).toHaveBeenCalledWith("test");
   unmount();
+  rerender();
+  console.log(channel);
 });
 
 test("should skip channel subscription if option is passed", () => {

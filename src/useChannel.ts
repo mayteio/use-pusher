@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { EventCallback } from "pusher-js";
 import invariant from "invariant";
@@ -43,44 +43,23 @@ export function useChannel(
    * Channel subscription
    */
   useEffect(() => {
-    if (client.current && !hookOptions.skip) {
-      // subscribe to the channel
-      const pusherChannel = client.current.subscribe(channelName);
-      setChannel(pusherChannel);
-    }
-  }, [client.current, hookOptions.skip]);
+    if (!client.current || hookOptions.skip) return;
 
-  const previousChannelName = useRef<string | undefined>();
-  useEffect(() => {
-    if (previousChannelName.current === channelName) return;
-    const clientRef = client.current;
-    return () => {
-      clientRef.unsubscribe(channelName);
-    };
-  });
-  // track channelName for unsubscription.
-  useEffect(() => {
-    previousChannelName.current = channelName;
-  });
+    // subscribe to the channel
+    const pusherChannel = client.current.subscribe(channelName);
+    setChannel(pusherChannel);
+    return () => client.current.unsubscribe(channelName);
+  }, [client.current, hookOptions.skip, channelName]);
 
   /**
    * Event binding
    */
   const callback = useCallback<EventCallback>(eventHandler, deps);
   useEffect(() => {
-    if (channel && eventName && !hookOptions.skip) {
-      channel.bind(eventName, callback);
-    }
+    if (!channel || !eventName || hookOptions.skip) return;
+    channel.bind(eventName, callback);
+    return () => channel.unbind(eventName, callback);
   }, [channel, eventName, hookOptions.skip, callback]);
-
-  // when the callback changes, unbind the old one.
-  useEffect(() => {
-    return () => {
-      if (client && channel && eventName) {
-        channel.unbind(eventName, callback);
-      }
-    };
-  }, [client, channel, callback, eventName]);
 
   return { channel };
 }
