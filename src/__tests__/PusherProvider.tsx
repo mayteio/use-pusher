@@ -27,14 +27,12 @@ const authConfig = {
 describe("PusherProvider", () => {
   test("should render without error", () => {
     render(<PusherProvider clientKey="a" cluster="b" children="Test" />);
-    expect(MockPusher.prototype.disconnect).toHaveBeenCalledTimes(1);
   });
 
   test("should re-render when auth params are supplied.", () => {
     const { container } = render(<PusherProvider {...config} />);
-    expect(MockPusher.prototype.disconnect).toHaveBeenCalledTimes(1);
     render(<PusherProvider {...config} {...authConfig} />, { container });
-    expect(MockPusher.prototype.disconnect).toHaveBeenCalledTimes(2);
+    expect(MockPusher.prototype.disconnect).toHaveBeenCalledTimes(1);
   });
 
   test("should not re-create instance if props are the same", () => {

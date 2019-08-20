@@ -31,8 +31,9 @@ export function PusherProvider({
   if (authEndpoint) config.authEndpoint = authEndpoint;
   if (auth) config.auth = auth;
 
-  const pusherClientRef = useRef<Pusher>(new PusherClass(clientKey, config));
+  const pusherClientRef = useRef<Pusher>();
   useEffect(() => {
+    // if client exists and options are the same, skip.
     if (
       dequal(previousConfig.current, config) &&
       pusherClientRef.current !== undefined
@@ -40,10 +41,15 @@ export function PusherProvider({
       return;
     }
 
+    // optional defer parameter skips creating the class.
+    // handy if you want to wait for something async like
+    // a JWT before creating it.
     if (!defer) {
-      pusherClientRef.current && pusherClientRef.current.disconnect();
       pusherClientRef.current = new PusherClass(clientKey, config);
     }
+
+    return () =>
+      pusherClientRef.current && pusherClientRef.current.disconnect();
   }, [clientKey, config, defer, pusherClientRef]);
 
   // track config for comparison
