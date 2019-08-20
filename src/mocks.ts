@@ -55,10 +55,12 @@ class PusherPresenceChannelMock<T> extends PusherChannelMock {
 export { PusherPresenceChannelMock };
 
 class PusherMock {
+  key: string;
   config: Config;
   channels: { [name: string]: PusherChannelMock };
   /** Initialize PusherMock with empty channels object. */
   constructor(key: string, config: Config) {
+    this.key = key;
     this.config = config;
     this.channels = {};
   }
