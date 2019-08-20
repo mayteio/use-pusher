@@ -30,8 +30,10 @@ test("should push event to trigger endpoint without authentication and warn", as
   const wrapper = ({ children }: any) => (
     <PusherProvider {...props}>{children}</PusherProvider>
   );
-  const { result } = renderHook(() => useTrigger("my-channel"), { wrapper });
-
+  const { result, rerender } = renderHook(() => useTrigger("my-channel"), {
+    wrapper
+  });
+  rerender();
   const trigger = result.current;
 
   const res = await trigger("my-event", "test").then(res => res.text());
@@ -58,7 +60,9 @@ test("should push event to trigger endpoint with authentication", async () => {
   const wrapper = ({ children }: any) => (
     <PusherProvider {...props}>{children}</PusherProvider>
   );
-  const { result } = renderHook(() => useTrigger("my-channel"), { wrapper });
+  const { result, rerender } = renderHook(() => useTrigger("my-channel"), {
+    wrapper
+  });
 
   const expectedOptions = {
     method: "POST",
@@ -70,6 +74,7 @@ test("should push event to trigger endpoint with authentication", async () => {
     headers: { Authorization: "Bearer token" }
   };
 
+  rerender();
   const trigger = result.current;
 
   const res = await trigger("my-event", "test").then((res: any) => res.text());
@@ -90,7 +95,9 @@ test("should throw an error when trigger endpoint wasn't provided (JS only, TS c
     </PusherProvider>
   );
 
-  const { result } = renderHook(() => useTrigger("my-channel"), { wrapper });
+  const { result } = renderHook(() => useTrigger("my-channel"), {
+    wrapper
+  });
   expect(result.error.message).toBe(
     "No trigger endpoint specified to <PusherProvider />. Cannot trigger an event."
   );

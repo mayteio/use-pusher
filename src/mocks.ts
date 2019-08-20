@@ -1,39 +1,104 @@
-import { Config } from "pusher-js";
+import { Member, Config } from "pusher-js";
 
-export class ChannelMock {
-  binding: any = {
-    eventType: undefined,
-    onEvent: undefined
-  };
-  emit = jest.fn((eventName: string, data: any) => {
-    if (
-      this.binding.onEvent !== undefined &&
-      this.binding.eventType === eventName
-    ) {
-      this.binding.onEvent(data);
-    }
-  });
-  bind = jest.fn((eventName: string, onEvent: any) => {
-    this.binding.onEvent = onEvent;
-    this.binding.eventType = eventName;
-  });
-  unbind = jest.fn(() => {
-    this.binding.onEvent = undefined;
-    this.binding.eventType = undefined;
-  });
-}
-
-export class PusherMock {
-  clientKey: undefined | string;
-  config: undefined | Config;
-
-  constructor(clientKey: string, config: Config) {
-    this.config = config;
-    this.clientKey = clientKey;
+class PusherChannelMock {
+  /** Initialize PusherChannelMock with callbacks object. */
+  callbacks: { [name: string]: Function[] };
+  constructor() {
+    this.callbacks = {};
   }
 
-  subscribe = jest.fn(() => new ChannelMock());
-  unsubscribe = jest.fn();
+  /**
+   * Bind callback to an event name.
+   * @param {String} name - name of the event.
+   * @param {Function} callback - callback to be called on event.
+   */
+  bind(name: string, callback: Function) {
+    this.callbacks[name] = this.callbacks[name] || [];
+    this.callbacks[name].push(callback);
+  }
 
-  disconnect = jest.fn();
+  /**
+   * Unbind callback from an event name.
+   * @param {String} name - name of the event.
+   * @param {Function} callback - callback to be called on event.
+   */
+  unbind(name: string, callback: Function) {
+    this.callbacks[name] = (this.callbacks[name] || []).filter(
+      cb => cb !== callback
+    );
+  }
+
+  /**
+   * Emit event with data.
+   * @param {String} name - name of the event.
+   * @param {*} data - data you want to pass in to callback function that gets * called.
+   */
+  emit(name: string, data: any) {
+    const callbacks = this.callbacks[name];
+
+    if (callbacks) {
+      callbacks.forEach(cb => cb(data));
+    }
+  }
 }
+
+export { PusherChannelMock };
+
+class PusherPresenceChannelMock<T> extends PusherChannelMock {
+  members: { members: { [id: string]: Member<T> } };
+  constructor() {
+    super();
+    this.members = { members: {} };
+  }
+}
+
+export { PusherPresenceChannelMock };
+
+class PusherMock {
+  config: Config;
+  channels: { [name: string]: PusherChannelMock };
+  /** Initialize PusherMock with empty channels object. */
+  constructor(key: string, config: Config) {
+    this.config = config;
+    this.channels = {};
+  }
+
+  /**
+   * Get channel by its name.
+   * @param {String} name - name of the channel.
+   * @returns {PusherChannelMock} PusherChannelMock object that represents channel
+   */
+  channel(name: string) {
+    if (!this.channels[name]) {
+      this.channels[name] = name.includes("-presence")
+        ? new PusherPresenceChannelMock()
+        : new PusherChannelMock();
+    }
+
+    return this.channels[name];
+  }
+
+  /**
+   * Mock subscribing to a channel.
+   * @param {String} name - name of the channel.
+   * @returns {PusherChannelMock} PusherChannelMock object that represents channel
+   */
+  subscribe(name: string) {
+    return this.channel(name);
+  }
+
+  /**
+   * Unsubscribe from a mocked channel.
+   * @param {String} name - name of the channel.
+   */
+  unsubscribe(name: string) {
+    if (name in this.channels) {
+      this.channels[name].callbacks = {};
+      delete this.channels[name];
+    }
+  }
+
+  disconnect() {}
+}
+
+export { PusherMock };
