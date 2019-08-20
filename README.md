@@ -4,6 +4,8 @@
 
 [![NPM](https://img.shields.io/npm/v/use-pusher.svg)](https://www.npmjs.com/package/react-pusher-hooks) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+### ⚠️ Still a WIP. Not production ready yet.
+
 ## Install
 
 ```bash
@@ -13,8 +15,6 @@ yarn add use-pusher
 ##### [API Reference/Docs](https://mayteio.github.io/use-pusher/)
 
 ## Usage
-
-### ⚠️ Still a WIP. Not production ready yet.
 
 You must wrap your app with a `PusherProvider` and pass it config props for [pusher-js](https://github.com/pusher/pusher-js) initialisation initialisation.
 
@@ -59,6 +59,24 @@ const Example = () => {
 
   return messages.map(event => <p key={event.id}>{event.message}</p>);
 };
+```
+
+## `usePresenceChannel`
+
+Like a regular channel but with member awareness.
+
+```tsx
+const Example= () => {
+  const {members} = usePresenceChannel('presence-awesome');
+
+  return (
+    <ul>
+      {Object.entries(members).map([id, info]) => (
+        <li key={id}>name: {info.name}</li>
+      )}
+    </ul>
+  )
+}
 ```
 
 ## `useTrigger`

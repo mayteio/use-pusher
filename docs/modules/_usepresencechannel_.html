@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ChannelMock | use-pusher</title>
+	<title>&quot;usePresenceChannel&quot; | use-pusher</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,112 +56,104 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_mocks_.html">&quot;mocks&quot;</a>
-				</li>
-				<li>
-					<a href="_mocks_.channelmock.html">ChannelMock</a>
+					<a href="_usepresencechannel_.html">&quot;usePresenceChannel&quot;</a>
 				</li>
 			</ul>
-			<h1>Class ChannelMock</h1>
+			<h1>External module &quot;usePresenceChannel&quot;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">ChannelMock</span>
-					</li>
-				</ul>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_mocks_.channelmock.html#bind" class="tsd-kind-icon">bind</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_mocks_.channelmock.html#emit" class="tsd-kind-icon">emit</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_mocks_.channelmock.html#unbind" class="tsd-kind-icon">unbind</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Object literals</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-object-literal tsd-parent-kind-class"><a href="_mocks_.channelmock.html#binding" class="tsd-kind-icon">binding</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_usepresencechannel_.html#usepresencechannel" class="tsd-kind-icon">use<wbr>Presence<wbr>Channel</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="bind" class="tsd-anchor"></a>
-					<h3>bind</h3>
-					<div class="tsd-signature tsd-kind-icon">bind<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Mock</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;jest.fn((eventName: string, onEvent: any) &#x3D;&gt; {this.binding.onEvent &#x3D; onEvent;this.binding.eventType &#x3D; eventName;})</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/daced79/src/mocks.ts#L16">mocks.ts:16</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="emit" class="tsd-anchor"></a>
-					<h3>emit</h3>
-					<div class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Mock</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;jest.fn((eventName: string, data: any) &#x3D;&gt; {if (this.binding.onEvent !&#x3D;&#x3D; undefined &amp;&amp;this.binding.eventType &#x3D;&#x3D;&#x3D; eventName) {this.binding.onEvent(data);}})</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/daced79/src/mocks.ts#L8">mocks.ts:8</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="unbind" class="tsd-anchor"></a>
-					<h3>unbind</h3>
-					<div class="tsd-signature tsd-kind-icon">unbind<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Mock</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;jest.fn(() &#x3D;&gt; {this.binding.onEvent &#x3D; undefined;this.binding.eventType &#x3D; undefined;})</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/daced79/src/mocks.ts#L20">mocks.ts:20</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Object literals</h2>
-				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
-					<a name="binding" class="tsd-anchor"></a>
-					<h3>binding</h3>
-					<div class="tsd-signature tsd-kind-icon">binding<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/daced79/src/mocks.ts#L4">mocks.ts:4</a></li>
-						</ul>
-					</aside>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="binding.eventtype" class="tsd-anchor"></a>
-						<h3>event<wbr>Type</h3>
-						<div class="tsd-signature tsd-kind-icon">event<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> =&nbsp;undefined</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/daced79/src/mocks.ts#L5">mocks.ts:5</a></li>
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="usepresencechannel" class="tsd-anchor"></a>
+					<h3>use<wbr>Presence<wbr>Channel</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">use<wbr>Presence<wbr>Channel<span class="tsd-signature-symbol">(</span>channelName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, eventName<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, onEvent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span>, dependencies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_types_.usechanneloptions.html" class="tsd-signature-type">useChannelOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/900310a/src/usePresenceChannel.ts#L25">usePresenceChannel.ts:25</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Subscribe to presence channel events and get members back</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><p>const {members} = usePresenceChannel(
+											&quot;my-channel&quot;,
+											&quot;my-event&quot;,
+											(message) =&gt; console.log(message),
+										)</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>channelName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>name of presence channel. Should have presence- suffix.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> eventName: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>name of event to bind to</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> onEvent: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>callback to fire when event is called</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> dependencies: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>dependencies array that onEvent uses</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_types_.usechanneloptions.html" class="tsd-signature-type">useChannelOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>optional argument to skip events</p>
+									</div>
+								</li>
 							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="binding.onevent" class="tsd-anchor"></a>
-						<h3>on<wbr>Event</h3>
-						<div class="tsd-signature tsd-kind-icon">on<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> =&nbsp;undefined</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/daced79/src/mocks.ts#L6">mocks.ts:6</a></li>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>channel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PresenceChannel</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>members<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
+									<ul class="tsd-parameters">
+									</ul>
+								</li>
 							</ul>
-						</aside>
-					</section>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -172,50 +164,32 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_pusherprovider_.html">"<wbr>Pusher<wbr>Provider"</a>
+						<a href="_pusherprovider_.html">"<wbr>Pusher<wbr>Provider"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_mocks_.html">"mocks"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_types_.html">"types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_usechannel_.html">"use<wbr>Channel"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_mocks_.html">"mocks"</a>
+						<a href="_usepresencechannel_.html">"use<wbr>Presence<wbr>Channel"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_types_.html">"types"</a>
+						<a href="_usepusher_.html">"use<wbr>Pusher"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_usechannel_.html">"use<wbr>Channel"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_usepusher_.html">"use<wbr>Pusher"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_usetrigger_.html">"use<wbr>Trigger"</a>
+						<a href="_usetrigger_.html">"use<wbr>Trigger"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_mocks_.channelmock.html" class="tsd-kind-icon">Channel<wbr>Mock</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_mocks_.channelmock.html#bind" class="tsd-kind-icon">bind</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_mocks_.channelmock.html#emit" class="tsd-kind-icon">emit</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_mocks_.channelmock.html#unbind" class="tsd-kind-icon">unbind</a>
-							</li>
-							<li class=" tsd-kind-object-literal tsd-parent-kind-class">
-								<a href="_mocks_.channelmock.html#binding" class="tsd-kind-icon">binding</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="after-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_mocks_.pushermock.html" class="tsd-kind-icon">Pusher<wbr>Mock</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_usepresencechannel_.html#usepresencechannel" class="tsd-kind-icon">use<wbr>Presence<wbr>Channel</a>
 					</li>
 				</ul>
 			</nav>
