@@ -83,7 +83,6 @@ test("should subscribe to channel as prop changes", () => {
   expect(onEvent).toHaveBeenCalledWith("test");
   unmount();
   rerender();
-  console.log(channel);
 });
 
 test("should skip channel subscription if option is passed", () => {
