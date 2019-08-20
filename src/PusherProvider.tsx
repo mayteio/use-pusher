@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Pusher, { Config } from "pusher-js";
+import React, { useEffect, useRef } from "react";
+import PusherClass, { Pusher, Config } from "pusher-js";
 import invariant from "invariant";
-import { useDeepCompareMemoize } from "./helpers";
+// import { useDeepCompareMemoize } from "./helpers";
 import { PusherContextValues, PusherProviderProps } from "./types";
+import dequal from "dequal";
 
 // context setup
-export const __PusherContext = React.createContext<PusherContextValues>({});
-export const __PusherConsumer = __PusherContext.Consumer;
+const PusherContext = React.createContext<PusherContextValues>({});
+export const __PusherContext = PusherContext;
+export const __PusherConsumer = PusherContext.Consumer;
 
 /**
  * Provider for the pusher service in an app
@@ -18,28 +20,42 @@ export function PusherProvider({
   triggerEndpoint,
   authEndpoint,
   auth,
+  defer = false,
   ...props
 }: PusherProviderProps) {
   // errors when required props are not passed.
   invariant(clientKey, "A client key is required for pusher");
   invariant(cluster, "A cluster is required for pusher");
 
-  const pusherOptions: Config = { cluster };
-  if (authEndpoint) pusherOptions.authEndpoint = authEndpoint;
-  if (auth) pusherOptions.auth = auth;
+  const config: Config = { cluster };
+  if (authEndpoint) config.authEndpoint = authEndpoint;
+  if (auth) config.auth = auth;
 
-  // when the options passed to the provider change,
-  // create a new instance of pusher
-  const [pusherClient, setPusherClient] = useState();
-
+  const pusherClientRef = useRef<Pusher>(new PusherClass(clientKey, config));
   useEffect(() => {
-    setPusherClient(new Pusher(clientKey, pusherOptions));
-  }, useDeepCompareMemoize([clientKey, pusherOptions]));
+    if (
+      dequal(previousConfig.current, config) &&
+      pusherClientRef.current !== undefined
+    ) {
+      return;
+    }
+
+    if (!defer) {
+      pusherClientRef.current && pusherClientRef.current.disconnect();
+      pusherClientRef.current = new PusherClass(clientKey, config);
+    }
+  }, [clientKey, config, defer, pusherClientRef]);
+
+  // track config for comparison
+  const previousConfig = useRef<Config | undefined>();
+  useEffect(() => {
+    previousConfig.current = config;
+  });
 
   return (
-    <__PusherContext.Provider
+    <PusherContext.Provider
       value={{
-        client: pusherClient,
+        client: pusherClientRef,
         triggerEndpoint
       }}
       {...props}

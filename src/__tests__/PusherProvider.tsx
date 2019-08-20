@@ -3,43 +3,48 @@ import { render, cleanup } from "@testing-library/react";
 import { PusherProvider } from "../PusherProvider";
 import { default as MockPusher } from "pusher-js";
 
-jest.mock("pusher-js", () => {
-  const { PusherMock } = require("../mocks.ts");
-  return {
-    __esModule: true,
-    default: jest.fn((clientKey, config) => new PusherMock(clientKey, config))
-  };
-});
-
-const setup = (props: any = {}) =>
-  render(<PusherProvider {...props}>Test</PusherProvider>);
-
-const defaultProps = { clientKey: "client-key", cluster: "ap4" };
-
 beforeEach(() => {
-  jest.resetAllMocks();
   cleanup();
+  jest.resetAllMocks();
 });
 
-test("should initialise pusher when required props are passed", () => {
-  setup(defaultProps);
-  expect(MockPusher).toHaveBeenCalledTimes(1);
+jest.mock("pusher-js", () => {
+  const { PusherMock } = require("pusher-js-mock");
+  PusherMock.prototype.disconnect = jest.fn();
+  return PusherMock;
 });
 
-test("should re-initialise Pusher when auth parameters are provided", () => {
-  const { container } = setup(defaultProps);
-  const authProps = {
-    authEndpoint: "auth-endpoint",
-    auth: {
-      headers: { Authorization: "Bearer token" }
-    }
-  };
-  render(
-    <PusherProvider {...defaultProps} {...authProps}>
-      Test
-    </PusherProvider>,
-    { container }
-  );
+const config = {
+  clientKey: "client-key",
+  cluster: "ap4",
+  children: "Test"
+};
+const authConfig = {
+  auth: {},
+  authEndpoint: "endpoint"
+};
 
-  expect(MockPusher).toHaveBeenCalledTimes(2);
+describe("PusherProvider", () => {
+  test("should render without error", () => {
+    render(<PusherProvider clientKey="a" cluster="b" children="Test" />);
+    expect(MockPusher.prototype.disconnect).toHaveBeenCalledTimes(1);
+  });
+
+  test("should re-render when auth params are supplied.", () => {
+    const { container } = render(<PusherProvider {...config} />);
+    expect(MockPusher.prototype.disconnect).toHaveBeenCalledTimes(1);
+    render(<PusherProvider {...config} {...authConfig} />, { container });
+    expect(MockPusher.prototype.disconnect).toHaveBeenCalledTimes(2);
+  });
+
+  test("should not re-create instance if props are the same", () => {
+    const { container } = render(<PusherProvider {...config} />);
+    render(<PusherProvider {...config} />, { container });
+    expect(MockPusher.prototype.disconnect).toHaveBeenCalledTimes(1);
+  });
+
+  test("should not re-create instance if defer is present", () => {
+    render(<PusherProvider {...config} defer={true} />);
+    expect(MockPusher.prototype.disconnect).toHaveBeenCalledTimes(0);
+  });
 });
