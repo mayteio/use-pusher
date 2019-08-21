@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { usePusher } from "./usePusher";
 import invariant from "invariant";
 import { useChannel } from "./useChannel";
@@ -36,6 +36,10 @@ export function useTrigger(channelName: string) {
 
       if (client.current.config && client.current.config.auth) {
         fetchOptions.headers = client.current.config.auth.headers;
+      } else {
+        console.warn(
+          "No auth parameters supplied to <PusherProvider />. Your events will be unauthenticated."
+        );
       }
 
       // forcing triggerEndpoint to exist for TS here
@@ -44,12 +48,6 @@ export function useTrigger(channelName: string) {
     },
     [client, triggerEndpoint, channelName]
   );
-
-  if (!client.current.config.auth || !client.current.config.authEndpoint) {
-    console.warn(
-      "No auth parameters supplied to <PusherProvider />. Your events will be unauthenticated."
-    );
-  }
 
   return trigger;
 }

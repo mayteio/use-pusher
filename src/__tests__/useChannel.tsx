@@ -22,80 +22,22 @@ const config = {
   children: "Test"
 };
 
-test("should fill default options", () => {
-  const wrapper = ({ children }: any) => (
-    <PusherProvider {...config}>{children}</PusherProvider>
-  );
-  const { result, unmount, rerender } = renderHook(
-    () => useChannel("my-channel"),
-    {
-      wrapper
-    }
-  );
+describe("useChannel hook", () => {
+  test("should subscribe to a channel with default options", () => {
+    const wrapper = ({ children }: any) => (
+      <PusherProvider {...config}>{children}</PusherProvider>
+    );
+    const { result, unmount, rerender } = renderHook(
+      () => useChannel("my-channel"),
+      {
+        wrapper
+      }
+    );
 
-  rerender();
-  const { channel } = result.current;
-  expect(Object.keys(channel.callbacks)).toHaveLength(0);
+    rerender();
+    const { channel } = result.current;
+    expect(Object.keys(channel.callbacks)).toHaveLength(0);
 
-  unmount();
-});
-
-test("should subscribe to channel and emit events", async () => {
-  const onEvent = jest.fn();
-  const wrapper = ({ children }: any) => (
-    <PusherProvider {...config}>{children}</PusherProvider>
-  );
-  const { result, unmount, rerender } = renderHook(
-    () => useChannel("my-channel", "my-event", onEvent, [], { skip: false }),
-    { wrapper }
-  );
-
-  rerender();
-
-  const { channel } = result.current;
-
-  channel.emit("my-event", "test");
-  expect(channel.callbacks["my-event"]).toBeTruthy();
-  expect(onEvent).toHaveBeenCalledTimes(1);
-  expect(onEvent).toHaveBeenCalledWith("test");
-
-  unmount();
-});
-
-test("should subscribe to channel as prop changes", () => {
-  const onEvent = jest.fn();
-  const wrapper = ({ children }: any) => (
-    <PusherProvider {...config}>{children}</PusherProvider>
-  );
-  const { result, unmount, rerender } = renderHook(
-    ([a = "my-channel", b = "my-event", c = onEvent]: any) =>
-      useChannel(a, b, c),
-    { wrapper }
-  );
-
-  rerender(["your-channel", "some-event", onEvent]);
-  const { channel } = result.current;
-
-  // simulate event
-  channel.emit("some-event", "test");
-
-  expect(onEvent).toHaveBeenCalledTimes(1);
-  expect(onEvent).toHaveBeenCalledWith("test");
-  unmount();
-  rerender();
-});
-
-test("should skip channel subscription if option is passed", () => {
-  const wrapper = ({ children }: any) => (
-    <PusherProvider {...config}>{children}</PusherProvider>
-  );
-  const { result, unmount } = renderHook(
-    () => useChannel("a", "b", () => {}, [], { skip: true }),
-    { wrapper }
-  );
-
-  const { channel } = result.current;
-  expect(channel).toBeUndefined();
-
-  unmount();
+    unmount();
+  });
 });

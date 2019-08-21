@@ -26,8 +26,7 @@ export function usePresenceChannel(
   channelName: string,
   eventName?: string,
   onEvent?: (message: any) => void,
-  dependencies?: any[],
-  options?: useChannelOptions
+  dependencies?: any[]
 ) {
   // errors for missing arguments
   invariant(channelName, "channelName required to subscribe to a channel");
@@ -37,20 +36,16 @@ export function usePresenceChannel(
   );
 
   // Get regular channel functionality
-  const { channel } = useChannel(
-    channelName,
-    eventName,
-    onEvent,
-    dependencies,
-    options
-  );
+  const { channel } = useChannel(channelName, eventName, onEvent, dependencies);
 
   const [members, setMembers] = useState({});
+  const [myID, setMyID] = useState();
   /**
    * Get members info on subscription success
    */
   const handleSubscriptionSuccess = useCallback((members: any) => {
     setMembers(members.members);
+    setMyID(members.myID);
   }, []);
 
   /**
@@ -96,9 +91,9 @@ export function usePresenceChannel(
         channel.unbind("pusher:member_removed", handleRemove);
       }
     };
-  }, [channel]);
+  }, [channel, handleSubscriptionSuccess, handleAdd, handleRemove]);
 
   const presenceChannel = channel as PresenceChannel<any>;
 
-  return { channel: presenceChannel, members };
+  return { channel: presenceChannel, members, myID };
 }

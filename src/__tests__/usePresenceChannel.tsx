@@ -14,7 +14,6 @@ jest.mock("pusher-js", () => {
   const { PusherMock } = require("../mocks");
 
   // monkey patch missing function
-  PusherMock.prototype.disconnect = () => {};
   return PusherMock;
 });
 
@@ -64,30 +63,48 @@ describe("usePresenceChannel hook", () => {
     // emits members object
     await act(async () => {
       result.current.channel.emit("pusher:subscription_succeeded", {
+        myID: "0a",
         members: {
-          "0a": {
-            id: "0a",
+          "0b": {
+            id: "0b",
             info: {}
           }
         }
       });
     });
 
-    expect(result.current.members["0a"]).toBeDefined();
+    expect(result.current.members["0b"]).toBeDefined();
     rerender();
 
     act(() => {
-      result.current.channel.emit("pusher:member_added", {
+      result.current.channel.emit("pusher:member_removed", {
         id: "0b",
         info: {}
       });
-      result.current.channel.emit("pusher:member_removed", {
-        id: "0a",
+      result.current.channel.emit("pusher:member_added", {
+        id: "0c",
         info: {}
       });
     });
 
-    expect(result.current.members["0a"]).toBeUndefined();
-    expect(result.current.members["0b"]).toBeDefined();
+    expect(result.current.members["0b"]).toBeUndefined();
+    expect(result.current.members["0c"]).toBeDefined();
+  });
+
+  test("should return myID if present", async () => {
+    const { result, rerender } = setup("presence-channel");
+    rerender();
+    await act(async () => {
+      result.current.channel.emit("pusher:subscription_succeeded", {
+        myID: "0a",
+        members: {
+          "0b": {
+            id: "0b",
+            info: {}
+          }
+        }
+      });
+    });
+    expect(result.current.myID).toBe("0a");
   });
 });

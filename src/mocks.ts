@@ -45,10 +45,10 @@ class PusherChannelMock {
 export { PusherChannelMock };
 
 class PusherPresenceChannelMock<T> extends PusherChannelMock {
-  members: { members: { [id: string]: Member<T> } };
+  members: { members: { [id: string]: Member<T> }; myID: string };
   constructor() {
     super();
-    this.members = { members: {} };
+    this.members = { members: {}, myID: "0a" };
   }
 }
 
