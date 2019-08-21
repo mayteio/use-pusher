@@ -1,3 +1,5 @@
+// Based off https://github.com/nikolalsvk/pusher-js-mock
+
 import { Member, Config } from "pusher-js";
 
 class PusherChannelMock {

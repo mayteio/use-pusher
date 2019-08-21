@@ -2,7 +2,7 @@
 
 > Easy as hooks that integrate with the [pusher-js](https://github.com/pusher/pusher-js) library.
 
-[![NPM](https://img.shields.io/npm/v/use-pusher.svg)](https://www.npmjs.com/package/react-pusher-hooks) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/use-pusher.svg)](https://www.npmjs.com/package/react-pusher-hooks) ![Typed](https://badgen.net/badge//types/Typescript?icon=typescript)
 
 ##### [API Reference/Docs](https://mayteio.github.io/use-pusher/)
 
@@ -103,7 +103,7 @@ const Example = () => {
 A helper function to create a **server triggered** event. BYO server (See [Trigger Server](#trigger-server) below). Pass in `triggerEndpoint` prop to `<PusherProvider />`. Any auth headers from config.auth.headers automatically get passed to the `fetch` call.
 
 ```tsx
-import {useTrigger} from 'use-pusher`;
+import {useTrigger} from 'use-pusher';
 
 const Example = () => {.
   const trigger = useTrigger();

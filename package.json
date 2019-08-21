@@ -5,12 +5,13 @@
   "author": "@mayteio",
   "keywords": [
     "react",
-    "react-hooks",
+    "react hooks",
     "pusher",
     "channels",
     "pusher-js",
     "websockets",
-    "realtime messaging"
+    "realtime messaging",
+    "typescript"
   ],
   "license": "MIT",
   "repository": "@mayteio/use-pusher",
