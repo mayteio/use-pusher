@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from "react";
 import { Member, PresenceChannel } from "pusher-js";
 import invariant from "invariant";
 
-import { useChannelOptions } from "./types";
 import { useChannel } from "./useChannel";
 
 /**
@@ -22,12 +21,7 @@ import { useChannel } from "./useChannel";
  *   (message) => console.log(message),
  * )
  */
-export function usePresenceChannel(
-  channelName: string,
-  eventName?: string,
-  onEvent?: (message: any) => void,
-  dependencies?: any[]
-) {
+export function usePresenceChannel(channelName: string) {
   // errors for missing arguments
   invariant(channelName, "channelName required to subscribe to a channel");
   invariant(
@@ -36,7 +30,7 @@ export function usePresenceChannel(
   );
 
   // Get regular channel functionality
-  const { channel } = useChannel(channelName, eventName, onEvent, dependencies);
+  const channel = useChannel(channelName);
 
   const [members, setMembers] = useState({});
   const [myID, setMyID] = useState();

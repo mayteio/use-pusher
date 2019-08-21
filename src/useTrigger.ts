@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { usePusher } from "./usePusher";
 import invariant from "invariant";
 import { useChannel } from "./useChannel";

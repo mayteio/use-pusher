@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;usePusher&quot; | use-pusher</title>
+	<title>&quot;useEvent&quot; | use-pusher</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_usepusher_.html">&quot;usePusher&quot;</a>
+					<a href="_useevent_.html">&quot;useEvent&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;usePusher&quot;</h1>
+			<h1>External module &quot;useEvent&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_usepusher_.html#usepusher" class="tsd-kind-icon">use<wbr>Pusher</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_useevent_.html#useevent" class="tsd-kind-icon">use<wbr>Event</a></li>
 							</ul>
 						</section>
 					</div>
@@ -82,30 +82,48 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="usepusher" class="tsd-anchor"></a>
-					<h3>use<wbr>Pusher</h3>
+					<a name="useevent" class="tsd-anchor"></a>
+					<h3>use<wbr>Event</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">use<wbr>Pusher<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_.pushercontextvalues.html" class="tsd-signature-type">PusherContextValues</a></li>
+						<li class="tsd-signature tsd-kind-icon">use<wbr>Event<span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Channel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PresenceChannel</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventCallback</span>, dependencies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/d440d3b/src/usePusher.ts#L12">usePusher.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/d440d3b/src/useEvent.ts#L12">useEvent.ts:12</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Provides access to the pusher client</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>example</dt>
-									<dd><p>const {client} = usePusher();
-										client.subscribe(&#39;my-channel&#39;);</p>
-									</dd>
-								</dl>
 							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_types_.pushercontextvalues.html" class="tsd-signature-type">PusherContextValues</a></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>channel: <span class="tsd-signature-type">Channel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PresenceChannel</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Pusher channel to bind to</p>
+									</div>
+								</li>
+								<li>
+									<h5>eventName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Name of event to bind to</p>
+									</div>
+								</li>
+								<li>
+									<h5>callback: <span class="tsd-signature-type">EventCallback</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Callback to call on a new event</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> dependencies: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Dependencies the callback uses.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -129,13 +147,13 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_usechannel_.html">"use<wbr>Channel"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_useevent_.html">"use<wbr>Event"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_usepresencechannel_.html">"use<wbr>Presence<wbr>Channel"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_usepusher_.html">"use<wbr>Pusher"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -146,7 +164,7 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_usepusher_.html#usepusher" class="tsd-kind-icon">use<wbr>Pusher</a>
+						<a href="_useevent_.html#useevent" class="tsd-kind-icon">use<wbr>Event</a>
 					</li>
 				</ul>
 			</nav>

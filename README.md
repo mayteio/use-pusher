@@ -4,7 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/use-pusher.svg)](https://www.npmjs.com/package/react-pusher-hooks) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-### ⚠️ Still a WIP. Not production ready yet.
+##### [API Reference/Docs](https://mayteio.github.io/use-pusher/)
 
 ## Install
 
@@ -12,7 +12,13 @@
 yarn add use-pusher
 ```
 
-##### [API Reference/Docs](https://mayteio.github.io/use-pusher/)
+## Hooks
+
+- [`useChannel`](#usechannel)
+- [`usePresenceChannel`](#usepresencechannel)
+- [`useEvent`](#useevent)
+- [`useTrigger`](#usetrigger)
+- [`usePusher`](#usepusher)
 
 ## Usage
 
@@ -49,16 +55,11 @@ const App = () => {
 
 ## `useChannel`
 
-Use this hook to subscribe to channel events.
+Use this hook to subscribe to channel events. Mainly used internally.
 
 ```tsx
-const Example = () => {
-  const [messages, setMessages] = React.useState([]);
-  const onEvent = message => setMessages(m => [...m, message]);
-  const channel = useChannel("channel-name", "event-name", onEvent);
-
-  return messages.map(event => <p key={event.id}>{event.message}</p>);
-};
+// returns channel instance.
+const channel = useChannel("channel-name");
 ```
 
 ## `usePresenceChannel`
@@ -67,16 +68,34 @@ Like a regular channel but with member awareness.
 
 ```tsx
 const Example= () => {
-  const {members} = usePresenceChannel('presence-awesome');
+  const { members, myID } = usePresenceChannel('presence-awesome');
 
   return (
     <ul>
-      {Object.entries(members).map([id, info]) => (
+      {Object.entries(members)
+        // filter self from members
+        .filter([id] => id !== myID)
+        // map them to a list
+        .map([id, info]) => (
         <li key={id}>name: {info.name}</li>
       )}
     </ul>
   )
 }
+```
+
+## `useEvent`
+
+Bind to events on a channel with a callback.
+
+```tsx
+const Example = () => {
+  const [message, setMessages] = useState();
+  const channel = useChannel("channel-name");
+  useEvent(channel, "message", ({ data }) => {
+    setMessages(m => [...m, data]);
+  });
+};
 ```
 
 ## `useTrigger`
@@ -155,6 +174,13 @@ const Example = () => {
 ## Typescript
 
 This project was built using typescript, so types are built-in. Yeeeew!
+
+## Contributing
+
+1. Clone the repository and run `yarn && yarn test:watch`
+2. Get coding!
+
+Please write tests (100% jest coverage) and types.
 
 ## License
 

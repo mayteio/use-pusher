@@ -35,7 +35,7 @@ describe("useChannel hook", () => {
     );
 
     rerender();
-    const { channel } = result.current;
+    const channel = result.current;
     expect(Object.keys(channel.callbacks)).toHaveLength(0);
 
     unmount();

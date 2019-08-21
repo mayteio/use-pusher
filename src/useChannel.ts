@@ -1,6 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
-
-import { EventCallback } from "pusher-js";
+import { useEffect, useState } from "react";
 import invariant from "invariant";
 
 import { usePusher } from "./usePusher";
@@ -29,5 +27,5 @@ export function useChannel(channelName: string) {
     const pusherChannel = pusherClient.subscribe(channelName);
     setChannel(pusherChannel);
   }, [channelName, pusherClient]);
-  return { channel };
+  return channel;
 }
