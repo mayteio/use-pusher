@@ -2,11 +2,9 @@ import React from "react";
 import { renderHook } from "@testing-library/react-hooks";
 import { usePresenceChannel } from "../usePresenceChannel";
 import { PusherProvider } from "../PusherProvider";
-import { cleanup } from "@testing-library/react";
 import { act } from "@testing-library/react-hooks";
 
 beforeEach(() => {
-  cleanup();
   jest.resetAllMocks();
 });
 
@@ -33,6 +31,23 @@ const setup = (channelName = "my-channel", customConfig = {}) => {
 };
 
 describe("usePresenceChannel hook", () => {
+  test("should render without error", () => {
+    const wrapper = ({ children }: any) => (
+      <PusherProvider
+        {...config}
+        children={children}
+        value={{ client: { current: undefined }, triggerEndpoint: "d" }}
+      />
+    );
+    const { result, rerender } = renderHook(
+      () => usePresenceChannel("presence-channel"),
+      { wrapper }
+    );
+    rerender();
+    // no client was provided
+    expect(result.current.channel).toBeUndefined();
+  });
+
   test('should throw an error if channelName doesn\'t have "presence-" in it', () => {
     const { result } = setup("public-channel");
     expect(result.error.message).toBe(

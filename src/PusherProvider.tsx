@@ -8,7 +8,6 @@ import dequal from "dequal";
 // context setup
 const PusherContext = React.createContext<PusherContextValues>({});
 export const __PusherContext = PusherContext;
-export const __PusherConsumer = PusherContext.Consumer;
 
 /**
  * Provider for the pusher service in an app

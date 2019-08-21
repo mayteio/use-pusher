@@ -2,17 +2,13 @@ import React from "react";
 import { renderHook } from "@testing-library/react-hooks";
 import { PusherProvider } from "../PusherProvider";
 import { useChannel } from "../useChannel";
-import { cleanup } from "@testing-library/react";
 
 beforeEach(() => {
-  cleanup();
   jest.resetAllMocks();
 });
 
 jest.mock("pusher-js", () => {
-  const { PusherMock } = require("pusher-js-mock");
-  // monkey patch missing function
-  PusherMock.prototype.disconnect = () => {};
+  const { PusherMock } = require("../mocks");
   return PusherMock;
 });
 
@@ -23,6 +19,21 @@ const config = {
 };
 
 describe("useChannel hook", () => {
+  test("should render without error", () => {
+    const wrapper = ({ children }: any) => (
+      <PusherProvider
+        {...config}
+        children={children}
+        value={{ client: { current: undefined }, triggerEndpoint: "d" }}
+      />
+    );
+    const { result, rerender } = renderHook(() => useChannel("my-channel"), {
+      wrapper
+    });
+    rerender();
+    expect(result.current).toBeUndefined();
+  });
+
   test("should subscribe to a channel with default options", () => {
     const wrapper = ({ children }: any) => (
       <PusherProvider {...config}>{children}</PusherProvider>

@@ -4,10 +4,8 @@ import { useEvent } from "../";
 import { PusherProvider } from "../PusherProvider";
 import { PusherChannelMock } from "../mocks";
 import { Channel } from "pusher-js";
-import { cleanup } from "@testing-library/react";
 
 beforeEach(() => {
-  cleanup();
   jest.resetAllMocks();
 });
 

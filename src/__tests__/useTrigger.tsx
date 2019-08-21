@@ -17,18 +17,30 @@ beforeEach(() => {
   (fetch as FetchMock).resetMocks();
 });
 
+const config = {
+  clientKey: "client-key",
+  cluster: "ap4",
+  triggerEndpoint: "trigger-endpoint"
+};
+
+test("should render without error", () => {
+  const wrapper = ({ children }: any) => (
+    <PusherProvider
+      {...config}
+      children={children}
+      value={{ client: { current: undefined }, triggerEndpoint: "d" }}
+    />
+  );
+  const { result } = renderHook(() => useTrigger("my-channel"), { wrapper });
+  result.current("my-event", "data");
+});
+
 test("should push event to trigger endpoint without authentication and warn", async () => {
   (fetch as FetchMock).mockResponseOnce("success");
   jest.spyOn(global.console, "warn");
 
-  const props = {
-    clientKey: "client-key",
-    cluster: "ap4",
-    triggerEndpoint: "trigger-endpoint"
-  };
-
   const wrapper = ({ children }: any) => (
-    <PusherProvider {...props}>{children}</PusherProvider>
+    <PusherProvider {...config}>{children}</PusherProvider>
   );
   const { result, rerender } = renderHook(() => useTrigger("my-channel"), {
     wrapper
@@ -47,7 +59,7 @@ test("should push event to trigger endpoint without authentication and warn", as
 
 test("should push event to trigger endpoint with authentication", async () => {
   (fetch as FetchMock).mockResponseOnce("success");
-  const props = {
+  const config = {
     clientKey: "client-key",
     cluster: "ap4",
     triggerEndpoint: "trigger-endpoint",
@@ -58,7 +70,7 @@ test("should push event to trigger endpoint with authentication", async () => {
   };
 
   const wrapper = ({ children }: any) => (
-    <PusherProvider {...props}>{children}</PusherProvider>
+    <PusherProvider {...config}>{children}</PusherProvider>
   );
   const { result, rerender } = renderHook(() => useTrigger("my-channel"), {
     wrapper

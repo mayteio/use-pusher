@@ -34,7 +34,7 @@ export function useTrigger(channelName: string) {
         body: JSON.stringify({ channelName, eventName, data })
       };
 
-      if (client.current.config && client.current.config.auth) {
+      if (client.current && client.current.config.auth) {
         fetchOptions.headers = client.current.config.auth.headers;
       } else {
         console.warn(
