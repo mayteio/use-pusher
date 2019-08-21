@@ -14,7 +14,7 @@
     "typescript"
   ],
   "license": "MIT",
-  "repository": "@mayteio/use-pusher",
+  "repository": "https://github.com/mayteio/use-pusher",
   "files": [
     "dist"
   ],

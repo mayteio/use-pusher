@@ -15,6 +15,8 @@ export interface PusherProviderProps extends Config {
   triggerEndpoint?: string;
   defer?: boolean;
   children: React.ReactNode;
+  // for testing purposes
+  value: any;
 }
 
 export interface useChannelOptions {
