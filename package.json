@@ -52,7 +52,7 @@
     "@testing-library/react": "^9.1.2",
     "@testing-library/react-hooks": "^2.0.1",
     "@types/invariant": "^2.2.30",
-    "@types/jest": "^24.0.17",
+    "@types/jest": "^24.0.18",
     "@types/pusher-js": "^4.2.2",
     "@types/react": "^16.7.22",
     "cross-env": "^5.2.0",
@@ -65,7 +65,7 @@
     "react-dom": "^16.9.0",
     "react-scripts": "^3.0.1",
     "react-test-renderer": "^16.9.0",
-    "rollup": "^1.1.2",
+    "rollup": "^1.20.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.0.2",
     "rollup-plugin-dts": "^1.1.6",
@@ -78,9 +78,13 @@
     "typescript": "^3.2.4"
   },
   "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ],
     "coveragePathIgnorePatterns": [
       "./src/index.ts",
       "./src/mocks.ts",
+      "./src/helpers.ts",
       "./src/types.ts"
     ]
   }
