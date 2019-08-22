@@ -70,7 +70,7 @@
 				<blockquote>
 					<p>Easy as hooks that integrate with the <a href="https://github.com/pusher/pusher-js">pusher-js</a> library.</p>
 				</blockquote>
-				<p><a href="https://www.npmjs.com/package/react-pusher-hooks"><img src="https://img.shields.io/npm/v/use-pusher.svg" alt="NPM"></a> <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="JavaScript Style Guide"></a></p>
+				<p><a href="https://www.npmjs.com/package/react-pusher-hooks"><img src="https://img.shields.io/npm/v/use-pusher.svg" alt="NPM"></a> <img src="https://badgen.net/badge//types/Typescript?icon=typescript" alt="Typed"></p>
 				<a href="#a-hrefhttpsmayteiogithubiouse-pusherapi-referencedocsa" id="a-hrefhttpsmayteiogithubiouse-pusherapi-referencedocsa" style="color: inherit; text-decoration: none;">
 					<h5><a href="https://mayteio.github.io/use-pusher/">API Reference/Docs</a></h5>
 				</a>
@@ -91,7 +91,7 @@
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
-				<p>You must wrap your app with a <code>PusherProvider</code> and pass it config props for <a href="https://github.com/pusher/pusher-js">pusher-js</a> initialisation initialisation.</p>
+				<p>You must wrap your app with a <code>PusherProvider</code> and pass it config props for <a href="https://github.com/pusher/pusher-js"><code>pusher-js</code></a> initialisation.</p>
 				<pre><code class="language-tsx">import React from &quot;react&quot;;
 import { PusherProvider } from &quot;@city-dna/use-pusher&quot;;
 
@@ -121,13 +121,13 @@ const App = () =&gt; {
 				<a href="#codeusechannelcode" id="codeusechannelcode" style="color: inherit; text-decoration: none;">
 					<h2><code>useChannel</code></h2>
 				</a>
-				<p>Use this hook to subscribe to channel events. Mainly used internally.</p>
+				<p>Use this hook to subscribe to a channel.</p>
 				<pre><code class="language-tsx">// returns channel instance.
 const channel = useChannel(&quot;channel-name&quot;);</code></pre>
 				<a href="#codeusepresencechannelcode" id="codeusepresencechannelcode" style="color: inherit; text-decoration: none;">
 					<h2><code>usePresenceChannel</code></h2>
 				</a>
-				<p>Like a regular channel but with member awareness.</p>
+				<p>Augments a regular channel with member functionality.</p>
 				<pre><code class="language-tsx">const Example= () =&gt; {
   const { members, myID } = usePresenceChannel(&#39;presence-awesome&#39;);
 
@@ -137,9 +137,10 @@ const channel = useChannel(&quot;channel-name&quot;);</code></pre>
         // filter self from members
         .filter([id] =&gt; id !== myID)
         // map them to a list
-        .map([id, info]) =&gt; (
-        &lt;li key={id}&gt;name: {info.name}&lt;/li&gt;
-      )}
+        .map([id, info] =&gt; (
+          &lt;li key={id}&gt;{info.name}&lt;/li&gt;
+        ))
+      }
     &lt;/ul&gt;
   )
 }</code></pre>
@@ -150,15 +151,15 @@ const channel = useChannel(&quot;channel-name&quot;);</code></pre>
 				<pre><code class="language-tsx">const Example = () =&gt; {
   const [message, setMessages] = useState();
   const channel = useChannel(&quot;channel-name&quot;);
-  useEvent(channel, &quot;message&quot;, ({ data }) =&gt; {
-    setMessages(m =&gt; [...m, data]);
-  });
+  useEvent(channel, &quot;message&quot;, ({ data }) =&gt;
+    setMessages(messages =&gt; [...messages, data])
+  );
 };</code></pre>
 				<a href="#codeusetriggercode" id="codeusetriggercode" style="color: inherit; text-decoration: none;">
 					<h2><code>useTrigger</code></h2>
 				</a>
-				<p>A helper function to create a <strong>server triggered</strong> event. BYO server (See <a href="#trigger-server">Trigger Server</a> below). Pass in <code>triggerEndpoint</code> prop to <code>&lt;PusherProvider /&gt;</code>. Any auth headers from config.auth.headers automatically get passed to the <code>fetch</code> call.</p>
-				<pre><code class="language-tsx">import {useTrigger} from &#39;use-pusher`;
+				<p>A helper function to create a <strong>server triggered</strong> event. BYO server (See <a href="#trigger-server">Trigger Server</a> below). Pass in <code>triggerEndpoint</code> prop to <code>&lt;PusherProvider /&gt;</code>. Any auth headers from <code>config.auth.headers</code> automatically get passed to the <code>fetch</code> call.</p>
+				<pre><code class="language-tsx">import {useTrigger} from &#39;use-pusher&#39;;
 
 const Example = () =&gt; {.
   const trigger = useTrigger();
@@ -184,7 +185,7 @@ const Example = () =&gt; {
 				<a href="#trigger-server" id="trigger-server" style="color: inherit; text-decoration: none;">
 					<h2>Trigger Server</h2>
 				</a>
-				<p>In order to trigger an event, you&#39;ll have to create a simple lambda (or an express server if that&#39;s your thing) that handles. Below is a short lambda that can handle your triggered events.</p>
+				<p>In order to trigger an event, you&#39;ll have to create a simple lambda (or an express server if that&#39;s your thing). Below is a short lambda that can handle triggered events from <code>useTrigger</code>.</p>
 				<pre><code class="language-tsx">import Pusher from &quot;pusher&quot;;
 
 const pusher = new Pusher({
@@ -199,11 +200,10 @@ export async function handler(event) {
   pusher.trigger(channelName, eventName, data);
   return { statusCode: 200 };
 }</code></pre>
-				<p>Though normally you&#39;d want to add some sort of authentication here.</p>
 				<blockquote>
 					<p><em>I don&#39;t want a server though</em></p>
 				</blockquote>
-				<p>I hear ya. If you&#39;re feeling audacious, you can use <a href="https://pusher.com/docs/channels/using_channels/events#triggering-client-events">client events</a> to push directly from the client, though this isn&#39;t recommended because security (thus no hook):</p>
+				<p>I hear ya. If you&#39;re feeling audacious, you can use <a href="https://pusher.com/docs/channels/using_channels/events#triggering-client-events">client events</a> to push directly from the client, though this isn&#39;t recommended (thus no hook):</p>
 				<pre><code class="language-tsx">import { useChannel } from &quot;use-pusher&quot;;
 
 const Example = () =&gt; {

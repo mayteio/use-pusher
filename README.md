@@ -22,7 +22,7 @@ yarn add use-pusher
 
 ## Usage
 
-You must wrap your app with a `PusherProvider` and pass it config props for [pusher-js](https://github.com/pusher/pusher-js) initialisation initialisation.
+You must wrap your app with a `PusherProvider` and pass it config props for [`pusher-js`](https://github.com/pusher/pusher-js) initialisation.
 
 ```tsx
 import React from "react";
@@ -55,7 +55,7 @@ const App = () => {
 
 ## `useChannel`
 
-Use this hook to subscribe to channel events. Mainly used internally.
+Use this hook to subscribe to a channel.
 
 ```tsx
 // returns channel instance.
@@ -64,7 +64,7 @@ const channel = useChannel("channel-name");
 
 ## `usePresenceChannel`
 
-Like a regular channel but with member awareness.
+Augments a regular channel with member functionality.
 
 ```tsx
 const Example= () => {
@@ -76,9 +76,10 @@ const Example= () => {
         // filter self from members
         .filter([id] => id !== myID)
         // map them to a list
-        .map([id, info]) => (
-        <li key={id}>name: {info.name}</li>
-      )}
+        .map([id, info] => (
+          <li key={id}>{info.name}</li>
+        ))
+      }
     </ul>
   )
 }
@@ -92,15 +93,15 @@ Bind to events on a channel with a callback.
 const Example = () => {
   const [message, setMessages] = useState();
   const channel = useChannel("channel-name");
-  useEvent(channel, "message", ({ data }) => {
-    setMessages(m => [...m, data]);
-  });
+  useEvent(channel, "message", ({ data }) =>
+    setMessages(messages => [...messages, data])
+  );
 };
 ```
 
 ## `useTrigger`
 
-A helper function to create a **server triggered** event. BYO server (See [Trigger Server](#trigger-server) below). Pass in `triggerEndpoint` prop to `<PusherProvider />`. Any auth headers from config.auth.headers automatically get passed to the `fetch` call.
+A helper function to create a **server triggered** event. BYO server (See [Trigger Server](#trigger-server) below). Pass in `triggerEndpoint` prop to `<PusherProvider />`. Any auth headers from `config.auth.headers` automatically get passed to the `fetch` call.
 
 ```tsx
 import {useTrigger} from 'use-pusher';
@@ -133,7 +134,7 @@ const Example = () => {
 
 ## Trigger Server
 
-In order to trigger an event, you'll have to create a simple lambda (or an express server if that's your thing) that handles. Below is a short lambda that can handle your triggered events.
+In order to trigger an event, you'll have to create a simple lambda (or an express server if that's your thing). Below is a short lambda that can handle triggered events from `useTrigger`.
 
 ```tsx
 import Pusher from "pusher";
@@ -152,11 +153,9 @@ export async function handler(event) {
 }
 ```
 
-Though normally you'd want to add some sort of authentication here.
-
 > _I don't want a server though_
 
-I hear ya. If you're feeling audacious, you can use [client events](https://pusher.com/docs/channels/using_channels/events#triggering-client-events) to push directly from the client, though this isn't recommended because security (thus no hook):
+I hear ya. If you're feeling audacious, you can use [client events](https://pusher.com/docs/channels/using_channels/events#triggering-client-events) to push directly from the client, though this isn't recommended (thus no hook):
 
 ```tsx
 import { useChannel } from "use-pusher";
