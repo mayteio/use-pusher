@@ -50,7 +50,7 @@ describe("useEvent hook", () => {
 
     setup(undefined, "my-event", () => {});
     expect(global.console.warn).toHaveBeenCalledWith(
-      "No channel supplied to onEvent."
+      "No channel supplied to onEvent. Not binding callback."
     );
   });
 

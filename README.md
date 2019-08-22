@@ -175,6 +175,55 @@ const Example = () => {
 
 This project was built using typescript, so types are built-in. Yeeeew!
 
+## Testing
+
+Typed `PusherMock`, `PusherChannelMock` and `PusherPresenceChannelMock` utils are provided based on [`pusher-js-mock`](https://github.com/nikolalsvk/pusher-js-mock) (thanks mate 🙏). Use these to stub out the client and channels, with an additional `emit` method on the channel classes.
+
+Testing emitted events with jest can be achieved using `jest.mock` and `react-testing-library` (or `enzyme`, though your tests should reflect what the user should see **NOT** how the component handles events internally):
+
+```tsx
+// Example.tsx
+import React from "react";
+import { useChannel, useEvent } from "use-pusher";
+
+const Example = () => {
+  const [title, setTitle] = useState();
+  const channel = useChannel("my-channel");
+  useEvent(channel, "title", ({ data }) => setTitle(data));
+
+  return <span>{title}</span>;
+};
+
+// Example.test.tsx
+import { render, act } from "@testing-library/react";
+import { PusherMock, PusherChannelMock } from "use-pusher";
+
+// mock out the result of the useChannel hook
+const mockChannel = new PusherChannelMock();
+jest.mock("use-pusher", () => ({
+  ...require.requireActual("use-pusher"),
+  useChannel: () => mockChannel
+}));
+
+test("should show a title when it receives a title event", async () => {
+  // mock the client
+  const client = { current: new PusherMock("client-key", { cluster: "ap4" }) };
+
+  // render component and provider with a mocked context value
+  const { findByText } = render(
+    <PusherProvider clientKey="client-key" cluster="ap4" value={{ client }}>
+      <Example />
+    </PusherProvider>
+  );
+
+  // emit an event on the mocked channel
+  act(() => mockChannel.emit("title", { data: "Hello world" }));
+
+  // assert expectations
+  expect(await findByText("Hello world")).toBeInTheDocument();
+});
+```
+
 ## Contributing
 
 1. Clone the repository and run `yarn && yarn test:watch`
