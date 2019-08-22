@@ -218,6 +218,51 @@ const Example = () =&gt; {
 					<h2>Typescript</h2>
 				</a>
 				<p>This project was built using typescript, so types are built-in. Yeeeew!</p>
+				<a href="#testing" id="testing" style="color: inherit; text-decoration: none;">
+					<h2>Testing</h2>
+				</a>
+				<p>Typed <code>PusherMock</code>, <code>PusherChannelMock</code> and <code>PusherPresenceChannelMock</code> utils are provided based on <a href="https://github.com/nikolalsvk/pusher-js-mock"><code>pusher-js-mock</code></a> (thanks mate 🙏). Use these to stub out the client and channels, with an additional <code>emit</code> method on the channel classes.</p>
+				<p>Testing emitted events with jest can be achieved using <code>jest.mock</code> and <code>react-testing-library</code> (or <code>enzyme</code>, though your tests should reflect what the user should see <strong>NOT</strong> how the component handles events internally):</p>
+				<pre><code class="language-tsx">// Example.tsx
+import React from &quot;react&quot;;
+import { useChannel, useEvent } from &quot;use-pusher&quot;;
+
+const Example = () =&gt; {
+  const [title, setTitle] = useState();
+  const channel = useChannel(&quot;my-channel&quot;);
+  useEvent(channel, &quot;title&quot;, ({ data }) =&gt; setTitle(data));
+
+  return &lt;span&gt;{title}&lt;/span&gt;;
+};
+
+// Example.test.tsx
+import { render, act } from &quot;@testing-library/react&quot;;
+import { PusherMock, PusherChannelMock } from &quot;use-pusher&quot;;
+
+// mock out the result of the useChannel hook
+const mockChannel = new PusherChannelMock();
+jest.mock(&quot;use-pusher&quot;, () =&gt; ({
+  ...require.requireActual(&quot;use-pusher&quot;),
+  useChannel: () =&gt; mockChannel
+}));
+
+test(&quot;should show a title when it receives a title event&quot;, async () =&gt; {
+  // mock the client
+  const client = { current: new PusherMock(&quot;client-key&quot;, { cluster: &quot;ap4&quot; }) };
+
+  // render component and provider with a mocked context value
+  const { findByText } = render(
+    &lt;PusherProvider clientKey=&quot;client-key&quot; cluster=&quot;ap4&quot; value={{ client }}&gt;
+      &lt;Example /&gt;
+    &lt;/PusherProvider&gt;
+  );
+
+  // emit an event on the mocked channel
+  act(() =&gt; mockChannel.emit(&quot;title&quot;, { data: &quot;Hello world&quot; }));
+
+  // assert expectations
+  expect(await findByText(&quot;Hello world&quot;)).toBeInTheDocument();
+});</code></pre>
 				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
 					<h2>Contributing</h2>
 				</a>
