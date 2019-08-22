@@ -128,7 +128,7 @@ const channel = useChannel(&quot;channel-name&quot;);</code></pre>
 					<h2><code>usePresenceChannel</code></h2>
 				</a>
 				<p>Augments a regular channel with member functionality.</p>
-				<pre><code class="language-tsx">const Example= () =&gt; {
+				<pre><code class="language-tsx">const Example = () =&gt; {
   const { members, myID } = usePresenceChannel(&#39;presence-awesome&#39;);
 
   return (
@@ -151,8 +151,12 @@ const channel = useChannel(&quot;channel-name&quot;);</code></pre>
 				<pre><code class="language-tsx">const Example = () =&gt; {
   const [message, setMessages] = useState();
   const channel = useChannel(&quot;channel-name&quot;);
-  useEvent(channel, &quot;message&quot;, ({ data }) =&gt;
-    setMessages(messages =&gt; [...messages, data])
+  useEvent(
+    channel,
+    &quot;message&quot;,
+    ({ data }) =&gt; setMessages(messages =&gt; [...messages, data]),
+    // optional dependencies array. Passed through to useCallback. Defaults to [].
+    []
   );
 };</code></pre>
 				<a href="#codeusetriggercode" id="codeusetriggercode" style="color: inherit; text-decoration: none;">

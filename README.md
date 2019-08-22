@@ -67,7 +67,7 @@ const channel = useChannel("channel-name");
 Augments a regular channel with member functionality.
 
 ```tsx
-const Example= () => {
+const Example = () => {
   const { members, myID } = usePresenceChannel('presence-awesome');
 
   return (
@@ -93,8 +93,12 @@ Bind to events on a channel with a callback.
 const Example = () => {
   const [message, setMessages] = useState();
   const channel = useChannel("channel-name");
-  useEvent(channel, "message", ({ data }) =>
-    setMessages(messages => [...messages, data])
+  useEvent(
+    channel,
+    "message",
+    ({ data }) => setMessages(messages => [...messages, data]),
+    // optional dependencies array. Passed through to useCallback. Defaults to [].
+    []
   );
 };
 ```
