@@ -64,6 +64,7 @@ export function PusherProvider({
         triggerEndpoint
       }}
       children={children}
+      {...props}
     />
   );
 }

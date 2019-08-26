@@ -76,8 +76,8 @@ export function usePresenceChannel<T = any>(channelName: string) {
       channel.bind("pusher:member_removed", handleRemove);
 
       // set any members that already existed on the channel
-      setMembers(channel.members.members);
-      setMyID(channel.members.myID);
+      channel.members && setMembers(channel.members.members);
+      channel.members && setMyID(channel.members.myID);
     }
 
     // cleanup

@@ -24,5 +24,6 @@ export function useChannel(channelName: string) {
     const channel = pusherClient.subscribe(channelName);
     setChannel(channel);
   }, [channelName, pusherClient]);
+
   return channel;
 }
