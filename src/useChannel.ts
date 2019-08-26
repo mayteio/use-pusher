@@ -4,14 +4,10 @@ import invariant from "invariant";
 import { usePusher } from "./usePusher";
 
 /**
- * Subscribe to channel events
+ * Subscribe to channel
  *
  * @example
- * useChannel(
- *   "my-channel",
- *   "my-event",
- *   (message) => console.log(message)
- * )
+ * useChannel("my-channel")
  */
 
 export function useChannel(channelName: string) {
@@ -22,10 +18,11 @@ export function useChannel(channelName: string) {
   const [channel, setChannel] = useState<any>();
 
   const pusherClient = client.current;
+
   useEffect(() => {
     if (!pusherClient) return;
-    const pusherChannel = pusherClient.subscribe(channelName);
-    setChannel(pusherChannel);
+    const channel = pusherClient.subscribe(channelName);
+    setChannel(channel);
   }, [channelName, pusherClient]);
   return channel;
 }

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { Member, PresenceChannel } from "pusher-js";
+import { Member, PresenceChannel, Members } from "pusher-js";
 import invariant from "invariant";
 
 import { useChannel } from "./useChannel";
@@ -21,7 +21,7 @@ import { useChannel } from "./useChannel";
  *   (message) => console.log(message),
  * )
  */
-export function usePresenceChannel(channelName: string) {
+export function usePresenceChannel<T = any>(channelName: string) {
   // errors for missing arguments
   invariant(channelName, "channelName required to subscribe to a channel");
   invariant(
@@ -30,14 +30,12 @@ export function usePresenceChannel(channelName: string) {
   );
 
   // Get regular channel functionality
-  const channel = useChannel(channelName);
-
   const [members, setMembers] = useState({});
   const [myID, setMyID] = useState();
   /**
    * Get members info on subscription success
    */
-  const handleSubscriptionSuccess = useCallback((members: any) => {
+  const handleSubscriptionSuccess = useCallback((members: Members<T>) => {
     setMembers(members.members);
     setMyID(members.myID);
   }, []);
@@ -45,8 +43,9 @@ export function usePresenceChannel(channelName: string) {
   /**
    * Add or update member in object.
    * @note not using a new Map() here to match pusher-js library.
+   * @param member member being added
    */
-  const handleAdd = useCallback((member: Member<any>) => {
+  const handleAdd = useCallback((member: Member<T>) => {
     setMembers(previousMembers => ({
       ...previousMembers,
       [member.id]: member.info
@@ -55,23 +54,30 @@ export function usePresenceChannel(channelName: string) {
 
   /**
    * Remove member from the state object.
-   * @note using delete here so it matches the way pusher-js handles it.
+   * @param member Member being removed
    */
-  const handleRemove = useCallback((member: any) => {
+  const handleRemove = useCallback((member: Member<T>) => {
     setMembers(previousMembers => {
       const nextMembers: any = { ...previousMembers };
       delete nextMembers[member.id];
       return nextMembers;
     });
   }, []);
+
   /**
    * Bind and unbind to membership events
    */
+  const channel = useChannel(channelName);
   useEffect(() => {
     if (channel) {
+      // bind to all member addition/removal events
       channel.bind("pusher:subscription_succeeded", handleSubscriptionSuccess);
       channel.bind("pusher:member_added", handleAdd);
       channel.bind("pusher:member_removed", handleRemove);
+
+      // set any members that already existed on the channel
+      setMembers(channel.members.members);
+      setMyID(channel.members.myID);
     }
 
     // cleanup
@@ -87,7 +93,11 @@ export function usePresenceChannel(channelName: string) {
     };
   }, [channel, handleSubscriptionSuccess, handleAdd, handleRemove]);
 
-  const presenceChannel = channel as PresenceChannel<any>;
+  const presenceChannel = channel as PresenceChannel<T>;
 
-  return { channel: presenceChannel, members, myID };
+  return {
+    channel: presenceChannel,
+    members,
+    myID
+  };
 }

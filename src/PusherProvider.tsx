@@ -25,8 +25,8 @@ export function PusherProvider({
   // errors when required props are not passed.
   invariant(clientKey, "A client key is required for pusher");
   invariant(cluster, "A cluster is required for pusher");
-
-  const config: Config = { cluster };
+  const { children, ...additionalConfig } = props;
+  const config: Config = { cluster, ...additionalConfig };
   if (authEndpoint) config.authEndpoint = authEndpoint;
   if (auth) config.auth = auth;
 
@@ -63,7 +63,7 @@ export function PusherProvider({
         client: pusherClientRef,
         triggerEndpoint
       }}
-      {...props}
+      children={children}
     />
   );
 }
