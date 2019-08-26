@@ -227,6 +227,8 @@ test("should show a title when it receives a title event", async () => {
 });
 ```
 
+[Check out the example tests](https://github.com/mayteio/use-pusher/blob/master/src/__tests__/Example.tsx) for testing presence channels.
+
 ## Contributing
 
 1. Clone the repository and run `yarn && yarn test:watch`

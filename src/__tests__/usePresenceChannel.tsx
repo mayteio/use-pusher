@@ -10,8 +10,6 @@ beforeEach(() => {
 
 jest.mock("pusher-js", () => {
   const { PusherMock } = require("../mocks");
-
-  // monkey patch missing function
   return PusherMock;
 });
 

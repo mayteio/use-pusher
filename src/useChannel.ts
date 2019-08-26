@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import invariant from "invariant";
-
 import { usePusher } from "./usePusher";
 
 /**

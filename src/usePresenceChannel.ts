@@ -3,23 +3,15 @@ import { useCallback, useEffect, useState } from "react";
 import { Member, PresenceChannel, Members } from "pusher-js";
 import invariant from "invariant";
 
-import { useChannel } from "./useChannel";
+import { useChannel } from "./";
 
 /**
  * Subscribe to presence channel events and get members back
  *
  * @param channelName name of presence channel. Should have presence- suffix.
- * @param eventName name of event to bind to
- * @param onEvent callback to fire when event is called
- * @param dependencies dependencies array that onEvent uses
- * @param options optional argument to skip events
  *
  * @example
- * const {members} = usePresenceChannel(
- *   "my-channel",
- *   "my-event",
- *   (message) => console.log(message),
- * )
+ * const {members, myID} = usePresenceChannel("presence-channel");
  */
 export function usePresenceChannel<T = any>(channelName: string) {
   // errors for missing arguments
@@ -67,6 +59,7 @@ export function usePresenceChannel<T = any>(channelName: string) {
   /**
    * Bind and unbind to membership events
    */
+
   const channel = useChannel(channelName);
   useEffect(() => {
     if (channel) {

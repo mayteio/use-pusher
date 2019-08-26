@@ -47,9 +47,9 @@ export { PusherChannelMock };
 
 class PusherPresenceChannelMock<T> extends PusherChannelMock {
   members: { members: { [id: string]: Member<T> }; myID: string };
-  constructor() {
+  constructor(members: any = {}) {
     super();
-    this.members = { members: {}, myID: "0a" };
+    this.members = { members: { ...members }, myID: "0a" };
   }
 }
 
