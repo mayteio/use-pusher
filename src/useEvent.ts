@@ -21,7 +21,7 @@ export function useEvent(
   const callbackRef = useCallback<EventCallback>(callback, dependencies);
   useEffect(() => {
     if (channel === undefined) {
-      console.warn("No channel supplied to onEvent. Not binding callback.");
+      // console.warn("No channel supplied to onEvent. Not binding callback.");
       return;
     }
     channel.bind(eventName, callbackRef);

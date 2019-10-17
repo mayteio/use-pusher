@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import invariant from "invariant";
+
 import { usePusher } from "./usePusher";
 
 /**
@@ -14,15 +15,14 @@ export function useChannel(channelName: string) {
   invariant(channelName, "channelName required to subscribe to a channel");
 
   const { client } = usePusher();
-  const [channel, setChannel] = useState<any>();
-
   const pusherClient = client.current;
+
+  const [channel, setChannel] = useState<any>();
 
   useEffect(() => {
     if (!pusherClient) return;
     const channel = pusherClient.subscribe(channelName);
     setChannel(channel);
   }, [channelName, pusherClient]);
-
   return channel;
 }

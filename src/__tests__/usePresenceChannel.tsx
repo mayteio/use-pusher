@@ -86,7 +86,7 @@ describe("usePresenceChannel hook", () => {
       });
     });
 
-    expect(result.current.members["0b"]).toBeDefined();
+    expect((result.current.members as any)["0b"]).toBeDefined();
     rerender();
 
     act(() => {
