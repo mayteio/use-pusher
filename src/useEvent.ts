@@ -9,10 +9,10 @@ import { Channel, PresenceChannel, EventCallback } from "pusher-js";
  * @param callback Callback to call on a new event
  * @param dependencies Dependencies the callback uses.
  */
-export function useEvent(
+export function useEvent<T>(
   channel: Channel | PresenceChannel<any> | undefined,
   eventName: string,
-  callback: EventCallback,
+  callback: (data?: T) => void,
   dependencies: any[] = []
 ) {
   invariant(eventName, "Must supply eventName and callback to onEvent");

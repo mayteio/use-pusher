@@ -13,7 +13,7 @@ export function useClientTrigger<T>(channel: Channel | PresenceChannel<T>) {
   const trigger = useCallback(
     (eventName: string, data?: any) => {
       invariant(eventName, "Must pass event name to trigger a client event.");
-      channel && channel.trigger(eventName, { data });
+      channel && channel.trigger(eventName, data);
     },
     [channel]
   );
