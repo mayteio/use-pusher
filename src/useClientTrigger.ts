@@ -11,7 +11,7 @@ export function useClientTrigger<T>(channel: Channel | PresenceChannel<T>) {
 
   // memoize trigger so it's not being created every render
   const trigger = useCallback(
-    (eventName: string, data?: any) => {
+    (eventName: string, data: any = {}) => {
       invariant(eventName, "Must pass event name to trigger a client event.");
       channel && channel.trigger(eventName, data);
     },

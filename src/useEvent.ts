@@ -18,15 +18,23 @@ export function useEvent<T>(
   invariant(eventName, "Must supply eventName and callback to onEvent");
   invariant(callback, "Must supply callback to onEvent");
 
-  const callbackRef = useCallback<EventCallback>(callback, dependencies);
+  useEffect(() => {
+    if (dependencies) {
+      console.warn(
+        "dependencies are no longer honoured - memoizing the callback is up to the developer."
+      );
+    }
+  }, [dependencies]);
+
+  // const callbackRef = useCallback<EventCallback>(callback, dependencies);
   useEffect(() => {
     if (channel === undefined) {
       // console.warn("No channel supplied to onEvent. Not binding callback.");
       return;
     }
-    channel.bind(eventName, callbackRef);
+    channel.bind(eventName, callback);
     return () => {
-      channel.unbind(eventName, callbackRef);
+      channel.unbind(eventName, callback);
     };
-  }, [channel, eventName, callbackRef]);
+  }, [channel, eventName, callback]);
 }
