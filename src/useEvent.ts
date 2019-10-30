@@ -1,6 +1,6 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import invariant from "invariant";
-import { Channel, PresenceChannel, EventCallback } from "pusher-js";
+import { Channel, PresenceChannel } from "pusher-js";
 
 /**
  *
@@ -13,7 +13,7 @@ export function useEvent<T>(
   channel: Channel | PresenceChannel<any> | undefined,
   eventName: string,
   callback: (data?: T) => void,
-  dependencies: any[] = []
+  dependencies: any[] | undefined
 ) {
   invariant(eventName, "Must supply eventName and callback to onEvent");
   invariant(callback, "Must supply callback to onEvent");
@@ -21,7 +21,7 @@ export function useEvent<T>(
   useEffect(() => {
     if (dependencies) {
       console.warn(
-        "dependencies are no longer honoured - memoizing the callback is up to the developer."
+        "useEvent dependencies are no longer honoured - memoizing the callback is up to the developer."
       );
     }
   }, [dependencies]);
