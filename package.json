@@ -1,6 +1,6 @@
 {
-  "name": "use-pusher",
-  "version": "3.0.4",
+  "name": "@harelpls/use-pusher",
+  "version": "3.0.5",
   "description": "A wrapper around pusher-js for easy-as hooks in React.",
   "author": "@mayteio",
   "keywords": [
@@ -36,11 +36,11 @@
     "release": "yarn test && yarn build && yarn types && yarn publish"
   },
   "dependencies": {
+    "pusher-js": "^5.0.0",
     "dequal": "^1.0.0",
     "invariant": "^2.2.4"
   },
   "peerDependencies": {
-    "pusher-js": "^5.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
