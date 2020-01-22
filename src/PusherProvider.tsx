@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
-import PusherClass, { Pusher, Config } from "pusher-js";
-import invariant from "invariant";
+import React, { useEffect, useRef } from 'react';
+import PusherClass, { Pusher, Config } from 'pusher-js';
+import invariant from 'invariant';
 // import { useDeepCompareMemoize } from "./helpers";
-import { PusherContextValues, PusherProviderProps } from "./types";
-import dequal from "dequal";
+import { PusherContextValues, PusherProviderProps } from './types';
+import dequal from 'dequal';
 
 // context setup
 const PusherContext = React.createContext<PusherContextValues>({});
@@ -23,8 +23,8 @@ export function PusherProvider({
   ...props
 }: PusherProviderProps) {
   // errors when required props are not passed.
-  invariant(clientKey, "A client key is required for pusher");
-  invariant(cluster, "A cluster is required for pusher");
+  invariant(clientKey, 'A client key is required for pusher');
+  invariant(cluster, 'A cluster is required for pusher');
   const { children, ...additionalConfig } = props;
   const config: Config = { cluster, ...additionalConfig };
   if (authEndpoint) config.authEndpoint = authEndpoint;
@@ -33,10 +33,7 @@ export function PusherProvider({
   const pusherClientRef = useRef<Pusher>();
   useEffect(() => {
     // if client exists and options are the same, skip.
-    if (
-      dequal(previousConfig.current, config) &&
-      pusherClientRef.current !== undefined
-    ) {
+    if (dequal(previousConfig.current, config) && pusherClientRef.current !== undefined) {
       return;
     }
 
@@ -47,8 +44,7 @@ export function PusherProvider({
       pusherClientRef.current = new PusherClass(clientKey, config);
     }
 
-    return () =>
-      pusherClientRef.current && pusherClientRef.current.disconnect();
+    return () => pusherClientRef.current && pusherClientRef.current.disconnect();
   }, [clientKey, config, defer, pusherClientRef]);
 
   // track config for comparison
@@ -57,11 +53,13 @@ export function PusherProvider({
     previousConfig.current = config;
   });
 
+  console.log('shouldnt be run');
+
   return (
     <PusherContext.Provider
       value={{
         client: pusherClientRef,
-        triggerEndpoint
+        triggerEndpoint,
       }}
       children={children}
       {...props}

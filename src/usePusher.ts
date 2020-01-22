@@ -1,14 +1,21 @@
-import { useContext } from "react";
-import { __PusherContext } from "./PusherProvider";
-import { PusherContextValues } from "./types";
+import { useContext, useEffect } from 'react';
+import { __PusherContext } from './PusherProvider';
+import { PusherContextValues } from './types';
 
 /**
  * Provides access to the pusher client
  *
  * @example
  * const {client} = usePusher();
- * client.subscribe('my-channel');
+ * client.current.subscribe('my-channel');
  */
 export function usePusher() {
-  return useContext<PusherContextValues>(__PusherContext);
+  const context = useContext<PusherContextValues>(__PusherContext);
+  useEffect(() => {
+    if (!context) console.warn(NOT_IN_CONTEXT_WARNING);
+  }, [context]);
+  return context;
 }
+
+export const NOT_IN_CONTEXT_WARNING =
+  'No Pusher context. Did you forget to wrap your app in a <PusherProvider />?';
