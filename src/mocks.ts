@@ -1,5 +1,5 @@
 // Based off https://github.com/nikolalsvk/pusher-js-mock
-import { Member, Config } from "pusher-js";
+import { Options } from 'pusher-js';
 
 class PusherChannelMock {
   /** Initialize PusherChannelMock with callbacks object. */
@@ -7,7 +7,7 @@ class PusherChannelMock {
   name: string;
   constructor(name?: string) {
     this.callbacks = {};
-    this.name = name || "channel";
+    this.name = name || 'channel';
   }
 
   /**
@@ -26,9 +26,7 @@ class PusherChannelMock {
    * @param {Function} callback - callback to be called on event.
    */
   unbind(name: string, callback: Function) {
-    this.callbacks[name] = (this.callbacks[name] || []).filter(
-      cb => cb !== callback
-    );
+    this.callbacks[name] = (this.callbacks[name] || []).filter(cb => cb !== callback);
   }
 
   /**
@@ -49,11 +47,12 @@ class PusherChannelMock {
 
 export { PusherChannelMock };
 
-class PusherPresenceChannelMock<T> extends PusherChannelMock {
-  members: { members: { [id: string]: Member<T> }; myID: string };
+class PusherPresenceChannelMock extends PusherChannelMock {
+  members: any;
+  myID: any;
   constructor(name?: string) {
-    super(name ? name : "presence-");
-    this.members = { members: {}, myID: "0a" };
+    super(name ? name : 'presence-');
+    this.members = { members: {}, myID: '0a' };
   }
 }
 
@@ -61,10 +60,10 @@ export { PusherPresenceChannelMock };
 
 class PusherMock {
   key: string;
-  config: Config;
+  config: Options;
   channels: { [name: string]: PusherChannelMock };
   /** Initialize PusherMock with empty channels object. */
-  constructor(key: string, config: Config) {
+  constructor(key: string, config: Options) {
     this.key = key;
     this.config = config;
     this.channels = {};
@@ -77,7 +76,7 @@ class PusherMock {
    */
   channel(name: string) {
     if (!this.channels[name]) {
-      this.channels[name] = name.includes("-presence")
+      this.channels[name] = name.includes('presence-')
         ? new PusherPresenceChannelMock(name)
         : new PusherChannelMock(name);
     }

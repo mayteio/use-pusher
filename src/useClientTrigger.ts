@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import invariant from 'invariant';
 import { Channel, PresenceChannel } from 'pusher-js';
 
-export function useClientTrigger<T>(channel: Channel | PresenceChannel<T>) {
+export function useClientTrigger(channel: Channel | PresenceChannel) {
   channel &&
     invariant(
       channel.name.match(/(private-|presence-)/gi),

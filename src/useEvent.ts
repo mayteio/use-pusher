@@ -10,7 +10,7 @@ import { Channel, PresenceChannel } from 'pusher-js';
  * @param dependencies Dependencies the callback uses.
  */
 export function useEvent<D>(
-  channel: Channel | PresenceChannel<unknown> | undefined,
+  channel: Channel | PresenceChannel | undefined,
   eventName: string,
   callback: (data?: D) => void,
   dependencies?: unknown[] | undefined

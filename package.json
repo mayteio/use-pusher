@@ -53,7 +53,6 @@
     "@testing-library/react-hooks": "^2.0.1",
     "@types/invariant": "^2.2.30",
     "@types/jest": "^24.0.18",
-    "@types/pusher-js": "^4.2.2",
     "@types/react": "^16.7.22",
     "cross-env": "^5.2.0",
     "dts-bundle-generator": "^3.2.0",
