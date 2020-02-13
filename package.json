@@ -73,7 +73,7 @@
     "rollup-plugin-typescript2": "^0.22.1",
     "rollup-plugin-url": "^2.1.0",
     "ts-jest": "^24.0.2",
-    "typedoc": "^0.15.0",
+    "typedoc": "^0.16.9",
     "typescript": "^3.2.4"
   },
   "jest": {
