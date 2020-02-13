@@ -64,8 +64,8 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#use-pusher" id="use-pusher" style="color: inherit; text-decoration: none;">
-					<h1>use-pusher</h1>
+				<a href="#harelplsuse-pusher" id="harelplsuse-pusher" style="color: inherit; text-decoration: none;">
+					<h1>@harelpls/use-pusher</h1>
 				</a>
 				<blockquote>
 					<p>Easy as hooks that integrate with the <a href="https://github.com/pusher/pusher-js">pusher-js</a> library.</p>
@@ -86,6 +86,7 @@
 					<li><a href="#usepresencechannel"><code>usePresenceChannel</code></a></li>
 					<li><a href="#useevent"><code>useEvent</code></a></li>
 					<li><a href="#usetrigger"><code>useTrigger</code></a></li>
+					<li><a href="#useclienttrigger"><code>useClientTrigger</code></a></li>
 					<li><a href="#usepusher"><code>usePusher</code></a></li>
 				</ul>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
@@ -204,6 +205,9 @@ const Example = () =&gt; {.
   pusher.trigger(channelName, eventName, data);
   <span class="hljs-keyword">return</span> { statusCode: <span class="hljs-number">200</span> };
 }</code></pre>
+				<a href="#codeuseclienttriggercode" id="codeuseclienttriggercode" style="color: inherit; text-decoration: none;">
+					<h2><code>useClientTrigger</code></h2>
+				</a>
 				<blockquote>
 					<p><em>I don&#39;t want a server though</em></p>
 				</blockquote>
@@ -227,7 +231,7 @@ const Example = () =&gt; {
 					<h2>Testing</h2>
 				</a>
 				<p>Typed <code>PusherMock</code>, <code>PusherChannelMock</code> and <code>PusherPresenceChannelMock</code> utils are provided based on <a href="https://github.com/nikolalsvk/pusher-js-mock"><code>pusher-js-mock</code></a> (thanks mate 🙏). Use these to stub out the client and channels, with an additional <code>emit</code> method on the channel classes.</p>
-				<p>Testing emitted events with jest can be achieved using <code>jest.mock</code> and <code>react-testing-library</code> (or <code>enzyme</code>, though your tests should reflect what the user should see <strong>NOT</strong> how the component handles events internally):</p>
+				<p>Testing emitted events with jest can be achieved using <code>jest.mock</code> and <code>@testing-library/react</code> (or <code>enzyme</code>, though your tests should reflect what the user should see <strong>NOT</strong> how the component handles events internally):</p>
 				<pre><code class="language-typescript">// Example.tsx
 import React from 'react';
 import { useChannel, useEvent } from '@harelpls/use-pusher';

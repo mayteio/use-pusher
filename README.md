@@ -1,4 +1,4 @@
-# use-pusher
+# @harelpls/use-pusher
 
 > Easy as hooks that integrate with the [pusher-js](https://github.com/pusher/pusher-js) library.
 
