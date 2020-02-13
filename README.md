@@ -26,7 +26,7 @@ You must wrap your app with a `PusherProvider` and pass it config props for [`pu
 
 ```tsx
 import React from "react";
-import { PusherProvider } from "@city-dna/use-pusher";
+import { PusherProvider } from "use-pusher";
 
 const config = {
   // required config props
