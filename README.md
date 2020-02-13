@@ -1,10 +1,10 @@
-# @harelpls/use-pusher
+# `@harelpls/use-pusher`
 
 > Easy as hooks that integrate with the [pusher-js](https://github.com/pusher/pusher-js) library.
 
 [![NPM](https://img.shields.io/npm/v/use-pusher.svg)](https://www.npmjs.com/package/react-pusher-hooks) ![Typed](https://badgen.net/badge//types/Typescript?icon=typescript)
 
-##### [API Reference/Docs](https://mayteio.github.io/use-pusher/)
+##### [API Reference/Docs](https://use-pusher-docs.netlify.com/)
 
 ## Install
 
