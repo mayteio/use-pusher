@@ -18,6 +18,7 @@ yarn add @harelpls/use-pusher
 - [`usePresenceChannel`](#usepresencechannel)
 - [`useEvent`](#useevent)
 - [`useTrigger`](#usetrigger)
+- [`useClientTrigger`](#useclienttrigger)
 - [`usePusher`](#usepusher)
 
 ## Usage
@@ -157,6 +158,8 @@ export async function handler(event) {
 }
 ```
 
+## `useClientTrigger`
+
 > _I don't want a server though_
 
 I hear ya. If you're feeling audacious, you can use [client events](https://pusher.com/docs/channels/using_channels/events#triggering-client-events) to push directly from the client:
@@ -183,7 +186,7 @@ This project was built using typescript, so types are built-in. Yeeeew!
 
 Typed `PusherMock`, `PusherChannelMock` and `PusherPresenceChannelMock` utils are provided based on [`pusher-js-mock`](https://github.com/nikolalsvk/pusher-js-mock) (thanks mate 🙏). Use these to stub out the client and channels, with an additional `emit` method on the channel classes.
 
-Testing emitted events with jest can be achieved using `jest.mock` and `react-testing-library` (or `enzyme`, though your tests should reflect what the user should see **NOT** how the component handles events internally):
+Testing emitted events with jest can be achieved using `jest.mock` and `@testing-library/react` (or `enzyme`, though your tests should reflect what the user should see **NOT** how the component handles events internally):
 
 ```typescript
 // Example.tsx
