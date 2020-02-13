@@ -1,5 +1,4 @@
 module.exports = {
-  out: "./docs",
-  include: "./",
-  exclude: ["**/__tests__/*", "*/**/index.ts", "*/**/helpers.ts"]
+  out: './docs',
+  exclude: ['**/__tests__/*', '*/**/index.ts', '*/**/helpers.ts'],
 };

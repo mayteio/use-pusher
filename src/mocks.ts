@@ -1,11 +1,13 @@
 // Based off https://github.com/nikolalsvk/pusher-js-mock
-import { Member, Config } from "pusher-js";
+import { Options } from 'pusher-js';
 
 class PusherChannelMock {
   /** Initialize PusherChannelMock with callbacks object. */
   callbacks: { [name: string]: Function[] };
-  constructor() {
+  name: string;
+  constructor(name?: string) {
     this.callbacks = {};
+    this.name = name || 'channel';
   }
 
   /**
@@ -24,9 +26,7 @@ class PusherChannelMock {
    * @param {Function} callback - callback to be called on event.
    */
   unbind(name: string, callback: Function) {
-    this.callbacks[name] = (this.callbacks[name] || []).filter(
-      cb => cb !== callback
-    );
+    this.callbacks[name] = (this.callbacks[name] || []).filter(cb => cb !== callback);
   }
 
   /**
@@ -34,22 +34,25 @@ class PusherChannelMock {
    * @param {String} name - name of the event.
    * @param {*} data - data you want to pass in to callback function that gets * called.
    */
-  emit(name: string, data: any) {
+  emit(name: string, data?: any, metadata?: any) {
     const callbacks = this.callbacks[name];
 
     if (callbacks) {
-      callbacks.forEach(cb => cb(data));
+      callbacks.forEach(cb => cb(data, metadata));
     }
   }
+
+  trigger() {}
 }
 
 export { PusherChannelMock };
 
-class PusherPresenceChannelMock<T> extends PusherChannelMock {
-  members: { members: { [id: string]: Member<T> }; myID: string };
-  constructor() {
-    super();
-    this.members = { members: {}, myID: "0a" };
+class PusherPresenceChannelMock extends PusherChannelMock {
+  members: any;
+  myID: any;
+  constructor(name?: string) {
+    super(name ? name : 'presence-');
+    this.members = { members: {}, myID: '0a' };
   }
 }
 
@@ -57,10 +60,10 @@ export { PusherPresenceChannelMock };
 
 class PusherMock {
   key: string;
-  config: Config;
+  config: Options;
   channels: { [name: string]: PusherChannelMock };
   /** Initialize PusherMock with empty channels object. */
-  constructor(key: string, config: Config) {
+  constructor(key: string, config: Options) {
     this.key = key;
     this.config = config;
     this.channels = {};
@@ -73,9 +76,9 @@ class PusherMock {
    */
   channel(name: string) {
     if (!this.channels[name]) {
-      this.channels[name] = name.includes("-presence")
-        ? new PusherPresenceChannelMock()
-        : new PusherChannelMock();
+      this.channels[name] = name.includes('presence-')
+        ? new PusherPresenceChannelMock(name)
+        : new PusherChannelMock(name);
     }
 
     return this.channels[name];

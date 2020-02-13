@@ -28,7 +28,7 @@ export function useTrigger(channelName: string) {
    * Memoized trigger function
    */
   const trigger = useCallback(
-    (eventName: string, data: any) => {
+    (eventName: string, data?: any) => {
       const fetchOptions: RequestInit = {
         method: "POST",
         body: JSON.stringify({ channelName, eventName, data })

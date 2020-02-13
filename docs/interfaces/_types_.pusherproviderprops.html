@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PusherProviderProps | use-pusher</title>
+	<title>PusherProviderProps | @harelpls/use-pusher</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">use-pusher</a>
+					<a href="../index.html" class="title">@harelpls/use-pusher</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="tsd-signature-type">Config</span>
+						<span class="tsd-signature-type">Options</span>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">PusherProviderProps</span>
@@ -100,6 +100,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_types_.pusherproviderprops.html#defer" class="tsd-kind-icon">defer</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#disablestats" class="tsd-kind-icon">disable<wbr>Stats</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#disabledtransports" class="tsd-kind-icon">disabled<wbr>Transports</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#enablestats" class="tsd-kind-icon">enable<wbr>Stats</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#enabledtransports" class="tsd-kind-icon">enabled<wbr>Transports</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#encrypted" class="tsd-kind-icon">encrypted</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#forcetls" class="tsd-kind-icon">forceTLS</a></li>
@@ -108,7 +109,10 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#httpsport" class="tsd-kind-icon">https<wbr>Port</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#ignorenullorigin" class="tsd-kind-icon">ignore<wbr>Null<wbr>Origin</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#pongtimeout" class="tsd-kind-icon">pong<wbr>Timeout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#statshost" class="tsd-kind-icon">stats<wbr>Host</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#timelineparams" class="tsd-kind-icon">timeline<wbr>Params</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_types_.pusherproviderprops.html#triggerendpoint" class="tsd-kind-icon">trigger<wbr>Endpoint</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#unavailable_timeout" class="tsd-kind-icon">unavailable_<wbr>timeout</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_types_.pusherproviderprops.html#value" class="tsd-kind-icon">value</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#wshost" class="tsd-kind-icon">ws<wbr>Host</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_types_.pusherproviderprops.html#wspath" class="tsd-kind-icon">ws<wbr>Path</a></li>
@@ -126,27 +130,20 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> activity<wbr>Timeout</h3>
 					<div class="tsd-signature tsd-kind-icon">activity<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.activityTimeout</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#activitytimeout">activityTimeout</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:104</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:20</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>After this time (in miliseconds) without any messages received from the server,
-								a ping message will be sent to check if the connection is still working.
-							Default value is is supplied by the server, low values will result in unnecessary traffic.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
 					<a name="auth" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> auth</h3>
-					<div class="tsd-signature tsd-kind-icon">auth<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AuthConfig</span></div>
+					<div class="tsd-signature tsd-kind-icon">auth<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AuthOptions</span></div>
 					<aside class="tsd-sources">
-						<p>Overrides Config.auth</p>
+						<p>Overrides Options.auth</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9d4a5fb/src/types.ts#L13">types.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9c270b7/src/types.ts#L13">src/types.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -155,44 +152,33 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> auth<wbr>Endpoint</h3>
 					<div class="tsd-signature tsd-kind-icon">auth<wbr>Endpoint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Overrides Config.authEndpoint</p>
+						<p>Overrides Options.authEndpoint</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9d4a5fb/src/types.ts#L12">types.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9c270b7/src/types.ts#L12">src/types.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="authtransport" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> auth<wbr>Transport</h3>
-					<div class="tsd-signature tsd-kind-icon">auth<wbr>Transport<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"ajax"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"jsonp"</span></div>
+					<div class="tsd-signature tsd-kind-icon">auth<wbr>Transport<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AuthTransport</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.authTransport</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#authtransport">authTransport</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:54</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:25</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Defines how the authentication endpoint, defined using authEndpoint, will be called.
-							There are two options available: ajax and jsonp.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="authorizer" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> authorizer</h3>
-					<div class="tsd-signature tsd-kind-icon">authorizer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Authorizer</span></div>
+					<div class="tsd-signature tsd-kind-icon">authorizer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AuthorizerGenerator</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.authorizer</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#authorizer">authorizer</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:65</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:26</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>If you need custom authorization behavior you can provide your own authorizer function as follows:</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="children" class="tsd-anchor"></a>
@@ -200,7 +186,7 @@
 					<div class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">React.ReactNode</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9d4a5fb/src/types.ts#L16">types.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9c270b7/src/types.ts#L16">src/types.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -210,7 +196,7 @@
 					<div class="tsd-signature tsd-kind-icon">client<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9d4a5fb/src/types.ts#L10">types.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9c270b7/src/types.ts#L10">src/types.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -219,9 +205,9 @@
 					<h3>cluster</h3>
 					<div class="tsd-signature tsd-kind-icon">cluster<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Overrides Config.cluster</p>
+						<p>Overrides Options.cluster</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9d4a5fb/src/types.ts#L11">types.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9c270b7/src/types.ts#L11">src/types.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -231,7 +217,7 @@
 					<div class="tsd-signature tsd-kind-icon">defer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9d4a5fb/src/types.ts#L15">types.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9c270b7/src/types.ts#L15">src/types.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -240,100 +226,75 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> disable<wbr>Stats</h3>
 					<div class="tsd-signature tsd-kind-icon">disable<wbr>Stats<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.disableStats</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#disablestats">disableStats</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:76</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:22</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Disables stats collection, so that connection metrics are not submitted to Pusher’s servers. These stats
-							are used for internal monitoring only and they do not affect the account stats.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="disabledtransports" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> disabled<wbr>Transports</h3>
 					<div class="tsd-signature tsd-kind-icon">disabled<wbr>Transports<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Transport</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.disabledTransports</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#disabledtransports">disabledTransports</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:92</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:27</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Specified which transports must not be used by Pusher to establish a connection.
-								This settings overwrites transports whitelisted via the enabledTransports options.
-								Available transports: ws, wss, xhr_streaming, xhr_polling, sockjs.
-							Additional transports may be added in the future and without adding them to this list, they will be enabled.</p>
-						</div>
-					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="enablestats" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr>Stats</h3>
+					<div class="tsd-signature tsd-kind-icon">enable<wbr>Stats<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#enablestats">enableStats</a></p>
+						<ul>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:21</li>
+						</ul>
+					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="enabledtransports" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enabled<wbr>Transports</h3>
 					<div class="tsd-signature tsd-kind-icon">enabled<wbr>Transports<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Transport</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.enabledTransports</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#enabledtransports">enabledTransports</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:84</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:28</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Specifies which transports should be used by Pusher to establish a connection.
-								Useful for applications running in controlled, well-behaving environments.
-								Available transports: ws, wss, xhr_streaming, xhr_polling, sockjs.
-							Additional transports may be added in the future and without adding them to this list, they will be disabled.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="encrypted" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> encrypted</h3>
 					<div class="tsd-signature tsd-kind-icon">encrypted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.encrypted</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#encrypted">encrypted</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:43</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:29</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Forces the connection to use encrypted transports.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>deprecated</dt>
-							<dd></dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="forcetls" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> forceTLS</h3>
 					<div class="tsd-signature tsd-kind-icon">forceTLS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.forceTLS</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#forcetls">forceTLS</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:38</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:30</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Forces the connection to use encrypted transports.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="httphost" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> http<wbr>Host</h3>
 					<div class="tsd-signature tsd-kind-icon">http<wbr>Host<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.httpHost</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#httphost">httpHost</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:116</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:38</li>
 						</ul>
 					</aside>
 				</section>
@@ -342,9 +303,9 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> http<wbr>Port</h3>
 					<div class="tsd-signature tsd-kind-icon">http<wbr>Port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.httpPort</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#httpport">httpPort</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:117</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:42</li>
 						</ul>
 					</aside>
 				</section>
@@ -353,9 +314,9 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> https<wbr>Port</h3>
 					<div class="tsd-signature tsd-kind-icon">https<wbr>Port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.httpsPort</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#httpsport">httpsPort</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:118</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:43</li>
 						</ul>
 					</aside>
 				</section>
@@ -364,33 +325,44 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ignore<wbr>Null<wbr>Origin</h3>
 					<div class="tsd-signature tsd-kind-icon">ignore<wbr>Null<wbr>Origin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.ignoreNullOrigin</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#ignorenullorigin">ignoreNullOrigin</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:97</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:31</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Ignores null origin checks for HTTP fallbacks. Use with care, it should be disabled only if necessary (i.e. PhoneGap).</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="pongtimeout" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> pong<wbr>Timeout</h3>
 					<div class="tsd-signature tsd-kind-icon">pong<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.pongTimeout</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#pongtimeout">pongTimeout</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:110</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:32</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Time before the connection is terminated after sending a ping message.
-							Default is 30000 (30s). Low values will cause false disconnections, if latency is high.</p>
-						</div>
-					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="statshost" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stats<wbr>Host</h3>
+					<div class="tsd-signature tsd-kind-icon">stats<wbr>Host<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#statshost">statsHost</a></p>
+						<ul>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:33</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="timelineparams" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> timeline<wbr>Params</h3>
+					<div class="tsd-signature tsd-kind-icon">timeline<wbr>Params<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#timelineparams">timelineParams</a></p>
+						<ul>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:34</li>
+						</ul>
+					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="triggerendpoint" class="tsd-anchor"></a>
@@ -398,7 +370,18 @@
 					<div class="tsd-signature tsd-kind-icon">trigger<wbr>Endpoint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9d4a5fb/src/types.ts#L14">types.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9c270b7/src/types.ts#L14">src/types.ts:14</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="unavailable_timeout" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> unavailable_<wbr>timeout</h3>
+					<div class="tsd-signature tsd-kind-icon">unavailable_<wbr>timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#unavailable_timeout">unavailable_timeout</a></p>
+						<ul>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:35</li>
 						</ul>
 					</aside>
 				</section>
@@ -408,7 +391,7 @@
 					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9d4a5fb/src/types.ts#L18">types.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9c270b7/src/types.ts#L18">src/types.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -417,9 +400,9 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ws<wbr>Host</h3>
 					<div class="tsd-signature tsd-kind-icon">ws<wbr>Host<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.wsHost</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#wshost">wsHost</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:112</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:37</li>
 						</ul>
 					</aside>
 				</section>
@@ -428,9 +411,9 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ws<wbr>Path</h3>
 					<div class="tsd-signature tsd-kind-icon">ws<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.wsPath</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#wspath">wsPath</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:113</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:39</li>
 						</ul>
 					</aside>
 				</section>
@@ -439,9 +422,9 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ws<wbr>Port</h3>
 					<div class="tsd-signature tsd-kind-icon">ws<wbr>Port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.wsPort</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#wsport">wsPort</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:114</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:40</li>
 						</ul>
 					</aside>
 				</section>
@@ -450,9 +433,9 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> wss<wbr>Port</h3>
 					<div class="tsd-signature tsd-kind-icon">wss<wbr>Port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Config.wssPort</p>
+						<p>Inherited from <a href="_types_.pusherproviderprops.html">PusherProviderProps</a>.<a href="_types_.pusherproviderprops.html#wssport">wssPort</a></p>
 						<ul>
-							<li>Defined in /Users/GISmac/Work/use-pusher/node_modules/@types/pusher-js/index.d.ts:115</li>
+							<li>Defined in node_modules/pusher-js/types/src/core/options.d.ts:41</li>
 						</ul>
 					</aside>
 				</section>
@@ -465,28 +448,31 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_pusherprovider_.html">"<wbr>Pusher<wbr>Provider"</a>
+						<a href="../modules/_pusherprovider_.html">&quot;<wbr>Pusher<wbr>Provider&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_mocks_.html">"mocks"</a>
+						<a href="../modules/_mocks_.html">&quot;mocks&quot;</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_types_.html">"types"</a>
+						<a href="../modules/_types_.html">&quot;types&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_usechannel_.html">"use<wbr>Channel"</a>
+						<a href="../modules/_usechannel_.html">&quot;use<wbr>Channel&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_useevent_.html">"use<wbr>Event"</a>
+						<a href="../modules/_useclienttrigger_.html">&quot;use<wbr>Client<wbr>Trigger&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_usepresencechannel_.html">"use<wbr>Presence<wbr>Channel"</a>
+						<a href="../modules/_useevent_.html">&quot;use<wbr>Event&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_usepusher_.html">"use<wbr>Pusher"</a>
+						<a href="../modules/_usepresencechannel_.html">&quot;use<wbr>Presence<wbr>Channel&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_usetrigger_.html">"use<wbr>Trigger"</a>
+						<a href="../modules/_usepusher_.html">&quot;use<wbr>Pusher&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_usetrigger_.html">&quot;use<wbr>Trigger&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -534,6 +520,9 @@
 								<a href="_types_.pusherproviderprops.html#disabledtransports" class="tsd-kind-icon">disabled<wbr>Transports</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_types_.pusherproviderprops.html#enablestats" class="tsd-kind-icon">enable<wbr>Stats</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_types_.pusherproviderprops.html#enabledtransports" class="tsd-kind-icon">enabled<wbr>Transports</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -557,8 +546,17 @@
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_types_.pusherproviderprops.html#pongtimeout" class="tsd-kind-icon">pong<wbr>Timeout</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_types_.pusherproviderprops.html#statshost" class="tsd-kind-icon">stats<wbr>Host</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_types_.pusherproviderprops.html#timelineparams" class="tsd-kind-icon">timeline<wbr>Params</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_types_.pusherproviderprops.html#triggerendpoint" class="tsd-kind-icon">trigger<wbr>Endpoint</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_types_.pusherproviderprops.html#unavailable_timeout" class="tsd-kind-icon">unavailable_<wbr>timeout</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_types_.pusherproviderprops.html#value" class="tsd-kind-icon">value</a>

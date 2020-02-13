@@ -10,8 +10,6 @@ beforeEach(() => {
 
 jest.mock("pusher-js", () => {
   const { PusherMock } = require("../mocks");
-
-  // monkey patch missing function
   return PusherMock;
 });
 
@@ -88,7 +86,7 @@ describe("usePresenceChannel hook", () => {
       });
     });
 
-    expect(result.current.members["0b"]).toBeDefined();
+    expect((result.current.members as any)["0b"]).toBeDefined();
     rerender();
 
     act(() => {

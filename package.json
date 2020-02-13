@@ -1,6 +1,6 @@
 {
-  "name": "use-pusher",
-  "version": "1.1.3",
+  "name": "@harelpls/use-pusher",
+  "version": "3.1.2",
   "description": "A wrapper around pusher-js for easy-as hooks in React.",
   "author": "@mayteio",
   "keywords": [
@@ -37,10 +37,10 @@
   },
   "dependencies": {
     "dequal": "^1.0.0",
-    "invariant": "^2.2.4"
+    "invariant": "^2.2.4",
+    "pusher-js": "^5.1.0"
   },
   "peerDependencies": {
-    "pusher-js": "^5.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
@@ -53,13 +53,12 @@
     "@testing-library/react-hooks": "^2.0.1",
     "@types/invariant": "^2.2.30",
     "@types/jest": "^24.0.18",
-    "@types/pusher-js": "^4.2.2",
     "@types/react": "^16.7.22",
     "cross-env": "^5.2.0",
     "dts-bundle-generator": "^3.2.0",
     "gh-pages": "^2.0.1",
     "jest-fetch-mock": "^2.1.2",
-    "pusher-js": "^5.0.0",
+    "pusher-js": "^5.1.0",
     "pusher-js-mock": "^0.2.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -74,7 +73,7 @@
     "rollup-plugin-typescript2": "^0.22.1",
     "rollup-plugin-url": "^2.1.0",
     "ts-jest": "^24.0.2",
-    "typedoc": "^0.15.0",
+    "typedoc": "^0.16.9",
     "typescript": "^3.2.4"
   },
   "jest": {

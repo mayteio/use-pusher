@@ -1,16 +1,16 @@
-import { Config, AuthConfig } from "pusher-js";
-import * as React from "react";
+import { Options, AuthOptions } from 'pusher-js';
+import * as React from 'react';
 
 export interface PusherContextValues {
   client?: any | undefined;
   triggerEndpoint?: string;
 }
 
-export interface PusherProviderProps extends Config {
+export interface PusherProviderProps extends Options {
   clientKey: string;
   cluster: string;
   authEndpoint?: string;
-  auth?: AuthConfig;
+  auth?: AuthOptions;
   triggerEndpoint?: string;
   defer?: boolean;
   children: React.ReactNode;

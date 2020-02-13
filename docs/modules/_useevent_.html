@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;useEvent&quot; | use-pusher</title>
+	<title>&quot;useEvent&quot; | @harelpls/use-pusher</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">use-pusher</a>
+					<a href="../index.html" class="title">@harelpls/use-pusher</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -73,7 +73,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_useevent_.html#useevent" class="tsd-kind-icon">use<wbr>Event</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_useevent_.html#useevent" class="tsd-kind-icon">use<wbr>Event</a></li>
 							</ul>
 						</section>
 					</div>
@@ -81,25 +81,34 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 					<a name="useevent" class="tsd-anchor"></a>
 					<h3>use<wbr>Event</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">use<wbr>Event<span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Channel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PresenceChannel</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventCallback</span>, dependencies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">use<wbr>Event&lt;D&gt;<span class="tsd-signature-symbol">(</span>channel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Channel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PresenceChannel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">?: </span><a href="" class="tsd-signature-type">D</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span>, dependencies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9d4a5fb/src/useEvent.ts#L12">useEvent.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9c270b7/src/useEvent.ts#L12">src/useEvent.ts:12</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Subscribes to a channel event and registers a callback.</p>
+								</div>
 							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>D</h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>channel: <span class="tsd-signature-type">Channel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PresenceChannel</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+									<h5>channel: <span class="tsd-signature-type">Channel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PresenceChannel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Pusher channel to bind to</p>
 									</div>
@@ -111,13 +120,31 @@
 									</div>
 								</li>
 								<li>
-									<h5>callback: <span class="tsd-signature-type">EventCallback</span></h5>
+									<h5>callback: <span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">?: </span><a href="" class="tsd-signature-type">D</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Callback to call on a new event</p>
 									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">?: </span><a href="" class="tsd-signature-type">D</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5><span class="tsd-flag ts-flagOptional">Optional</span> data: <a href="" class="tsd-signature-type">D</a></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> dependencies: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> dependencies: <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Dependencies the callback uses.</p>
 									</div>
@@ -136,34 +163,37 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_pusherprovider_.html">"<wbr>Pusher<wbr>Provider"</a>
+						<a href="_pusherprovider_.html">&quot;<wbr>Pusher<wbr>Provider&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_mocks_.html">"mocks"</a>
+						<a href="_mocks_.html">&quot;mocks&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_types_.html">"types"</a>
+						<a href="_types_.html">&quot;types&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_usechannel_.html">"use<wbr>Channel"</a>
+						<a href="_usechannel_.html">&quot;use<wbr>Channel&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_useclienttrigger_.html">&quot;use<wbr>Client<wbr>Trigger&quot;</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_useevent_.html">"use<wbr>Event"</a>
+						<a href="_useevent_.html">&quot;use<wbr>Event&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_usepresencechannel_.html">"use<wbr>Presence<wbr>Channel"</a>
+						<a href="_usepresencechannel_.html">&quot;use<wbr>Presence<wbr>Channel&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_usepusher_.html">"use<wbr>Pusher"</a>
+						<a href="_usepusher_.html">&quot;use<wbr>Pusher&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_usetrigger_.html">"use<wbr>Trigger"</a>
+						<a href="_usetrigger_.html">&quot;use<wbr>Trigger&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_useevent_.html#useevent" class="tsd-kind-icon">use<wbr>Event</a>
 					</li>
 				</ul>

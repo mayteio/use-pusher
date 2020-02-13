@@ -1,32 +1,41 @@
-import { useCallback, useEffect } from "react";
-import invariant from "invariant";
-import { Channel, PresenceChannel, EventCallback } from "pusher-js";
+import { useEffect } from 'react';
+import invariant from 'invariant';
+import { Channel, PresenceChannel } from 'pusher-js';
 
 /**
- *
+ * Subscribes to a channel event and registers a callback.
  * @param channel Pusher channel to bind to
  * @param eventName Name of event to bind to
  * @param callback Callback to call on a new event
  * @param dependencies Dependencies the callback uses.
  */
-export function useEvent(
-  channel: Channel | PresenceChannel<any> | undefined,
+export function useEvent<D>(
+  channel: Channel | PresenceChannel | undefined,
   eventName: string,
-  callback: EventCallback,
-  dependencies: any[] = []
+  callback: (data?: D) => void,
+  dependencies?: unknown[] | undefined
 ) {
-  invariant(eventName, "Must supply eventName and callback to onEvent");
-  invariant(callback, "Must supply callback to onEvent");
+  // error when required arguments aren't passed.
+  invariant(eventName, 'Must supply eventName and callback to onEvent');
+  invariant(callback, 'Must supply callback to onEvent');
 
-  const callbackRef = useCallback<EventCallback>(callback, dependencies);
+  // deprecate dependencies
+  useEffect(() => {
+    if (dependencies) {
+      console.warn(
+        'The useEvent callback is no longer memoized - dependencies are deprecated and its up to you to memoize the callback if you want to.'
+      );
+    }
+  }, [dependencies]);
+
+  // bind and unbind events whenever the channel, eventName or callback changes.
   useEffect(() => {
     if (channel === undefined) {
-      console.warn("No channel supplied to onEvent. Not binding callback.");
       return;
     }
-    channel.bind(eventName, callbackRef);
+    channel.bind(eventName, callback);
     return () => {
-      channel.unbind(eventName, callbackRef);
+      channel.unbind(eventName, callback);
     };
-  }, [channel, eventName, callbackRef]);
+  }, [channel, eventName, callback]);
 }

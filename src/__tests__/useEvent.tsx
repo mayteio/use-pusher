@@ -47,11 +47,6 @@ describe("useEvent hook", () => {
     );
     const { result: result3 } = setup(channel, "my-event");
     expect(result3.error.message).toBe("Must supply callback to onEvent");
-
-    setup(undefined, "my-event", () => {});
-    expect(global.console.warn).toHaveBeenCalledWith(
-      "No channel supplied to onEvent. Not binding callback."
-    );
   });
 
   test("subscribe to channel and call events emitted", () => {
@@ -61,7 +56,7 @@ describe("useEvent hook", () => {
     rerender();
 
     channel.emit("my-event", "test");
-    expect(callback).toHaveBeenCalledWith("test");
+    expect(callback).toHaveBeenCalledWith("test", undefined);
   });
 
   test("should unbind on unmount", () => {
@@ -81,7 +76,7 @@ describe("useEvent hook", () => {
     rerender([channel, "your-event", callback]);
 
     channel.emit("your-event", "test");
-    expect(callback).toHaveBeenCalledWith("test");
+    expect(callback).toHaveBeenCalledWith("test", undefined);
 
     unmount();
     expect(channel.callbacks["my-event"]).toHaveLength(0);
