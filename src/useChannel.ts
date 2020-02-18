@@ -8,7 +8,7 @@ import { usePusher } from './usePusher';
  * Subscribe to a channel
  *
  * @param channelName The name of the channel you want to subscribe to.
- * @typeparam Type of channel you're subscribing to. Can be one of Channel or PresenceChannel.
+ * @typeparam Type of channel you're subscribing to. Can be one of `Channel` or `PresenceChannel` from `pusher-js`.
  * @returns Instance of the channel you just subscribed to.
  *
  * @example

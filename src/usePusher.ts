@@ -7,7 +7,7 @@ import { PusherContextValues } from './types';
  *
  * @returns a `MutableRefObject<Pusher|undefined>`. The instance is held by a `useRef()` hook.
  * @example
- * ```javscript
+ * ```javascript
  * const { client } = usePusher();
  * client.current.subscribe('my-channel');
  * ```

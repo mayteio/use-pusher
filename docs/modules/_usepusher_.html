@@ -93,7 +93,7 @@
 					<div class="tsd-signature tsd-kind-icon">NOT_<wbr>IN_<wbr>CONTEXT_<wbr>WARNING<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"No Pusher context. Did you forget to wrap your app in a &lt;PusherProvider /&gt;?"</span><span class="tsd-signature-symbol"> = &quot;No Pusher context. Did you forget to wrap your app in a &lt;PusherProvider /&gt;?&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9c270b7/src/usePusher.ts#L20">src/usePusher.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/bb1fbb2/src/usePusher.ts#L23">src/usePusher.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -110,21 +110,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/9c270b7/src/usePusher.ts#L12">src/usePusher.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/mayteio/use-pusher/blob/bb1fbb2/src/usePusher.ts#L15">src/usePusher.ts:15</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Provides access to the pusher client</p>
+									<p>Provides access to the pusher client instance.</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><p>const {client} = usePusher();
-										client.current.subscribe(&#39;my-channel&#39;);</p>
+									<dd><pre><code class="language-javascript"><span class="hljs-keyword">const</span> { client } = usePusher();
+client.current.subscribe(<span class="hljs-string">'my-channel'</span>);</code></pre>
 									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_types_.pushercontextvalues.html" class="tsd-signature-type">PusherContextValues</a></h4>
+							<p>a <code>MutableRefObject&lt;Pusher|undefined&gt;</code>. The instance is held by a <code>useRef()</code> hook.</p>
 						</li>
 					</ul>
 				</section>
