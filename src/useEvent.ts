@@ -7,7 +7,6 @@ import { Channel, PresenceChannel } from 'pusher-js';
  * @param channel Pusher channel to bind to
  * @param eventName Name of event to bind to
  * @param callback Callback to call on a new event
- * @param dependencies Dependencies the callback uses.
  */
 export function useEvent<D>(
   channel: Channel | PresenceChannel | undefined,
@@ -32,8 +31,7 @@ export function useEvent<D>(
   useEffect(() => {
     if (channel === undefined) {
       return;
-    }
-    channel.bind(eventName, callback);
+    } else channel.bind(eventName, callback);
     return () => {
       channel.unbind(eventName, callback);
     };
