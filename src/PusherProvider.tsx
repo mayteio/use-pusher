@@ -10,49 +10,52 @@ const PusherContext = React.createContext<PusherContextValues>({});
 export const __PusherContext = PusherContext;
 
 /**
- * Provider for the pusher service in an app
+ * Provider that creates your pusher instance and provides it to child hooks throughout your app.
+ * Note, you can pass in value={{}} as a prop if you'd like to override the pusher client passed.
+ * This is handy when simulating pusher locally, or for testing.
  * @param props Config for Pusher client
  */
-export function PusherProvider({
+
+export const PusherProvider: React.FC<PusherProviderProps> = ({
   clientKey,
   cluster,
   triggerEndpoint,
-  authEndpoint,
-  auth,
   defer = false,
+  children,
   ...props
-}: PusherProviderProps) {
+}) => {
   // errors when required props are not passed.
   invariant(clientKey, 'A client key is required for pusher');
   invariant(cluster, 'A cluster is required for pusher');
-  const { children, ...additionalConfig } = props;
-  const config: Options = { cluster, ...additionalConfig };
-  if (authEndpoint) config.authEndpoint = authEndpoint;
-  if (auth) config.auth = auth;
 
-  const pusherClientRef = useRef<Pusher>();
+  const config: Options = { cluster, ...props };
+
+  const pusherClientRef = useRef<Pusher | undefined>();
 
   // track config for comparison
-  const previousConfig = useRef<Options | undefined>();
+  const previousConfig = useRef<Options | undefined>(props);
   useEffect(() => {
-    previousConfig.current = config;
+    previousConfig.current = props;
   });
 
   useEffect(() => {
-    // if client exists and options are the same, skip.
-    if (dequal(previousConfig.current, config) && pusherClientRef.current !== undefined) {
+    // Skip creation of client if deferring, a value prop is passed, or config props are the same.
+    if (
+      defer ||
+      props.value ||
+      (dequal(previousConfig.current, props) && pusherClientRef.current !== undefined)
+    ) {
       return;
     }
 
-    // optional defer parameter skips creating the class.
-    // handy if you want to wait for something async like
-    // a JWT before creating it.
-    if (!defer) {
-      pusherClientRef.current = new Pusher(clientKey, config);
-    }
+    // create the client and assign it to the ref
+    pusherClientRef.current = new Pusher(clientKey, config);
 
-    return () => pusherClientRef.current && pusherClientRef.current.disconnect();
-  }, [clientKey, config, defer, pusherClientRef]);
+    // cleanup
+    return () => {
+      pusherClientRef.current && pusherClientRef.current.disconnect();
+    };
+  }, [clientKey, props, defer, pusherClientRef]);
 
   return (
     <PusherContext.Provider
@@ -64,4 +67,4 @@ export function PusherProvider({
       {...props}
     />
   );
-}
+};

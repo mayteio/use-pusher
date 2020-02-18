@@ -1,9 +1,11 @@
 // Based off https://github.com/nikolalsvk/pusher-js-mock
 import { Options } from 'pusher-js';
 
+type CallbackSignature = (data: any, metadata?: any) => void;
+
 class PusherChannelMock {
   /** Initialize PusherChannelMock with callbacks object. */
-  callbacks: { [name: string]: Function[] };
+  callbacks: { [name: string]: CallbackSignature[] };
   name: string;
   constructor(name?: string) {
     this.callbacks = {};
@@ -15,7 +17,7 @@ class PusherChannelMock {
    * @param {String} name - name of the event.
    * @param {Function} callback - callback to be called on event.
    */
-  bind(name: string, callback: Function) {
+  bind(name: string, callback: CallbackSignature) {
     this.callbacks[name] = this.callbacks[name] || [];
     this.callbacks[name].push(callback);
   }
@@ -25,7 +27,7 @@ class PusherChannelMock {
    * @param {String} name - name of the event.
    * @param {Function} callback - callback to be called on event.
    */
-  unbind(name: string, callback: Function) {
+  unbind(name: string, callback: CallbackSignature) {
     this.callbacks[name] = (this.callbacks[name] || []).filter(cb => cb !== callback);
   }
 
