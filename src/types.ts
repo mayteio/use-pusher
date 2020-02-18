@@ -1,23 +1,16 @@
-import { Options, AuthOptions } from 'pusher-js';
+import Pusher, { Options } from 'pusher-js';
 import * as React from 'react';
 
 export interface PusherContextValues {
-  client?: any | undefined;
+  client?: React.MutableRefObject<Pusher | undefined>;
   triggerEndpoint?: string;
 }
 
 export interface PusherProviderProps extends Options {
   clientKey: string;
-  cluster: string;
-  authEndpoint?: string;
-  auth?: AuthOptions;
+  cluster: 'mt1' | 'us2' | 'us3' | 'eu' | 'ap1' | 'ap2' | 'ap3' | 'ap4';
   triggerEndpoint?: string;
   defer?: boolean;
-  children: React.ReactNode;
   // for testing purposes
-  value?: any;
-}
-
-export interface useChannelOptions {
-  skip?: boolean;
+  value?: PusherContextValues;
 }

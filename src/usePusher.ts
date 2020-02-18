@@ -3,11 +3,14 @@ import { __PusherContext } from './PusherProvider';
 import { PusherContextValues } from './types';
 
 /**
- * Provides access to the pusher client
+ * Provides access to the pusher client instance.
  *
+ * @returns a `MutableRefObject<Pusher|undefined>`. The instance is held by a `useRef()` hook.
  * @example
- * const {client} = usePusher();
+ * ```javascript
+ * const { client } = usePusher();
  * client.current.subscribe('my-channel');
+ * ```
  */
 export function usePusher() {
   const context = useContext<PusherContextValues>(__PusherContext);
