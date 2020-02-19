@@ -44,7 +44,7 @@ export function useTrigger<TData = {}>(channelName: string) {
         );
       }
 
-      return fetch(triggerEndpoint, fetchOptions);
+      return triggerEndpoint && fetch(triggerEndpoint, fetchOptions);
     },
     [client, triggerEndpoint, channelName]
   );

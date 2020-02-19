@@ -4,7 +4,6 @@ import external from 'rollup-plugin-peer-deps-external';
 import resolve from 'rollup-plugin-node-resolve';
 import url from 'rollup-plugin-url';
 import babel from 'rollup-plugin-babel';
-import dts from 'rollup-plugin-dts';
 
 import pkg from './package.json';
 
@@ -39,7 +38,6 @@ export default {
       presets: ['@babel/env', '@babel/preset-react'],
     }),
     commonjs(),
-    dts(),
   ],
   external: ['pusher-js'],
 };
