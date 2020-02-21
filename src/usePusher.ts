@@ -15,7 +15,7 @@ import { PusherContextValues } from './types';
 export function usePusher() {
   const context = useContext<PusherContextValues>(__PusherContext);
   useEffect(() => {
-    if (!context) console.warn(NOT_IN_CONTEXT_WARNING);
+    if (!Object.keys(context).length) console.warn(NOT_IN_CONTEXT_WARNING);
   }, [context]);
   return context;
 }

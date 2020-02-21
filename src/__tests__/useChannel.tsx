@@ -24,7 +24,7 @@ describe("useChannel hook", () => {
       <PusherProvider
         {...config}
         children={children}
-        value={{ client: { current: undefined }, triggerEndpoint: "d" }}
+        value={{ client: undefined, triggerEndpoint: "d" }}
       />
     );
     const { result, rerender } = renderHook(() => useChannel("my-channel"), {

@@ -26,24 +26,24 @@ yarn add @harelpls/use-pusher
 You must wrap your app with a `PusherProvider` and pass it config props for [`pusher-js`](https://github.com/pusher/pusher-js) initialisation.
 
 ```typescript
-import React from 'react';
-import { PusherProvider } from '@harelpls/use-pusher';
+import React from "react";
+import { PusherProvider } from "@harelpls/use-pusher";
 
 const config = {
   // required config props
-  clientKey: 'client-key',
-  cluster: 'ap4',
+  clientKey: "client-key",
+  cluster: "ap4",
 
   // optional if you'd like to trigger events. BYO endpoint.
   // see "Trigger Server" below for more info
-  triggerEndpoint: '/pusher/trigger',
+  triggerEndpoint: "/pusher/trigger",
 
   // required for private/presence channels
   // also sends auth headers to trigger endpoint
-  authEndpoint: '/pusher/auth',
+  authEndpoint: "/pusher/auth",
   auth: {
-    headers: { Authorization: 'Bearer token' },
-  },
+    headers: { Authorization: "Bearer token" }
+  }
 };
 
 // Wrap app in provider
@@ -60,7 +60,7 @@ Use this hook to subscribe to a channel.
 
 ```typescript
 // returns channel instance.
-const channel = useChannel('channel-name');
+const channel = useChannel("channel-name");
 ```
 
 ## `usePresenceChannel`
@@ -93,11 +93,11 @@ Bind to events on a channel with a callback.
 ```typescript
 const Example = () => {
   const [message, setMessages] = useState();
-  const channel = useChannel('channel-name');
+  const channel = useChannel("channel-name");
   useEvent(
     channel,
-    'message',
-    ({ data }) => setMessages(messages => [...messages, data]),
+    "message",
+    ({ data }) => setMessages((messages) => [...messages, data]),
     // optional dependencies array. Passed through to useCallback. Defaults to [].
     []
   );
@@ -127,11 +127,11 @@ const Example = () => {.
 Get access to the Pusher instance to do other things.
 
 ```typescript
-import { usePusher } from '@harelpls/use-pusher';
+import { usePusher } from "@harelpls/use-pusher";
 
 const Example = () => {
   const { client } = usePusher();
-  client.log('Look ma, logs!');
+  client.log("Look ma, logs!");
 
   return null;
 };
@@ -142,13 +142,13 @@ const Example = () => {
 In order to trigger an event, you'll have to create a simple lambda (or an express server if that's your thing). Below is a short lambda that can handle triggered events from `useTrigger`.
 
 ```typescript
-import Pusher from 'pusher';
+import Pusher from "pusher";
 
 const pusher = new Pusher({
-  appId: 'app-id',
-  key: 'client-key',
-  secret: 'mad-secret',
-  cluster: 'ap4',
+  appId: "app-id",
+  key: "client-key",
+  secret: "mad-secret",
+  cluster: "ap4"
 });
 
 export async function handler(event) {
@@ -165,13 +165,13 @@ export async function handler(event) {
 I hear ya. If you're feeling audacious, you can use [client events](https://pusher.com/docs/channels/using_channels/events#triggering-client-events) to push directly from the client:
 
 ```typescript
-import { useChannel, useClientTrigger } from '@harelpls/use-pusher';
+import { useChannel, useClientTrigger } from "@harelpls/use-pusher";
 
 const Example = () => {
-  const channel = useChannel('presence-danger-zone');
+  const channel = useChannel("presence-danger-zone");
   const trigger = useClientTrigger(channel);
   const handleClientEvent = () => {
-    trigger('Pew pew');
+    trigger("Pew pew");
   };
 
   return <button onClick={handleClientEvent}>Fire</button>;
@@ -190,31 +190,31 @@ Testing emitted events with jest can be achieved using `jest.mock` and `@testing
 
 ```typescript
 // Example.tsx
-import React from 'react';
-import { useChannel, useEvent } from '@harelpls/use-pusher';
+import React from "react";
+import { useChannel, useEvent } from "@harelpls/use-pusher";
 
 const Example = () => {
   const [title, setTitle] = useState();
-  const channel = useChannel('my-channel');
-  useEvent(channel, 'title', ({ data }) => setTitle(data));
+  const channel = useChannel("my-channel");
+  useEvent(channel, "title", ({ data }) => setTitle(data));
 
   return <span>{title}</span>;
 };
 
 // Example.test.tsx
-import { render, act } from '@testing-library/react';
-import { PusherMock, PusherChannelMock } from '@harelpls/use-pusher';
+import { render, act } from "@testing-library/react";
+import { PusherMock, PusherChannelMock } from "@harelpls/use-pusher";
 
 // mock out the result of the useChannel hook
 const mockChannel = new PusherChannelMock();
-jest.mock('@harelpls/use-pusher', () => ({
-  ...require.requireActual('@harelpls/use-pusher'),
-  useChannel: () => mockChannel,
+jest.mock("@harelpls/use-pusher", () => ({
+  ...require.requireActual("@harelpls/use-pusher"),
+  useChannel: () => mockChannel
 }));
 
-test('should show a title when it receives a title event', async () => {
+test("should show a title when it receives a title event", async () => {
   // mock the client
-  const client = { current: new PusherMock('client-key', { cluster: 'ap4' }) };
+  const client = new PusherMock("client-key", { cluster: "ap4" });
 
   // render component and provider with a mocked context value
   const { findByText } = render(
@@ -224,10 +224,10 @@ test('should show a title when it receives a title event', async () => {
   );
 
   // emit an event on the mocked channel
-  act(() => mockChannel.emit('title', { data: 'Hello world' }));
+  act(() => mockChannel.emit("title", { data: "Hello world" }));
 
   // assert expectations
-  expect(await findByText('Hello world')).toBeInTheDocument();
+  expect(await findByText("Hello world")).toBeInTheDocument();
 });
 ```
 

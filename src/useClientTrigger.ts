@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
-import invariant from 'invariant';
-import { Channel, PresenceChannel } from 'pusher-js';
+import { useCallback } from "react";
+import invariant from "invariant";
+import { Channel, PresenceChannel } from "pusher-js";
 
 /**
  *
@@ -15,17 +15,19 @@ import { Channel, PresenceChannel } from 'pusher-js';
  * const handleClick = () => trigger('some-client-event', {});
  * ```
  */
-export function useClientTrigger<TData = {}>(channel: Channel | PresenceChannel) {
+export function useClientTrigger<TData = {}>(
+  channel: Channel | PresenceChannel
+) {
   channel &&
     invariant(
-      channel.name.match(/(private-|presence-)/gi),
+      channel.name?.match(/(private-|presence-)/gi),
       "Channel provided to useClientTrigger wasn't private or presence channel. Client events only work on these types of channels."
     );
 
   // memoize trigger so it's not being created every render
   const trigger = useCallback(
     (eventName: string, data: TData) => {
-      invariant(eventName, 'Must pass event name to trigger a client event.');
+      invariant(eventName, "Must pass event name to trigger a client event.");
       channel && channel.trigger(eventName, data);
     },
     [channel]

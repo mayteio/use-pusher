@@ -28,7 +28,7 @@ test("should render without error", () => {
     <PusherProvider
       {...config}
       children={children}
-      value={{ client: { current: undefined }, triggerEndpoint: "d" }}
+      value={{ client: undefined, triggerEndpoint: "d" }}
     />
   );
   const { result } = renderHook(() => useTrigger("my-channel"), { wrapper });
@@ -48,7 +48,7 @@ test("should push event to trigger endpoint without authentication and warn", as
   rerender();
   const trigger = result.current;
 
-  const res = await trigger("my-event", "test").then(res => res.text());
+  const res = await trigger("my-event", "test").then((res) => res.text());
   expect(fetch as FetchMock).toHaveBeenCalledTimes(1);
   expect(res).toBe("success");
 
