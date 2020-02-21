@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import invariant from 'invariant';
+import { useEffect, useState } from "react";
+import invariant from "invariant";
 
-import { Channel, PresenceChannel } from 'pusher-js';
-import { usePusher } from './usePusher';
+import { Channel, PresenceChannel } from "pusher-js";
+import { usePusher } from "./usePusher";
 
 /**
  * Subscribe to a channel
@@ -18,19 +18,20 @@ import { usePusher } from './usePusher';
  * ```
  */
 
-export function useChannel<T extends Channel & PresenceChannel>(channelName: string) {
+export function useChannel<T extends Channel & PresenceChannel>(
+  channelName: string
+) {
   // errors for missing arguments
-  invariant(channelName, 'channelName required to subscribe to a channel');
+  invariant(channelName, "channelName required to subscribe to a channel");
 
   const { client } = usePusher();
-  const pusherClient = client && client.current;
 
   const [channel, setChannel] = useState<T | undefined>();
 
   useEffect(() => {
-    if (!pusherClient) return;
-    const pusherChannel = pusherClient.subscribe(channelName);
+    if (!client) return;
+    const pusherChannel = client.subscribe(channelName);
     setChannel(pusherChannel as T);
-  }, [channelName, pusherClient]);
+  }, [channelName, client]);
   return channel;
 }

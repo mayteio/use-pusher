@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
-import { usePusher } from './usePusher';
-import invariant from 'invariant';
-import { useChannel } from './useChannel';
+import { useCallback } from "react";
+import { usePusher } from "./usePusher";
+import invariant from "invariant";
+import { useChannel } from "./useChannel";
 
 /**
  * Hook to provide a trigger function that calls the server defined in `PusherProviderProps.triggerEndpoint` using `fetch`.
@@ -22,7 +22,7 @@ export function useTrigger<TData = {}>(channelName: string) {
   // you can't use this if you haven't supplied a triggerEndpoint.
   invariant(
     triggerEndpoint,
-    'No trigger endpoint specified to <PusherProvider />. Cannot trigger an event.'
+    "No trigger endpoint specified to <PusherProvider />. Cannot trigger an event."
   );
 
   // subscribe to the channel we'll be triggering to.
@@ -32,15 +32,15 @@ export function useTrigger<TData = {}>(channelName: string) {
   const trigger = useCallback(
     (eventName: string, data?: TData) => {
       const fetchOptions: RequestInit = {
-        method: 'POST',
-        body: JSON.stringify({ channelName, eventName, data }),
+        method: "POST",
+        body: JSON.stringify({ channelName, eventName, data })
       };
 
-      if (client && client.current && client.current.config.auth) {
-        fetchOptions.headers = client.current.config.auth.headers;
+      if (client && client.config.auth) {
+        fetchOptions.headers = client.config.auth.headers;
       } else {
         console.warn(
-          'No auth parameters supplied to <PusherProvider />. Your events will be unauthenticated.'
+          "No auth parameters supplied to <PusherProvider />. Your events will be unauthenticated."
         );
       }
 

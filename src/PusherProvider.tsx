@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import Pusher, { Options } from 'pusher-js';
-import invariant from 'invariant';
+import React, { useEffect, useRef, useState } from "react";
+import Pusher, { Options } from "pusher-js";
+import invariant from "invariant";
 // import { useDeepCompareMemoize } from "./helpers";
-import { PusherContextValues, PusherProviderProps } from './types';
-import dequal from 'dequal';
+import { PusherContextValues, PusherProviderProps } from "./types";
+import dequal from "dequal";
 
 // context setup
 const PusherContext = React.createContext<PusherContextValues>({});
@@ -25,12 +25,13 @@ export const PusherProvider: React.FC<PusherProviderProps> = ({
   ...props
 }) => {
   // errors when required props are not passed.
-  invariant(clientKey, 'A client key is required for pusher');
-  invariant(cluster, 'A cluster is required for pusher');
+  invariant(clientKey, "A client key is required for pusher");
+  invariant(cluster, "A cluster is required for pusher");
 
   const config: Options = { cluster, ...props };
 
-  const pusherClientRef = useRef<Pusher | undefined>();
+  // const pusherClientRef = useRef();
+  const [client, setClient] = useState<Pusher | undefined>();
 
   // track config for comparison
   const previousConfig = useRef<Options | undefined>(props);
@@ -43,25 +44,20 @@ export const PusherProvider: React.FC<PusherProviderProps> = ({
     if (
       defer ||
       props.value ||
-      (dequal(previousConfig.current, props) && pusherClientRef.current !== undefined)
+      (dequal(previousConfig.current, props) && client !== undefined)
     ) {
       return;
     }
 
     // create the client and assign it to the ref
-    pusherClientRef.current = new Pusher(clientKey, config);
-
-    // cleanup
-    return () => {
-      pusherClientRef.current && pusherClientRef.current.disconnect();
-    };
-  }, [clientKey, props, defer, pusherClientRef]);
+    setClient(new Pusher(clientKey, config));
+  }, [client, clientKey, props, defer]);
 
   return (
     <PusherContext.Provider
       value={{
-        client: pusherClientRef,
-        triggerEndpoint,
+        client,
+        triggerEndpoint
       }}
       children={children}
       {...props}
