@@ -30,7 +30,7 @@ export function useChannel<T extends Channel & PresenceChannel>(
 
   useEffect(() => {
     if (!client) return;
-    const pusherChannel = client.subscribe(channelName);
+    const pusherChannel = client?.subscribe(channelName);
     setChannel(pusherChannel as T);
   }, [channelName, client]);
   return channel;
