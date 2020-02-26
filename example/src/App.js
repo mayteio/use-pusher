@@ -1,11 +1,14 @@
+import "./App.css";
+
+import { useClientTrigger, usePresenceChannel } from "./use-pusher";
+
 import React from "react";
 import logo from "./logo.svg";
-import "./App.css";
-import { usePresenceChannel, useClientTrigger } from "./use-pusher";
 
 function App() {
-  const { channel } = usePresenceChannel("presence-my-channel");
+  const { channel, ...rest } = usePresenceChannel("presence-my-channel");
   const trigger = useClientTrigger(channel);
+  console.log(rest);
 
   return (
     <div className="App">

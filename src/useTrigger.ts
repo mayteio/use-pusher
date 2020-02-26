@@ -1,7 +1,7 @@
-import { useCallback } from "react";
-import { usePusher } from "./usePusher";
 import invariant from "invariant";
+import { useCallback } from "react";
 import { useChannel } from "./useChannel";
+import { usePusher } from "./usePusher";
 
 /**
  * Hook to provide a trigger function that calls the server defined in `PusherProviderProps.triggerEndpoint` using `fetch`.
@@ -36,8 +36,8 @@ export function useTrigger<TData = {}>(channelName: string) {
         body: JSON.stringify({ channelName, eventName, data })
       };
 
-      if (client && client.config.auth) {
-        fetchOptions.headers = client.config.auth.headers;
+      if (client && client.config?.auth) {
+        fetchOptions.headers = client.config?.auth.headers;
       } else {
         console.warn(
           "No auth parameters supplied to <PusherProvider />. Your events will be unauthenticated."

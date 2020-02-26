@@ -2,7 +2,7 @@ import React from "react";
 import { renderHook } from "@testing-library/react-hooks";
 import { useEvent } from "../";
 import { PusherProvider } from "../PusherProvider";
-import { PusherChannelMock } from "../mocks";
+import { PusherChannelMock } from "pusher-js-mock";
 import { Channel } from "pusher-js";
 
 beforeEach(() => {
@@ -10,7 +10,7 @@ beforeEach(() => {
 });
 
 jest.mock("pusher-js", () => {
-  const { PusherMock } = require("../mocks");
+  const { PusherMock } = require("pusher-js-mock");
   return PusherMock;
 });
 
@@ -56,7 +56,7 @@ describe("useEvent hook", () => {
     rerender();
 
     channel.emit("my-event", "test");
-    expect(callback).toHaveBeenCalledWith("test", undefined);
+    expect(callback).toHaveBeenCalledWith("test");
   });
 
   test("should unbind on unmount", () => {
@@ -76,7 +76,7 @@ describe("useEvent hook", () => {
     rerender([channel, "your-event", callback]);
 
     channel.emit("your-event", "test");
-    expect(callback).toHaveBeenCalledWith("test", undefined);
+    expect(callback).toHaveBeenCalledWith("test");
 
     unmount();
     expect(channel.callbacks["my-event"]).toHaveLength(0);

@@ -59,7 +59,7 @@
     "gh-pages": "^2.0.1",
     "jest-fetch-mock": "^2.1.2",
     "pusher-js": "^5.1.0",
-    "pusher-js-mock": "^0.2.0",
+    "pusher-js-mock": "mayteio/pusher-js-mock#feature/presence-channels-release",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "^3.0.1",
@@ -76,16 +76,5 @@
     "ts-jest": "^24.0.2",
     "typedoc": "^0.16.9",
     "typescript": "^3.2.4"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{ts,tsx}"
-    ],
-    "coveragePathIgnorePatterns": [
-      "./src/index.ts",
-      "./src/mocks.ts",
-      "./src/helpers.ts",
-      "./src/types.ts"
-    ]
   }
 }

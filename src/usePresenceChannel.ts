@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+import { Members, PresenceChannel } from "pusher-js";
+import { useEffect, useState } from "react";
 
-import { PresenceChannel, Members } from 'pusher-js';
-import invariant from 'invariant';
-
-import { useChannel } from './useChannel';
+import invariant from "invariant";
+import { useChannel } from "./useChannel";
 
 /**
  * Subscribe to presence channel events and get members back
@@ -19,7 +18,7 @@ import { useChannel } from './useChannel';
 export function usePresenceChannel(channelName: string) {
   // errors for missing arguments
   invariant(
-    channelName.includes('presence-'),
+    channelName.includes("presence-"),
     "Presence channels should use prefix 'presence-' in their name. Use the useChannel hook instead."
   );
 
@@ -39,15 +38,15 @@ export function usePresenceChannel(channelName: string) {
 
       // add a member to the members object
       const handleAdd = (member: any) => {
-        setMembers(previousMembers => ({
+        setMembers((previousMembers) => ({
           ...previousMembers,
-          [member.id]: member.info,
+          [member.id]: member.info
         }));
       };
 
       // remove a member from the members object
       const handleRemove = (member: any) => {
-        setMembers(previousMembers => {
+        setMembers((previousMembers) => {
           const nextMembers: any = { ...previousMembers };
           delete nextMembers[member.id];
           return nextMembers;
@@ -55,9 +54,9 @@ export function usePresenceChannel(channelName: string) {
       };
 
       // bind to all member addition/removal events
-      channel.bind('pusher:subscription_succeeded', handleSubscriptionSuccess);
-      channel.bind('pusher:member_added', handleAdd);
-      channel.bind('pusher:member_removed', handleRemove);
+      channel.bind("pusher:subscription_succeeded", handleSubscriptionSuccess);
+      channel.bind("pusher:member_added", handleAdd);
+      channel.bind("pusher:member_removed", handleRemove);
 
       // set any members that already existed on the channel
       if (channel.members) {
@@ -67,9 +66,12 @@ export function usePresenceChannel(channelName: string) {
 
       // cleanup
       return () => {
-        channel.unbind('pusher:subscription_succeeded', handleSubscriptionSuccess);
-        channel.unbind('pusher:member_added', handleAdd);
-        channel.unbind('pusher:member_removed', handleRemove);
+        channel.unbind(
+          "pusher:subscription_succeeded",
+          handleSubscriptionSuccess
+        );
+        channel.unbind("pusher:member_added", handleAdd);
+        channel.unbind("pusher:member_removed", handleRemove);
       };
     }
 
@@ -80,6 +82,6 @@ export function usePresenceChannel(channelName: string) {
   return {
     channel,
     members,
-    myID,
+    myID
   };
 }

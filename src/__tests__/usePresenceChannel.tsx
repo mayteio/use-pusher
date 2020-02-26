@@ -1,17 +1,19 @@
+import Pusher from "pusher-js";
+import { PusherMock } from "pusher-js-mock";
+import { PusherProvider } from "../PusherProvider";
 import React from "react";
+import { act } from "@testing-library/react-hooks";
 import { renderHook } from "@testing-library/react-hooks";
 import { usePresenceChannel } from "../usePresenceChannel";
-import { PusherProvider } from "../PusherProvider";
-import { act } from "@testing-library/react-hooks";
 
 beforeEach(() => {
   jest.resetAllMocks();
 });
 
-jest.mock("pusher-js", () => {
-  const { PusherMock } = require("../mocks");
-  return PusherMock;
-});
+// jest.mock("pusher-js", () => {
+//   const { PusherMock } = require("pusher-js-mock");
+//   return PusherMock;
+// });
 
 const config = {
   clientKey: "client-key",
@@ -20,8 +22,13 @@ const config = {
 };
 
 const setup = (channelName = "my-channel", customConfig = {}) => {
+  const client = new PusherMock("my-id", {}) as unknown;
   const wrapper = ({ children }: any) => (
-    <PusherProvider {...config} {...customConfig}>
+    <PusherProvider
+      {...config}
+      {...customConfig}
+      value={{ client: client as Pusher }}
+    >
       {children}
     </PusherProvider>
   );
@@ -34,7 +41,7 @@ describe("usePresenceChannel hook", () => {
       <PusherProvider
         {...config}
         children={children}
-        value={{ client: undefined, triggerEndpoint: "d" }}
+        value={{ client: undefined }}
       />
     );
     const { result, rerender } = renderHook(
@@ -70,54 +77,16 @@ describe("usePresenceChannel hook", () => {
   });
 
   test("should return new member list when members are added", async () => {
-    const { result, rerender } = setup("presence-channel");
-    rerender();
-
-    // emits members object
-    await act(async () => {
-      result.current.channel.emit("pusher:subscription_succeeded", {
-        myID: "0a",
-        members: {
-          "0b": {
-            id: "0b",
-            info: {}
-          }
-        }
-      });
-    });
-
-    expect((result.current.members as any)["0b"]).toBeDefined();
-    rerender();
-
+    const { result, waitForNextUpdate } = setup("presence-channel");
+    await waitForNextUpdate();
+    expect(result.current.members).toEqual({ "my-id": {} });
     act(() => {
-      result.current.channel.emit("pusher:member_removed", {
-        id: "0b",
-        info: {}
-      });
-      result.current.channel.emit("pusher:member_added", {
-        id: "0c",
-        info: {}
-      });
+      // new client connecting
+      const otherClient = new PusherMock("your-id", {});
+      otherClient.subscribe("presence-channel");
     });
 
-    expect(result.current.members["0b"]).toBeUndefined();
-    expect(result.current.members["0c"]).toBeDefined();
-  });
-
-  test("should return myID if present", async () => {
-    const { result, rerender } = setup("presence-channel");
-    rerender();
-    await act(async () => {
-      result.current.channel.emit("pusher:subscription_succeeded", {
-        myID: "0a",
-        members: {
-          "0b": {
-            id: "0b",
-            info: {}
-          }
-        }
-      });
-    });
-    expect(result.current.myID).toBe("0a");
+    await waitForNextUpdate();
+    expect(result.current.members).toEqual({ "my-id": {}, "your-id": {} });
   });
 });

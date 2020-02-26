@@ -8,7 +8,7 @@ beforeEach(() => {
 });
 
 jest.mock("pusher-js", () => {
-  const { PusherMock } = require("../mocks");
+  const { PusherMock } = require("pusher-js-mock");
   return PusherMock;
 });
 

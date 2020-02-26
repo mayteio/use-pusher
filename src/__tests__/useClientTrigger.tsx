@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { PusherPresenceChannelMock } from "../mocks";
+import { PusherPresenceChannelMock } from "pusher-js-mock";
 import { useClientTrigger } from "../useClientTrigger";
 import { PresenceChannel } from "pusher-js";
 
