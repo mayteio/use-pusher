@@ -1,54 +1,35 @@
+import { PusherChannelMock, PusherMock } from "pusher-js-mock";
+
+import Pusher from "pusher-js";
 import React from "react";
+import { __PusherContext } from "../PusherProvider";
 import { renderHook } from "@testing-library/react-hooks";
-import { PusherProvider } from "../PusherProvider";
+import { renderHookWithProvider } from "../../testUtils";
 import { useChannel } from "../useChannel";
 
-beforeEach(() => {
-  jest.resetAllMocks();
-});
-
-jest.mock("pusher-js", () => {
-  const { PusherMock } = require("pusher-js-mock");
-  return PusherMock;
-});
-
-const config = {
-  clientKey: "client-key",
-  cluster: "ap4",
-  children: "Test"
-};
-
-describe("useChannel hook", () => {
-  test("should render without error", () => {
-    const wrapper = ({ children }: any) => (
-      <PusherProvider
-        {...config}
-        children={children}
-        value={{ client: undefined, triggerEndpoint: "d" }}
-      />
+describe("useChannel()", () => {
+  test("should throw an error when no channelName present", () => {
+    const { result } = renderHook(() => useChannel(undefined));
+    expect(result.error.message).toBe(
+      "channelName required to subscribe to a channel"
     );
-    const { result, rerender } = renderHook(() => useChannel("my-channel"), {
+  });
+
+  test("should return undefined if no pusher client present", () => {
+    const wrapper = (props) => (
+      <__PusherContext.Provider value={{ client: undefined }} {...props} />
+    );
+    const { result } = renderHook(() => useChannel("public-channel"), {
       wrapper
     });
-    rerender();
+
     expect(result.current).toBeUndefined();
   });
 
-  test("should subscribe to a channel with default options", () => {
-    const wrapper = ({ children }: any) => (
-      <PusherProvider {...config}>{children}</PusherProvider>
+  test("should return instance of channel", async () => {
+    const { result } = await renderHookWithProvider(() =>
+      useChannel("public-channel")
     );
-    const { result, unmount, rerender } = renderHook(
-      () => useChannel("my-channel"),
-      {
-        wrapper
-      }
-    );
-
-    rerender();
-    const channel = result.current;
-    expect(Object.keys(channel.callbacks)).toHaveLength(0);
-
-    unmount();
+    expect(result.current).toBeInstanceOf(PusherChannelMock);
   });
 });

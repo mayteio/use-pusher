@@ -26,5 +26,13 @@
     "noEmit": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js", "src/__tests__/*"]
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist",
+    "example",
+    "rollup.config.js",
+    "src/__oldtests__/*",
+    "src/__tests__/*"
+  ]
 }

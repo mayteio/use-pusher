@@ -8338,7 +8338,7 @@ punycode@^2.1.0, punycode@^2.1.1:
 
 pusher-js-mock@mayteio/pusher-js-mock#feature/presence-channels-release:
   version "0.2.1"
-  resolved "https://codeload.github.com/mayteio/pusher-js-mock/tar.gz/2d4056849c0e8bd8b641dfd657e5ea8441fa0b89"
+  resolved "https://codeload.github.com/mayteio/pusher-js-mock/tar.gz/20e9fe51d13327950cdb4c87cf61ede05aa7ec42"
 
 pusher-js@^5.1.0:
   version "5.1.1"

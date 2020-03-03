@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
 import Pusher, { Options } from "pusher-js";
-import invariant from "invariant";
 // import { useDeepCompareMemoize } from "./helpers";
 import { PusherContextValues, PusherProviderProps } from "./types";
+import React, { useEffect, useRef, useState } from "react";
+
 import dequal from "dequal";
 
 // context setup
@@ -25,19 +25,19 @@ export const PusherProvider: React.FC<PusherProviderProps> = ({
   ...props
 }) => {
   // errors when required props are not passed.
-  invariant(clientKey, "A client key is required for pusher");
-  invariant(cluster, "A cluster is required for pusher");
+  useEffect(() => {
+    if (!clientKey) console.error("A client key is required for pusher");
+    if (!cluster) console.error("A cluster is required for pusher");
+  }, [clientKey, cluster]);
 
   const config: Options = { cluster, ...props };
-
-  // const pusherClientRef = useRef();
-  const [client, setClient] = useState<Pusher | undefined>();
 
   // track config for comparison
   const previousConfig = useRef<Options | undefined>(props);
   useEffect(() => {
     previousConfig.current = props;
   });
+  const [client, setClient] = useState<Pusher | undefined>();
 
   useEffect(() => {
     // Skip creation of client if deferring, a value prop is passed, or config props are the same.
