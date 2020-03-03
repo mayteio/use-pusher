@@ -58,12 +58,6 @@ export function usePresenceChannel(channelName: string) {
       channel.bind("pusher:member_added", handleAdd);
       channel.bind("pusher:member_removed", handleRemove);
 
-      // set any members that already existed on the channel
-      if (channel.members) {
-        setMembers(channel.members.members);
-        setMyID(channel.members.myID);
-      }
-
       // cleanup
       return () => {
         channel.unbind(

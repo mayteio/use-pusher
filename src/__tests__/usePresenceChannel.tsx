@@ -1,3 +1,4 @@
+import { PusherMock, PusherPresenceChannelMock } from "pusher-js-mock";
 import { act, renderHook } from "@testing-library/react-hooks";
 import {
   actAndFlushPromises,
@@ -5,9 +6,6 @@ import {
   renderHookWithProvider
 } from "../../testUtils";
 
-import Pusher from "pusher-js";
-import { PusherMock } from "pusher-js-mock";
-import React from "react";
 import { __PusherContext } from "../PusherProvider";
 import { usePresenceChannel } from "../usePresenceChannel";
 
@@ -23,7 +21,7 @@ describe("usePresenceChannel()", () => {
   });
 
   test("should bind to pusher events and unbind on mount", async () => {
-    const { result, unmount, rerender } = await renderHookWithProvider(
+    const { result, unmount } = await renderHookWithProvider(
       () => usePresenceChannel("presence-channel"),
       makeAuthPusherConfig()
     );
@@ -39,7 +37,7 @@ describe("usePresenceChannel()", () => {
     expect(channel.callbacks["pusher:member_removed"]).toHaveLength(0);
   });
 
-  test("should return new member list when members are added", async () => {
+  test("should return new member list when members are added and remove them when they unsubscribe", async () => {
     const { result } = await renderHookWithProvider(
       () => usePresenceChannel("presence-channel"),
       makeAuthPusherConfig()
@@ -48,15 +46,18 @@ describe("usePresenceChannel()", () => {
     expect(result.current.members).toEqual({ "my-id": {} });
     expect(result.current.myID).toEqual("my-id");
 
+    let otherClient;
     await act(async () => {
-      const otherClient = new PusherMock(
-        "key",
-        makeAuthPusherConfig("your-id")
-      );
+      otherClient = new PusherMock("key", makeAuthPusherConfig("your-id"));
       otherClient.subscribe("presence-channel");
       await actAndFlushPromises();
     });
 
     expect(result.current.members).toEqual({ "my-id": {}, "your-id": {} });
+
+    await act(async () => {
+      otherClient.unsubscribe("presence-channel");
+    });
+    expect(result.current.members).toEqual({ "my-id": {} });
   });
 });

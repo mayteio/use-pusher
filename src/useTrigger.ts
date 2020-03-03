@@ -39,15 +39,16 @@ export function useTrigger<TData = {}>(channelName: string) {
       if (client && client.config?.auth) {
         fetchOptions.headers = client.config?.auth.headers;
       } else {
-        console.warn(
-          "No auth parameters supplied to <PusherProvider />. Your events will be unauthenticated."
-        );
+        console.warn(NO_AUTH_HEADERS_WARNING);
       }
 
-      return triggerEndpoint && fetch(triggerEndpoint, fetchOptions);
+      return fetch(triggerEndpoint, fetchOptions);
     },
     [client, triggerEndpoint, channelName]
   );
 
   return trigger;
 }
+
+export const NO_AUTH_HEADERS_WARNING =
+  "No auth parameters supplied to <PusherProvider />. Your events will be unauthenticated.";

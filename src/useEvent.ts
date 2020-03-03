@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
-import invariant from 'invariant';
-import { Channel, PresenceChannel } from 'pusher-js';
+import { Channel, PresenceChannel } from "pusher-js";
+
+import invariant from "invariant";
+import { useEffect } from "react";
 
 /**
  * Subscribes to a channel event and registers a callback.
@@ -11,21 +12,11 @@ import { Channel, PresenceChannel } from 'pusher-js';
 export function useEvent<D>(
   channel: Channel | PresenceChannel | undefined,
   eventName: string,
-  callback: (data?: D) => void,
-  dependencies?: unknown[] | undefined
+  callback: (data?: D) => void
 ) {
   // error when required arguments aren't passed.
-  invariant(eventName, 'Must supply eventName and callback to onEvent');
-  invariant(callback, 'Must supply callback to onEvent');
-
-  // deprecate dependencies
-  useEffect(() => {
-    if (dependencies) {
-      console.warn(
-        'The useEvent callback is no longer memoized - dependencies are deprecated and its up to you to memoize the callback if you want to.'
-      );
-    }
-  }, [dependencies]);
+  invariant(eventName, "Must supply eventName and callback to onEvent");
+  invariant(callback, "Must supply callback to onEvent");
 
   // bind and unbind events whenever the channel, eventName or callback changes.
   useEffect(() => {
