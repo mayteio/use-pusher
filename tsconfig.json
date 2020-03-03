@@ -25,6 +25,14 @@
     "declaration": false,
     "noEmit": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js", "src/__tests__/*"]
+  "include": ["src", "src/types.d.ts"],
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist",
+    "example",
+    "rollup.config.js",
+    "src/__oldtests__/*",
+    "src/__tests__/*"
+  ]
 }

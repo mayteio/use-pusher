@@ -168,7 +168,7 @@ I hear ya. If you're feeling audacious, you can use [client events](https://push
 import { useChannel, useClientTrigger } from "@harelpls/use-pusher";
 
 const Example = () => {
-  const channel = useChannel("presence-danger-zone");
+  const channel = useChannel("presence-ca");
   const trigger = useClientTrigger(channel);
   const handleClientEvent = () => {
     trigger("Pew pew");
@@ -184,7 +184,7 @@ This project was built using typescript, so types are built-in. Yeeeew!
 
 ## Testing
 
-Typed `PusherMock`, `PusherChannelMock` and `PusherPresenceChannelMock` utils are provided based on [`pusher-js-mock`](https://github.com/nikolalsvk/pusher-js-mock) (thanks mate 🙏). Use these to stub out the client and channels, with an additional `emit` method on the channel classes.
+I've teamed up with [@nikolalsvk](https://github.com/nikolalsvk) on [`pusher-js-mock`](https://github.com/nikolalsvk/pusher-js-mock) to bring y'all a great pusher mock.
 
 Testing emitted events with jest can be achieved using `jest.mock` and `@testing-library/react` (or `enzyme`, though your tests should reflect what the user should see **NOT** how the component handles events internally):
 
@@ -203,7 +203,7 @@ const Example = () => {
 
 // Example.test.tsx
 import { render, act } from "@testing-library/react";
-import { PusherMock, PusherChannelMock } from "@harelpls/use-pusher";
+import { PusherMock, PusherChannelMock } from "pusher-js-mock";
 
 // mock out the result of the useChannel hook
 const mockChannel = new PusherChannelMock();

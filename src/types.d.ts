@@ -1,5 +1,6 @@
 import Pusher, { Options } from "pusher-js";
 import * as React from "react";
+import "jest-fetch-mock";
 
 export interface PusherContextValues {
   // client?: React.MutableRefObject<Pusher | undefined>;

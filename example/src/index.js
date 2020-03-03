@@ -1,11 +1,13 @@
+import "./index.css";
+
+import * as serviceWorker from "./serviceWorker";
+
+import App from "./App";
+import Pusher from "pusher";
+import { PusherProvider } from "./use-pusher";
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
-import { PusherProvider } from "./use-pusher/index";
 
-import Pusher from "pusher";
 const pusher = new Pusher({
   appId: process.env.REACT_APP_PUSHER_APP_ID,
   key: process.env.REACT_APP_PUSHER_KEY,
@@ -20,7 +22,8 @@ ReactDOM.render(
     authorizer={({ name }) => ({
       authorize: async (socketId, callback) => {
         const auth = pusher.authenticate(socketId, name, {
-          user_id: Math.random() * 124234
+          user_id: Math.random() * 124234,
+          user_info: {}
         });
         callback(false, auth);
       }

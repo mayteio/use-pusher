@@ -1,6 +1,7 @@
-import { useContext, useEffect } from 'react';
-import { __PusherContext } from './PusherProvider';
-import { PusherContextValues } from './types';
+import { useContext, useEffect } from "react";
+
+import { PusherContextValues } from "./types";
+import { __PusherContext } from "./PusherProvider";
 
 /**
  * Provides access to the pusher client instance.
@@ -21,4 +22,4 @@ export function usePusher() {
 }
 
 export const NOT_IN_CONTEXT_WARNING =
-  'No Pusher context. Did you forget to wrap your app in a <PusherProvider />?';
+  "No Pusher context. Did you forget to wrap your app in a <PusherProvider />?";
