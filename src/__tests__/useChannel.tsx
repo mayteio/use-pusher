@@ -4,7 +4,7 @@ import Pusher from "pusher-js";
 import React from "react";
 import { __PusherContext } from "../PusherProvider";
 import { renderHook } from "@testing-library/react-hooks";
-import { renderHookWithProvider } from "../../testUtils";
+import { renderHookWithProvider } from "../testUtils";
 import { useChannel } from "../useChannel";
 
 describe("useChannel()", () => {
