@@ -21,7 +21,7 @@ export async function renderHookWithProvider<T>(
   clientConfig: Record<string, any> = {}
 ) {
   const client = new PusherMock("key", clientConfig) as unknown;
-  const wrapper = ({ children }) => (
+  const wrapper: React.FC = ({ children }) => (
     <__PusherContext.Provider value={{ client: client as Pusher }}>
       {children}
     </__PusherContext.Provider>
@@ -36,8 +36,11 @@ export async function renderHookWithProvider<T>(
  * @param id the id for the client
  * @param info the info object for the client
  */
-export const makeAuthPusherConfig = (id = "my-id", info = {}) => ({
+export const makeAuthPusherConfig = (id: string = "my-id", info: any = {}) => ({
   authorizer: () => ({
-    authorize: (socketId, callback) => callback(false, { id, info })
+    authorize: (
+      socketId: string,
+      callback: (errored: boolean, info: any) => void
+    ) => callback(socketId === "errored", { id, info })
   })
 });

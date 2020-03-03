@@ -1,6 +1,7 @@
 import { PusherProvider, __PusherContext } from "../PusherProvider";
 
 import Pusher from "pusher-js";
+import { PusherContextValues } from "../types";
 import React from "react";
 import { render } from "@testing-library/react";
 
@@ -69,7 +70,7 @@ describe("<PusherProvider />", () => {
   });
 });
 
-const Logger = ({ value }) => {
+const Logger: React.FC<{ value: PusherContextValues }> = ({ value }) => {
   console.log(value);
   return null;
 };

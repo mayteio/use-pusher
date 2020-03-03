@@ -37,7 +37,7 @@ export function useTrigger<TData = {}>(channelName: string) {
       };
 
       if (client && client.config?.auth) {
-        fetchOptions.headers = client.config?.auth.headers;
+        fetchOptions.headers = client.config.auth.headers;
       } else {
         console.warn(NO_AUTH_HEADERS_WARNING);
       }

@@ -1,6 +1,7 @@
-import { useCallback } from "react";
-import invariant from "invariant";
 import { Channel, PresenceChannel } from "pusher-js";
+
+import invariant from "invariant";
+import { useCallback } from "react";
 
 /**
  *
@@ -20,7 +21,7 @@ export function useClientTrigger<TData = {}>(
 ) {
   channel &&
     invariant(
-      channel.name?.match(/(private-|presence-)/gi),
+      channel.name.match(/(private-|presence-)/gi),
       "Channel provided to useClientTrigger wasn't private or presence channel. Client events only work on these types of channels."
     );
 

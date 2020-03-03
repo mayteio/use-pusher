@@ -1,6 +1,4 @@
-import { PusherChannelMock, PusherMock } from "pusher-js-mock";
-
-import Pusher from "pusher-js";
+import { PusherChannelMock } from "pusher-js-mock";
 import React from "react";
 import { __PusherContext } from "../PusherProvider";
 import { renderHook } from "@testing-library/react-hooks";
@@ -16,7 +14,7 @@ describe("useChannel()", () => {
   });
 
   test("should return undefined if no pusher client present", () => {
-    const wrapper = (props) => (
+    const wrapper: React.FC = (props) => (
       <__PusherContext.Provider value={{ client: undefined }} {...props} />
     );
     const { result } = renderHook(() => useChannel("public-channel"), {

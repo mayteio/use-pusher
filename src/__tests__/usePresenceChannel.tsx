@@ -1,12 +1,12 @@
-import { PusherMock, PusherPresenceChannelMock } from "pusher-js-mock";
-import { act, renderHook } from "@testing-library/react-hooks";
 import {
   actAndFlushPromises,
   makeAuthPusherConfig,
   renderHookWithProvider
 } from "../../testUtils";
 
+import { PusherMock } from "pusher-js-mock";
 import { __PusherContext } from "../PusherProvider";
+import { act } from "@testing-library/react-hooks";
 import { usePresenceChannel } from "../usePresenceChannel";
 
 describe("usePresenceChannel()", () => {
@@ -46,7 +46,7 @@ describe("usePresenceChannel()", () => {
     expect(result.current.members).toEqual({ "my-id": {} });
     expect(result.current.myID).toEqual("my-id");
 
-    let otherClient;
+    let otherClient: PusherMock;
     await act(async () => {
       otherClient = new PusherMock("key", makeAuthPusherConfig("your-id"));
       otherClient.subscribe("presence-channel");

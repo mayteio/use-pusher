@@ -19,7 +19,7 @@ import { usePusher } from "./usePusher";
  */
 
 export function useChannel<T extends Channel & PresenceChannel>(
-  channelName: string
+  channelName: string | undefined
 ) {
   // errors for missing arguments
   invariant(channelName, NO_CHANNEL_NAME_ERROR);
@@ -27,7 +27,7 @@ export function useChannel<T extends Channel & PresenceChannel>(
   const [channel, setChannel] = useState<T | undefined>();
   useEffect(() => {
     if (!client) return;
-    const pusherChannel = client?.subscribe(channelName);
+    const pusherChannel = client.subscribe(channelName);
 
     setChannel(pusherChannel as T);
   }, [channelName, client]);
