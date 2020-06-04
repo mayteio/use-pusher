@@ -1,6 +1,4 @@
-import { PusherChannelMock, PusherMock } from "pusher-js-mock";
-
-import Pusher from "pusher-js";
+import { PusherChannelMock } from "pusher-js-mock";
 import React from "react";
 import { __PusherContext } from "../PusherProvider";
 import { renderHook } from "@testing-library/react-hooks";

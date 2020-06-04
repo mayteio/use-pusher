@@ -42,8 +42,8 @@ const config = {
   // also sends auth headers to trigger endpoint
   authEndpoint: "/pusher/auth",
   auth: {
-    headers: { Authorization: "Bearer token" }
-  }
+    headers: { Authorization: "Bearer token" },
+  },
 };
 
 // Wrap app in provider
@@ -94,15 +94,13 @@ Bind to events on a channel with a callback.
 const Example = () => {
   const [message, setMessages] = useState();
   const channel = useChannel("channel-name");
-  useEvent(
-    channel,
-    "message",
-    ({ data }) => setMessages((messages) => [...messages, data]),
-    // optional dependencies array. Passed through to useCallback. Defaults to [].
-    []
+  useEvent(channel, "message", ({ data }) =>
+    setMessages((messages) => [...messages, data])
   );
 };
 ```
+
+_Note_: This will bind and unbind to the event on each render. You may want to memoise your callback with `useCallback` before passing it in if you notice performance issues.
 
 ## `useTrigger`
 
@@ -148,7 +146,7 @@ const pusher = new Pusher({
   appId: "app-id",
   key: "client-key",
   secret: "mad-secret",
-  cluster: "ap4"
+  cluster: "ap4",
 });
 
 export async function handler(event) {
@@ -209,7 +207,7 @@ import { PusherMock, PusherChannelMock } from "pusher-js-mock";
 const mockChannel = new PusherChannelMock();
 jest.mock("@harelpls/use-pusher", () => ({
   ...require.requireActual("@harelpls/use-pusher"),
-  useChannel: () => mockChannel
+  useChannel: () => mockChannel,
 }));
 
 test("should show a title when it receives a title event", async () => {
