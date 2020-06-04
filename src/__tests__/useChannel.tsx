@@ -20,7 +20,7 @@ describe("useChannel()", () => {
       <__PusherContext.Provider value={{ client: undefined }} {...props} />
     );
     const { result } = renderHook(() => useChannel("public-channel"), {
-      wrapper
+      wrapper,
     });
 
     expect(result.current).toBeUndefined();
@@ -31,5 +31,24 @@ describe("useChannel()", () => {
       useChannel("public-channel")
     );
     expect(result.current).toBeInstanceOf(PusherChannelMock);
+  });
+
+  test("should unsubscribe on unmount", async () => {
+    const mockUnsubscribe = jest.fn();
+    const client = {
+      subscribe: jest.fn(),
+      unsubscribe: mockUnsubscribe,
+    };
+    const wrapper = ({ children }) => (
+      <__PusherContext.Provider value={{ client: client as any }}>
+        {children}
+      </__PusherContext.Provider>
+    );
+    const { unmount } = await renderHook(() => useChannel("public-channel"), {
+      wrapper,
+    });
+    unmount();
+
+    expect(mockUnsubscribe).toHaveBeenCalled();
   });
 });

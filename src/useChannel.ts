@@ -26,11 +26,18 @@ export function useChannel<T extends Channel & PresenceChannel>(
   const { client } = usePusher();
   const [channel, setChannel] = useState<T | undefined>();
   useEffect(() => {
+    /** Return early if there's no client */
     if (!client) return;
-    const pusherChannel = client?.subscribe(channelName);
 
+    /** Subscribe to channel and set it in state */
+    const pusherChannel = client?.subscribe(channelName);
     setChannel(pusherChannel as T);
+
+    /** Cleanup on unmount/re-render */
+    return () => client?.unsubscribe(channelName);
   }, [channelName, client]);
+
+  /** Return the channel for use. */
   return channel;
 }
 
