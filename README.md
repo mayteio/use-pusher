@@ -2,7 +2,7 @@
 
 > Easy as [React hooks](https://reactjs.org/docs/hooks-intro.html) that integrate with the [`pusher-js`](https://github.com/pusher/pusher-js) library.
 
-[![NPM](https://img.shields.io/npm/v/use-pusher.svg)](https://www.npmjs.com/package/react-pusher-hooks) ![Typed](https://badgen.net/badge//types/Typescript?icon=typescript)
+[![NPM](https://img.shields.io/npm/v/@harelpls/use-pusher.svg)](https://www.npmjs.com/package/@harelpls/use-pusher) ![Typed](https://badgen.net/badge//types/Typescript?icon=typescript)
 
 ##### [API Reference/Docs](https://use-pusher-docs.netlify.com/)
 
