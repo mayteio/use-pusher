@@ -4,7 +4,28 @@
 
 [![NPM](https://img.shields.io/npm/v/use-pusher.svg)](https://www.npmjs.com/package/react-pusher-hooks) ![Typed](https://badgen.net/badge//types/Typescript?icon=typescript)
 
-##### [API Reference/Docs](https://use-pusher-docs.netlify.com/)
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Install](#install)
+- [Hooks](#hooks)
+- [Usage](#usage)
+- [`useChannel`](#usechannel)
+- [`usePresenceChannel`](#usepresencechannel)
+- [`useEvent`](#useevent)
+- [`useTrigger`](#usetrigger)
+- [`usePusher`](#usepusher)
+- [Trigger Server](#trigger-server)
+- [`useClientTrigger`](#useclienttrigger)
+- [Typescript](#typescript)
+- [Testing](#testing)
+- [React Native](#react-native)
+- [Contributing](#contributing)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## [API Reference/Docs](https://use-pusher-docs.netlify.com/)
 
 ## Install
 
@@ -42,8 +63,8 @@ const config = {
   // also sends auth headers to trigger endpoint
   authEndpoint: "/pusher/auth",
   auth: {
-    headers: { Authorization: "Bearer token" }
-  }
+    headers: { Authorization: "Bearer token" },
+  },
 };
 
 // Wrap app in provider
@@ -148,7 +169,7 @@ const pusher = new Pusher({
   appId: "app-id",
   key: "client-key",
   secret: "mad-secret",
-  cluster: "ap4"
+  cluster: "ap4",
 });
 
 export async function handler(event) {
@@ -209,7 +230,7 @@ import { PusherMock, PusherChannelMock } from "pusher-js-mock";
 const mockChannel = new PusherChannelMock();
 jest.mock("@harelpls/use-pusher", () => ({
   ...require.requireActual("@harelpls/use-pusher"),
-  useChannel: () => mockChannel
+  useChannel: () => mockChannel,
 }));
 
 test("should show a title when it receives a title event", async () => {
@@ -232,6 +253,14 @@ test("should show a title when it receives a title event", async () => {
 ```
 
 [Check out the example tests](https://github.com/mayteio/use-pusher/blob/master/src/__tests__/Example.tsx) for testing presence channels.
+
+## React Native
+
+This package comes with React Native support. Import your `PusherProvider` from `@harelpls/use-pusher/react-native` instead of the default `@harelpls/use-pusher`. All exports (except testing utils) are re-exported from there.
+
+```ts
+import { PusherProvider, useChannel } from "@harelpls/use-pusher/react-native";
+```
 
 ## Contributing
 
