@@ -49,6 +49,7 @@ export const PusherProvider: React.FC<PusherProviderProps> = ({
       return;
     }
 
+    // @ts-ignore
     setClient(new _PusherRuntime(clientKey, config));
   }, [client, clientKey, props, defer]);
 
