@@ -1,5 +1,4 @@
 import Pusher, { Options } from "pusher-js";
-// import { useDeepCompareMemoize } from "./helpers";
 import { PusherContextValues, PusherProviderProps } from "./types";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -22,6 +21,7 @@ export const PusherProvider: React.FC<PusherProviderProps> = ({
   triggerEndpoint,
   defer = false,
   children,
+  _PusherRuntime = Pusher,
   ...props
 }) => {
   // errors when required props are not passed.
@@ -49,15 +49,14 @@ export const PusherProvider: React.FC<PusherProviderProps> = ({
       return;
     }
 
-    // create the client and assign it to the ref
-    setClient(new Pusher(clientKey, config));
+    setClient(new _PusherRuntime(clientKey, config));
   }, [client, clientKey, props, defer]);
 
   return (
     <PusherContext.Provider
       value={{
         client,
-        triggerEndpoint
+        triggerEndpoint,
       }}
       children={children}
       {...props}

@@ -16,7 +16,8 @@
   "license": "MIT",
   "repository": "https://github.com/mayteio/use-pusher",
   "files": [
-    "dist"
+    "dist",
+    "react-native"
   ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -29,18 +30,19 @@
   "scripts": {
     "test": "cross-env CI=1 yarn test:web && yarn test:rn",
     "test:web": "jest --config=jest.config.js",
-    "test:rn": "jest --config=jest.rn.config.js",
-    "build": "rimraf dist && rollup -c",
+    "test:rn": "JEST_ENV=rn jest --config=jest.rn.config.js",
+    "build": "rimraf dist react-native && rollup -c",
     "start": "rollup -c -w",
     "types": "dts-bundle-generator -o ./dist/index.d.ts ./src/index.ts --external-imports pusher-js",
     "docs": "typedoc --options ./typedoc.js ./src",
     "release": "yarn test && yarn build && yarn types && yarn publish && ntl deploy"
   },
   "dependencies": {
+    "@react-native-community/netinfo": "^5.9.3",
     "dequal": "^1.0.0",
     "invariant": "^2.2.4",
     "jest": "^25.1.0",
-    "pusher-js": "^5.1.0"
+    "pusher-js": "^6.0.3"
   },
   "peerDependencies": {
     "react": "^16.9.0",
@@ -48,23 +50,29 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-transform-flow-strip-types": "^7.10.1",
+    "@babel/plugin-transform-object-assign": "^7.10.3",
     "@babel/preset-env": "^7.8.6",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.3.1",
     "@testing-library/react": "^9.1.2",
     "@testing-library/react-hooks": "^2.0.1",
+    "@testing-library/react-native": "^5.0.3",
     "@types/invariant": "^2.2.30",
     "@types/jest": "^24.0.18",
     "@types/react": "^16.7.22",
+    "@types/react-native": "^0.62.13",
     "babel-jest": "^25.1.0",
     "cross-env": "^5.2.0",
     "dts-bundle-generator": "^3.2.0",
     "gh-pages": "^2.0.1",
     "jest-fetch-mock": "^2.1.2",
-    "pusher-js": "^5.1.0",
     "pusher-js-mock": "mayteio/pusher-js-mock#feature/presence-channels-release",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-native": "^0.62.2",
+    "react-native-typescript-transformer": "^1.2.13",
     "react-test-renderer": "^16.9.0",
     "rimraf": "^3.0.2",
     "rollup": "^1.20.0",

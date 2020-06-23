@@ -9,6 +9,7 @@ export interface PusherContextValues {
 }
 
 export interface PusherProviderProps extends Options {
+  _PusherRuntime?: Pusher | PusherReactNative;
   clientKey: string | undefined;
   cluster:
     | "mt1"
