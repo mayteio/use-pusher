@@ -2,7 +2,7 @@
 
 > Easy as [React hooks](https://reactjs.org/docs/hooks-intro.html) that integrate with the [`pusher-js`](https://github.com/pusher/pusher-js) library.
 
-[![NPM](https://img.shields.io/npm/v/use-pusher.svg)](https://www.npmjs.com/package/react-pusher-hooks) ![Typed](https://badgen.net/badge//types/Typescript?icon=typescript)
+[![NPM](https://img.shields.io/npm/v/@harelpls/use-pusher.svg)](https://www.npmjs.com/package/@harelpls/use-pusher) ![Typed](https://badgen.net/badge//types/Typescript?icon=typescript)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -115,15 +115,13 @@ Bind to events on a channel with a callback.
 const Example = () => {
   const [message, setMessages] = useState();
   const channel = useChannel("channel-name");
-  useEvent(
-    channel,
-    "message",
-    ({ data }) => setMessages((messages) => [...messages, data]),
-    // optional dependencies array. Passed through to useCallback. Defaults to [].
-    []
+  useEvent(channel, "message", ({ data }) =>
+    setMessages((messages) => [...messages, data])
   );
 };
 ```
+
+_Note_: This will bind and unbind to the event on each render. You may want to memoise your callback with `useCallback` before passing it in if you notice performance issues.
 
 ## `useTrigger`
 
