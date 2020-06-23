@@ -14,7 +14,7 @@ describe("useChannel()", () => {
   });
 
   test("should return undefined if no pusher client present", () => {
-    const wrapper = (props) => (
+    const wrapper: React.FC = (props) => (
       <__PusherContext.Provider value={{ client: undefined }} {...props} />
     );
     const { result } = renderHook(() => useChannel("public-channel"), {

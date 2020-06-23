@@ -1,12 +1,12 @@
-import { PusherMock, PusherPresenceChannelMock } from "pusher-js-mock";
-import { act, renderHook } from "@testing-library/react-hooks";
 import {
   actAndFlushPromises,
   makeAuthPusherConfig,
-  renderHookWithProvider
+  renderHookWithProvider,
 } from "../../testUtils";
 
+import { PusherMock } from "pusher-js-mock";
 import { __PusherContext } from "../PusherProvider";
+import { act } from "@testing-library/react-hooks";
 import { usePresenceChannel } from "../usePresenceChannel";
 
 describe("usePresenceChannel()", () => {
@@ -27,14 +27,23 @@ describe("usePresenceChannel()", () => {
     );
 
     const channel = result.current.channel;
-    expect(channel.callbacks["pusher:subscription_succeeded"]).toHaveLength(1);
-    expect(channel.callbacks["pusher:member_added"]).toHaveLength(1);
-    expect(channel.callbacks["pusher:member_removed"]).toHaveLength(1);
+    expect(channel).toBeDefined();
+    channel &&
+      expect(channel.callbacks["pusher:subscription_succeeded"]).toHaveLength(
+        1
+      );
+    channel && expect(channel.callbacks["pusher:member_added"]).toHaveLength(1);
+    channel &&
+      expect(channel.callbacks["pusher:member_removed"]).toHaveLength(1);
 
     unmount();
-    expect(channel.callbacks["pusher:subscription_succeeded"]).toHaveLength(0);
-    expect(channel.callbacks["pusher:member_added"]).toHaveLength(0);
-    expect(channel.callbacks["pusher:member_removed"]).toHaveLength(0);
+    channel &&
+      expect(channel.callbacks["pusher:subscription_succeeded"]).toHaveLength(
+        0
+      );
+    channel && expect(channel.callbacks["pusher:member_added"]).toHaveLength(0);
+    channel &&
+      expect(channel.callbacks["pusher:member_removed"]).toHaveLength(0);
   });
 
   test("should return new member list when members are added and remove them when they unsubscribe", async () => {
@@ -46,7 +55,7 @@ describe("usePresenceChannel()", () => {
     expect(result.current.members).toEqual({ "my-id": {} });
     expect(result.current.myID).toEqual("my-id");
 
-    let otherClient;
+    let otherClient: PusherMock;
     await act(async () => {
       otherClient = new PusherMock("key", makeAuthPusherConfig("your-id"));
       otherClient.subscribe("presence-channel");

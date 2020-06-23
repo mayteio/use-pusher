@@ -8,6 +8,7 @@ node_modules
 coverage
 build
 dist
+react-native
 .rpt2_cache
 
 # misc
@@ -17,6 +18,9 @@ dist
 .env.development.local
 .env.test.local
 .env.production.local
+
+# jest artifacts, i.e. cache
+.jest
 
 npm-debug.log*
 yarn-debug.log*

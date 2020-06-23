@@ -10,11 +10,12 @@ import { renderHook } from "@testing-library/react-hooks";
 
 describe("useTrigger()", () => {
   beforeEach(() => {
+    // @ts-ignore
     fetch.resetMocks();
   });
   test("should trigger a fetch event on use and warn about no headers", async () => {
     jest.spyOn(console, "warn");
-    const wrapper = ({ children }) => (
+    const wrapper: React.FC = ({ children }) => (
       <__PusherContext.Provider
         value={{
           client: (new PusherMock("key") as unknown) as Pusher,
@@ -30,18 +31,13 @@ describe("useTrigger()", () => {
     });
 
     result.current("event", {});
+    // @ts-ignore
     expect(fetch.mock.calls.length).toBe(1);
     expect(console.warn).toHaveBeenCalledWith(NO_AUTH_HEADERS_WARNING);
   });
   test("should trigger a fetch event on use and warn", async () => {
     jest.spyOn(console, "warn");
-    const config = {
-      auth: {
-        headers: "Bearer token"
-      }
-    };
-
-    const wrapper = ({ children }) => (
+    const wrapper: React.FC = ({ children }) => (
       <__PusherContext.Provider
         value={{
           client: (new PusherMock("key", {
@@ -63,6 +59,7 @@ describe("useTrigger()", () => {
     });
 
     result.current("event", {});
+    // @ts-ignore
     expect(fetch.mock.calls[0]).toEqual([
       "http://example.com",
       {
