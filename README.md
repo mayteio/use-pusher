@@ -2,9 +2,30 @@
 
 > Easy as [React hooks](https://reactjs.org/docs/hooks-intro.html) that integrate with the [`pusher-js`](https://github.com/pusher/pusher-js) library.
 
-[![NPM](https://img.shields.io/npm/v/use-pusher.svg)](https://www.npmjs.com/package/react-pusher-hooks) ![Typed](https://badgen.net/badge//types/Typescript?icon=typescript)
+[![NPM](https://img.shields.io/npm/v/@harelpls/use-pusher.svg)](https://www.npmjs.com/package/@harelpls/use-pusher) ![Typed](https://badgen.net/badge//types/Typescript?icon=typescript)
 
-##### [API Reference/Docs](https://use-pusher-docs.netlify.com/)
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Install](#install)
+- [Hooks](#hooks)
+- [Usage](#usage)
+- [`useChannel`](#usechannel)
+- [`usePresenceChannel`](#usepresencechannel)
+- [`useEvent`](#useevent)
+- [`useTrigger`](#usetrigger)
+- [`usePusher`](#usepusher)
+- [Trigger Server](#trigger-server)
+- [`useClientTrigger`](#useclienttrigger)
+- [Typescript](#typescript)
+- [Testing](#testing)
+- [React Native](#react-native)
+- [Contributing](#contributing)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## [API Reference/Docs](https://use-pusher-docs.netlify.com/)
 
 ## Install
 
@@ -230,6 +251,14 @@ test("should show a title when it receives a title event", async () => {
 ```
 
 [Check out the example tests](https://github.com/mayteio/use-pusher/blob/master/src/__tests__/Example.tsx) for testing presence channels.
+
+## React Native
+
+This package comes with React Native support. Import your `PusherProvider` from `@harelpls/use-pusher/react-native` instead of the default `@harelpls/use-pusher`. All exports (except testing utils) are re-exported from there.
+
+```ts
+import { PusherProvider, useChannel } from "@harelpls/use-pusher/react-native";
+```
 
 ## Contributing
 

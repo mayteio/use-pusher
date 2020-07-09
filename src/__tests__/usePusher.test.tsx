@@ -14,7 +14,7 @@ describe("usePusher()", () => {
 
   test("should return context values of PusherProvider", () => {
     const client = {} as Pusher;
-    const wrapper = ({ children }) => (
+    const wrapper: React.FC = ({ children }) => (
       <__PusherContext.Provider value={{ client }}>
         {children}
       </__PusherContext.Provider>

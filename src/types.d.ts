@@ -9,7 +9,8 @@ export interface PusherContextValues {
 }
 
 export interface PusherProviderProps extends Options {
-  clientKey: string;
+  _PusherRuntime?: typeof Pusher;
+  clientKey: string | undefined;
   cluster:
     | "mt1"
     | "us2"
@@ -19,7 +20,8 @@ export interface PusherProviderProps extends Options {
     | "ap2"
     | "ap3"
     | "ap4"
-    | string;
+    | string
+    | undefined;
   triggerEndpoint?: string;
   defer?: boolean;
   // for testing purposes

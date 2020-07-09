@@ -19,7 +19,7 @@ import { usePusher } from "./usePusher";
  */
 
 export function useChannel<T extends Channel & PresenceChannel>(
-  channelName: string
+  channelName: string | undefined
 ) {
   // errors for missing arguments
   invariant(channelName, NO_CHANNEL_NAME_ERROR);
