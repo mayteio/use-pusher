@@ -7,7 +7,7 @@ const Pusher = require(process.env.JEST_ENV === "rn"
 
 const { PusherProvider } = require(process.env.JEST_ENV === "rn"
   ? "../react-native/PusherProvider"
-  : "../PusherProvider");
+  : "../PusherProviderWeb");
 
 const { render } = require(process.env.JEST_ENV === "rn"
   ? "@testing-library/react-native"

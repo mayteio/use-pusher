@@ -62,6 +62,12 @@ export default [
         exports: "named",
         sourcemap: true,
       },
+      {
+        file: "example-rn/use-pusher/index.js",
+        format: "cjs",
+        exports: "named",
+        sourcemap: true,
+      },
     ],
   },
 ];

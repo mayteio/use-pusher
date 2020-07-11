@@ -28,11 +28,7 @@ const config = {
 import {PusherProvider} from '@harelpls/use-pusher/react-native';
 
 const App = () => {
-  return (
-    <PusherProvider {...config}>
-      <Screen />
-    </PusherProvider>
-  );
+  return <Screen />;
 };
 
 const Screen = () => {

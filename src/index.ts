@@ -1,5 +1,6 @@
 // hooks for prod
 export * from "./PusherProvider";
+export * from "./PusherProviderWeb";
 export * from "./usePusher";
 export * from "./useChannel";
 export * from "./usePresenceChannel";
