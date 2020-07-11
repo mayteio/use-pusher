@@ -37,10 +37,8 @@ describe("useChannel()", () => {
       subscribe: jest.fn(),
       unsubscribe: mockUnsubscribe,
     };
-    const wrapper = ({ children }) => (
-      <__PusherContext.Provider value={{ client: client as any }}>
-        {children}
-      </__PusherContext.Provider>
+    const wrapper: React.FC = (props) => (
+      <__PusherContext.Provider value={{ client: client as any }} {...props} />
     );
     const { unmount } = await renderHook(() => useChannel("public-channel"), {
       wrapper,
