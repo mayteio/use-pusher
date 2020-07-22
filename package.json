@@ -34,8 +34,8 @@
     "build": "rimraf dist react-native && rollup -c",
     "start": "rollup -c -w",
     "types": "dts-bundle-generator -o ./dist/index.d.ts ./src/index.ts --external-imports pusher-js",
-    "docs": "typedoc --options ./typedoc.js ./src",
-    "release": "yarn test && yarn build && yarn types && yarn publish && ntl deploy"
+    "docs": "typedoc --options ./typedoc.js ./src && netlify deploy --prod",
+    "release": "yarn test && yarn build && yarn types && yarn publish"
   },
   "dependencies": {
     "@react-native-community/netinfo": "^5.9.3",
