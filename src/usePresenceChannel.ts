@@ -77,11 +77,11 @@ export const presenceChannelReducer = (
 };
 
 export function usePresenceChannel(
-  channelName: string
+  channelName: string | undefined
 ): usePresenceChannelValue {
   // errors for missing arguments
   invariant(
-    channelName.includes("presence-"),
+    channelName && channelName.includes("presence-"),
     "Presence channels should use prefix 'presence-' in their name. Use the useChannel hook instead."
   );
 
