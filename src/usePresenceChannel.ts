@@ -80,10 +80,12 @@ export function usePresenceChannel(
   channelName: string | undefined
 ): usePresenceChannelValue {
   // errors for missing arguments
-  invariant(
-    channelName && channelName.includes("presence-"),
-    "Presence channels should use prefix 'presence-' in their name. Use the useChannel hook instead."
-  );
+  if (channelName) {
+    invariant(
+      channelName.includes("presence-"),
+      "Presence channels should use prefix 'presence-' in their name. Use the useChannel hook instead."
+    );
+  }
 
   /** Store internal channel state */
   const [state, dispatch] = useReducer(presenceChannelReducer, {

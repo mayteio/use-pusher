@@ -17,7 +17,7 @@ import { useCallback } from "react";
  * ```
  */
 export function useClientTrigger<TData = {}>(
-  channel: Channel | PresenceChannel
+  channel: Channel | PresenceChannel | undefined
 ) {
   channel &&
     invariant(
