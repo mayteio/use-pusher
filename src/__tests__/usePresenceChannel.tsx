@@ -7,7 +7,49 @@ import {
 import { PusherMock } from "pusher-js-mock";
 import { __PusherContext } from "../PusherProvider";
 import { act } from "@testing-library/react-hooks";
-import { usePresenceChannel } from "../usePresenceChannel";
+import {
+  usePresenceChannel,
+  SET_STATE,
+  presenceChannelReducer,
+  ADD_MEMBER,
+  REMOVE_MEMBER,
+} from "../usePresenceChannel";
+
+describe("presenceChannelReducer", () => {
+  /** Default state */
+  const defaultState = {
+    members: {},
+    count: 0,
+    me: undefined,
+    myID: undefined,
+  };
+
+  test(SET_STATE, () => {
+    const state = presenceChannelReducer(defaultState, {
+      type: SET_STATE,
+      payload: { count: 1 },
+    });
+    expect(state.count).toBe(1);
+  });
+
+  test(ADD_MEMBER, () => {
+    const state = presenceChannelReducer(defaultState, {
+      type: ADD_MEMBER,
+      payload: { id: "their-id", info: {} },
+    });
+    expect(state.members).toEqual({ "their-id": {} });
+    expect(state.count).toBe(1);
+  });
+
+  test(REMOVE_MEMBER, () => {
+    const state = presenceChannelReducer(
+      { ...defaultState, members: { "their-id": {} }, count: 1 },
+      { type: REMOVE_MEMBER, payload: { id: "their-id" } }
+    );
+    expect(state.members).toEqual({});
+    expect(state.count).toBe(0);
+  });
+});
 
 describe("usePresenceChannel()", () => {
   test('should throw an error if channelName doesn\'t have "presence-" in it', async () => {
@@ -54,6 +96,8 @@ describe("usePresenceChannel()", () => {
 
     expect(result.current.members).toEqual({ "my-id": {} });
     expect(result.current.myID).toEqual("my-id");
+    expect(result.current.me).toEqual({ id: "my-id", info: {} });
+    expect(result.current.count).toBe(1);
 
     let otherClient: PusherMock;
     await act(async () => {
@@ -63,10 +107,12 @@ describe("usePresenceChannel()", () => {
     });
 
     expect(result.current.members).toEqual({ "my-id": {}, "your-id": {} });
+    expect(result.current.count).toBe(2);
 
     await act(async () => {
       otherClient.unsubscribe("presence-channel");
     });
     expect(result.current.members).toEqual({ "my-id": {} });
+    expect(result.current.count).toBe(1);
   });
 });

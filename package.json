@@ -1,6 +1,6 @@
 {
   "name": "@harelpls/use-pusher",
-  "version": "5.0.0",
+  "version": "6.0.3",
   "description": "A wrapper around pusher-js for easy-as hooks in React.",
   "author": "@mayteio",
   "keywords": [
@@ -34,8 +34,8 @@
     "build": "rimraf dist react-native && rollup -c",
     "start": "rollup -c -w",
     "types": "dts-bundle-generator -o ./dist/index.d.ts ./src/index.ts --external-imports pusher-js",
-    "docs": "typedoc --options ./typedoc.js ./src",
-    "release": "yarn test && yarn build && yarn types && yarn publish && ntl deploy"
+    "docs": "typedoc --options ./typedoc.js ./src && netlify deploy --prod",
+    "release": "yarn test && yarn build && yarn types && yarn publish"
   },
   "dependencies": {
     "@react-native-community/netinfo": "^5.9.3",

@@ -65,14 +65,34 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<a href="#harelplsuse-pusher" id="harelplsuse-pusher" style="color: inherit; text-decoration: none;">
-					<h1>@harelpls/use-pusher</h1>
+					<h1><code>@harelpls/use-pusher</code></h1>
 				</a>
 				<blockquote>
-					<p>Easy as hooks that integrate with the <a href="https://github.com/pusher/pusher-js">pusher-js</a> library.</p>
+					<p>Easy as <a href="https://reactjs.org/docs/hooks-intro.html">React hooks</a> that integrate with the <a href="https://github.com/pusher/pusher-js"><code>pusher-js</code></a> library.</p>
 				</blockquote>
-				<p><a href="https://www.npmjs.com/package/react-pusher-hooks"><img src="https://img.shields.io/npm/v/use-pusher.svg" alt="NPM"></a> <img src="https://badgen.net/badge//types/Typescript?icon=typescript" alt="Typed"></p>
-				<a href="#a-hrefhttpsmayteiogithubiouse-pusherapi-referencedocsa" id="a-hrefhttpsmayteiogithubiouse-pusherapi-referencedocsa" style="color: inherit; text-decoration: none;">
-					<h5><a href="https://mayteio.github.io/use-pusher/">API Reference/Docs</a></h5>
+				<p><a href="https://www.npmjs.com/package/@harelpls/use-pusher"><img src="https://img.shields.io/npm/v/@harelpls/use-pusher.svg" alt="NPM"></a> <img src="https://badgen.net/badge//types/Typescript?icon=typescript" alt="Typed"></p>
+				<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+				<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+				<ul>
+					<li><a href="#install">Install</a></li>
+					<li><a href="#hooks">Hooks</a></li>
+					<li><a href="#usage">Usage</a></li>
+					<li><a href="#usechannel"><code>useChannel</code></a></li>
+					<li><a href="#usepresencechannel"><code>usePresenceChannel</code></a></li>
+					<li><a href="#useevent"><code>useEvent</code></a></li>
+					<li><a href="#usetrigger"><code>useTrigger</code></a></li>
+					<li><a href="#usepusher"><code>usePusher</code></a></li>
+					<li><a href="#trigger-server">Trigger Server</a></li>
+					<li><a href="#useclienttrigger"><code>useClientTrigger</code></a></li>
+					<li><a href="#typescript">Typescript</a></li>
+					<li><a href="#testing">Testing</a></li>
+					<li><a href="#react-native">React Native</a></li>
+					<li><a href="#contributing">Contributing</a></li>
+					<li><a href="#license">License</a></li>
+				</ul>
+				<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+				<a href="#api-referencedocs" id="api-referencedocs" style="color: inherit; text-decoration: none;">
+					<h2><a href="https://use-pusher-docs.netlify.com/">API Reference/Docs</a></h2>
 				</a>
 				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
 					<h2>Install</h2>
@@ -93,23 +113,23 @@
 					<h2>Usage</h2>
 				</a>
 				<p>You must wrap your app with a <code>PusherProvider</code> and pass it config props for <a href="https://github.com/pusher/pusher-js"><code>pusher-js</code></a> initialisation.</p>
-				<pre><code class="language-typescript">import React from 'react';
-import { PusherProvider } from '@harelpls/use-pusher';
+				<pre><code class="language-typescript">import React from "react";
+import { PusherProvider } from "@harelpls/use-pusher";
 
 const config = {
   // required config props
-  clientKey: 'client-key',
-  cluster: 'ap4',
+  clientKey: "client-key",
+  cluster: "ap4",
 
   // optional if you'd like to trigger events. BYO endpoint.
   // see "Trigger Server" below for more info
-  triggerEndpoint: '/pusher/trigger',
+  triggerEndpoint: "/pusher/trigger",
 
   // required for private/presence channels
   // also sends auth headers to trigger endpoint
-  authEndpoint: '/pusher/auth',
+  authEndpoint: "/pusher/auth",
   auth: {
-    headers: { Authorization: 'Bearer token' },
+    headers: { Authorization: "Bearer token" },
   },
 };
 
@@ -119,13 +139,13 @@ const App = () =&gt; {
     &lt;Example /&gt;
   &lt;/PusherProvider&gt;;
 };</code></pre>
-				<a href="#codeusechannelcode" id="codeusechannelcode" style="color: inherit; text-decoration: none;">
+				<a href="#usechannel" id="usechannel" style="color: inherit; text-decoration: none;">
 					<h2><code>useChannel</code></h2>
 				</a>
 				<p>Use this hook to subscribe to a channel.</p>
 				<pre><code class="language-typescript"><span class="hljs-comment">// returns channel instance.</span>
-<span class="hljs-keyword">const</span> channel = useChannel(<span class="hljs-string">'channel-name'</span>);</code></pre>
-				<a href="#codeusepresencechannelcode" id="codeusepresencechannelcode" style="color: inherit; text-decoration: none;">
+<span class="hljs-keyword">const</span> channel = useChannel(<span class="hljs-string">"channel-name"</span>);</code></pre>
+				<a href="#usepresencechannel" id="usepresencechannel" style="color: inherit; text-decoration: none;">
 					<h2><code>usePresenceChannel</code></h2>
 				</a>
 				<p>Augments a regular channel with member functionality.</p>
@@ -145,22 +165,19 @@ const App = () =&gt; {
     &lt;/ul&gt;
   )
 }</code></pre>
-				<a href="#codeuseeventcode" id="codeuseeventcode" style="color: inherit; text-decoration: none;">
+				<a href="#useevent" id="useevent" style="color: inherit; text-decoration: none;">
 					<h2><code>useEvent</code></h2>
 				</a>
 				<p>Bind to events on a channel with a callback.</p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> Example = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
   <span class="hljs-keyword">const</span> [message, setMessages] = useState();
-  <span class="hljs-keyword">const</span> channel = useChannel(<span class="hljs-string">'channel-name'</span>);
-  useEvent(
-    channel,
-    <span class="hljs-string">'message'</span>,
-    <span class="hljs-function">(<span class="hljs-params">{ data }</span>) =&gt;</span> setMessages(<span class="hljs-function"><span class="hljs-params">messages</span> =&gt;</span> [...messages, data]),
-    <span class="hljs-comment">// optional dependencies array. Passed through to useCallback. Defaults to [].</span>
-    []
+  <span class="hljs-keyword">const</span> channel = useChannel(<span class="hljs-string">"channel-name"</span>);
+  useEvent(channel, <span class="hljs-string">"message"</span>, <span class="hljs-function">(<span class="hljs-params">{ data }</span>) =&gt;</span>
+    setMessages(<span class="hljs-function">(<span class="hljs-params">messages</span>) =&gt;</span> [...messages, data])
   );
 };</code></pre>
-				<a href="#codeusetriggercode" id="codeusetriggercode" style="color: inherit; text-decoration: none;">
+				<p><em>Note</em>: This will bind and unbind to the event on each render. You may want to memoise your callback with <code>useCallback</code> before passing it in if you notice performance issues.</p>
+				<a href="#usetrigger" id="usetrigger" style="color: inherit; text-decoration: none;">
 					<h2><code>useTrigger</code></h2>
 				</a>
 				<p>A helper function to create a <strong>server triggered</strong> event. BYO server (See <a href="#trigger-server">Trigger Server</a> below). Pass in <code>triggerEndpoint</code> prop to <code>&lt;PusherProvider /&gt;</code>. Any auth headers from <code>config.auth.headers</code> automatically get passed to the <code>fetch</code> call.</p>
@@ -175,15 +192,15 @@ const Example = () =&gt; {.
     &lt;button onClick={handleClick}&gt;Say Hello&lt;/button&gt;
   )
 }</code></pre>
-				<a href="#codeusepushercode" id="codeusepushercode" style="color: inherit; text-decoration: none;">
+				<a href="#usepusher" id="usepusher" style="color: inherit; text-decoration: none;">
 					<h2><code>usePusher</code></h2>
 				</a>
 				<p>Get access to the Pusher instance to do other things.</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { usePusher } <span class="hljs-keyword">from</span> <span class="hljs-string">'@harelpls/use-pusher'</span>;
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { usePusher } <span class="hljs-keyword">from</span> <span class="hljs-string">"@harelpls/use-pusher"</span>;
 
 <span class="hljs-keyword">const</span> Example = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
   <span class="hljs-keyword">const</span> { client } = usePusher();
-  client.log(<span class="hljs-string">'Look ma, logs!'</span>);
+  client.log(<span class="hljs-string">"Look ma, logs!"</span>);
 
   <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
 };</code></pre>
@@ -191,13 +208,13 @@ const Example = () =&gt; {.
 					<h2>Trigger Server</h2>
 				</a>
 				<p>In order to trigger an event, you&#39;ll have to create a simple lambda (or an express server if that&#39;s your thing). Below is a short lambda that can handle triggered events from <code>useTrigger</code>.</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Pusher <span class="hljs-keyword">from</span> <span class="hljs-string">'pusher'</span>;
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Pusher <span class="hljs-keyword">from</span> <span class="hljs-string">"pusher"</span>;
 
 <span class="hljs-keyword">const</span> pusher = <span class="hljs-keyword">new</span> Pusher({
-  appId: <span class="hljs-string">'app-id'</span>,
-  key: <span class="hljs-string">'client-key'</span>,
-  secret: <span class="hljs-string">'mad-secret'</span>,
-  cluster: <span class="hljs-string">'ap4'</span>,
+  appId: <span class="hljs-string">"app-id"</span>,
+  key: <span class="hljs-string">"client-key"</span>,
+  secret: <span class="hljs-string">"mad-secret"</span>,
+  cluster: <span class="hljs-string">"ap4"</span>,
 });
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handler</span>(<span class="hljs-params">event</span>) </span>{
@@ -205,20 +222,20 @@ const Example = () =&gt; {.
   pusher.trigger(channelName, eventName, data);
   <span class="hljs-keyword">return</span> { statusCode: <span class="hljs-number">200</span> };
 }</code></pre>
-				<a href="#codeuseclienttriggercode" id="codeuseclienttriggercode" style="color: inherit; text-decoration: none;">
+				<a href="#useclienttrigger" id="useclienttrigger" style="color: inherit; text-decoration: none;">
 					<h2><code>useClientTrigger</code></h2>
 				</a>
 				<blockquote>
 					<p><em>I don&#39;t want a server though</em></p>
 				</blockquote>
 				<p>I hear ya. If you&#39;re feeling audacious, you can use <a href="https://pusher.com/docs/channels/using_channels/events#triggering-client-events">client events</a> to push directly from the client:</p>
-				<pre><code class="language-typescript">import { useChannel, useClientTrigger } from '@harelpls/use-pusher';
+				<pre><code class="language-typescript">import { useChannel, useClientTrigger } from "@harelpls/use-pusher";
 
 const Example = () =&gt; {
-  const channel = useChannel('presence-danger-zone');
+  const channel = useChannel("presence-ca");
   const trigger = useClientTrigger(channel);
   const handleClientEvent = () =&gt; {
-    trigger('Pew pew');
+    trigger("Pew pew");
   };
 
   return &lt;button onClick={handleClientEvent}&gt;Fire&lt;/button&gt;;
@@ -230,34 +247,34 @@ const Example = () =&gt; {
 				<a href="#testing" id="testing" style="color: inherit; text-decoration: none;">
 					<h2>Testing</h2>
 				</a>
-				<p>Typed <code>PusherMock</code>, <code>PusherChannelMock</code> and <code>PusherPresenceChannelMock</code> utils are provided based on <a href="https://github.com/nikolalsvk/pusher-js-mock"><code>pusher-js-mock</code></a> (thanks mate 🙏). Use these to stub out the client and channels, with an additional <code>emit</code> method on the channel classes.</p>
+				<p>I&#39;ve teamed up with <a href="https://github.com/nikolalsvk">@nikolalsvk</a> on <a href="https://github.com/nikolalsvk/pusher-js-mock"><code>pusher-js-mock</code></a> to bring y&#39;all a great pusher mock.</p>
 				<p>Testing emitted events with jest can be achieved using <code>jest.mock</code> and <code>@testing-library/react</code> (or <code>enzyme</code>, though your tests should reflect what the user should see <strong>NOT</strong> how the component handles events internally):</p>
 				<pre><code class="language-typescript">// Example.tsx
-import React from 'react';
-import { useChannel, useEvent } from '@harelpls/use-pusher';
+import React from "react";
+import { useChannel, useEvent } from "@harelpls/use-pusher";
 
 const Example = () =&gt; {
   const [title, setTitle] = useState();
-  const channel = useChannel('my-channel');
-  useEvent(channel, 'title', ({ data }) =&gt; setTitle(data));
+  const channel = useChannel("my-channel");
+  useEvent(channel, "title", ({ data }) =&gt; setTitle(data));
 
   return &lt;span&gt;{title}&lt;/span&gt;;
 };
 
 // Example.test.tsx
-import { render, act } from '@testing-library/react';
-import { PusherMock, PusherChannelMock } from '@harelpls/use-pusher';
+import { render, act } from "@testing-library/react";
+import { PusherMock, PusherChannelMock } from "pusher-js-mock";
 
 // mock out the result of the useChannel hook
 const mockChannel = new PusherChannelMock();
-jest.mock('@harelpls/use-pusher', () =&gt; ({
-  ...require.requireActual('@harelpls/use-pusher'),
+jest.mock("@harelpls/use-pusher", () =&gt; ({
+  ...require.requireActual("@harelpls/use-pusher"),
   useChannel: () =&gt; mockChannel,
 }));
 
-test('should show a title when it receives a title event', async () =&gt; {
+test("should show a title when it receives a title event", async () =&gt; {
   // mock the client
-  const client = { current: new PusherMock('client-key', { cluster: 'ap4' }) };
+  const client = new PusherMock("client-key", { cluster: "ap4" });
 
   // render component and provider with a mocked context value
   const { findByText } = render(
@@ -267,12 +284,17 @@ test('should show a title when it receives a title event', async () =&gt; {
   );
 
   // emit an event on the mocked channel
-  act(() =&gt; mockChannel.emit('title', { data: 'Hello world' }));
+  act(() =&gt; mockChannel.emit("title", { data: "Hello world" }));
 
   // assert expectations
-  expect(await findByText('Hello world')).toBeInTheDocument();
+  expect(await findByText("Hello world")).toBeInTheDocument();
 });</code></pre>
 				<p><a href="https://github.com/mayteio/use-pusher/blob/master/src/__tests__/Example.tsx">Check out the example tests</a> for testing presence channels.</p>
+				<a href="#react-native" id="react-native" style="color: inherit; text-decoration: none;">
+					<h2>React Native</h2>
+				</a>
+				<p>This package comes with React Native support. Import your <code>PusherProvider</code> from <code>@harelpls/use-pusher/react-native</code> instead of the default <code>@harelpls/use-pusher</code>. All exports (except testing utils) are re-exported from there.</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { PusherProvider, useChannel } <span class="hljs-keyword">from</span> <span class="hljs-string">"@harelpls/use-pusher/react-native"</span>;</code></pre>
 				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
 					<h2>Contributing</h2>
 				</a>
@@ -299,10 +321,10 @@ test('should show a title when it receives a title event', async () =&gt; {
 						<a href="modules/_pusherprovider_.html">&quot;<wbr>Pusher<wbr>Provider&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_mocks_.html">&quot;mocks&quot;</a>
+						<a href="modules/_react_native_pusherprovider_.html">&quot;react-<wbr>native/<wbr>Pusher<wbr>Provider&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_types_.html">&quot;types&quot;</a>
+						<a href="modules/_testutils_.html">&quot;test<wbr>Utils&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_usechannel_.html">&quot;use<wbr>Channel&quot;</a>
