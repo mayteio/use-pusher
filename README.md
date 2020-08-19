@@ -254,7 +254,9 @@ test("should show a title when it receives a title event", async () => {
 
 ## React Native
 
-This package comes with React Native support. Import your `PusherProvider` from `@harelpls/use-pusher/react-native` instead of the default `@harelpls/use-pusher`. All exports (except testing utils) are re-exported from there.
+This package comes with React Native support. Import your `PusherProvider` from `@harelpls/use-pusher/react-native` instead of the default `@harelpls/use-pusher`. All exports are re-exported from there.
+
+Ensure you add the netinfo package to your project too: [`@react-native-community/netinfo`](https://github.com/react-native-community/react-native-netinfo).
 
 ```ts
 import { PusherProvider, useChannel } from "@harelpls/use-pusher/react-native";

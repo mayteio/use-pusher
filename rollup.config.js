@@ -4,6 +4,7 @@ import external from "rollup-plugin-peer-deps-external";
 import resolve from "rollup-plugin-node-resolve";
 import url from "rollup-plugin-url";
 import babel from "rollup-plugin-babel";
+import ts from "@wessberg/rollup-plugin-ts";
 
 import pkg from "./package.json";
 
@@ -11,22 +12,23 @@ const plugins = [
   external(),
   url({ exclude: ["**/*.svg"] }),
   resolve(),
-  typescript({
-    rollupCommonJSResolveHack: true,
-    clean: true,
-    exclude: ["./src/__tests__/*"],
-  }),
-  babel({
-    extensions: [".tsx"],
-    exclude: ["node_modules/**", "./src/__tests__"],
-    presets: ["@babel/env", "@babel/preset-react"],
-  }),
+  ts(),
+  // typescript({
+  //   rollupCommonJSResolveHack: true,
+  //   clean: true,
+  //   exclude: ["./src/__tests__/*"],
+  // }),
+  // babel({
+  //   extensions: [".tsx"],
+  //   exclude: ["node_modules/**", "./src/__tests__"],
+  //   presets: ["@babel/env", "@babel/preset-react"],
+  // }),
   commonjs(),
 ];
 
 export default [
   {
-    input: "src/index.ts",
+    input: "src/web/index.ts",
     external: ["pusher-js"],
     plugins,
     output: [
@@ -44,7 +46,7 @@ export default [
       },
       {
         // build into our example app for testing with a real client
-        file: "example/src/use-pusher/index.js",
+        file: "examples/web/src/use-pusher/index.js",
         format: "es",
         exports: "named",
         sourcemap: true,
@@ -52,12 +54,19 @@ export default [
     ],
   },
   {
+    input: "src/native/index.ts",
     external: ["pusher-js", "react-native"],
     plugins,
-    input: "src/react-native/index.ts",
     output: [
       {
+        // allows users to import from @harelpls/use-pusher/react-native
         file: "react-native/index.js",
+        format: "cjs",
+        exports: "named",
+        sourcemap: true,
+      },
+      {
+        file: "examples/native-use-pusher-example/use-pusher/native/index.js",
         format: "cjs",
         exports: "named",
         sourcemap: true,

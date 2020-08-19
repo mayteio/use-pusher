@@ -1,9 +1,9 @@
-import { NOT_IN_CONTEXT_WARNING, usePusher } from "../usePusher";
-
+import { renderHook } from "@testing-library/react-hooks";
 import Pusher from "pusher-js";
 import React from "react";
-import { __PusherContext } from "../PusherProvider";
-import { renderHook } from "@testing-library/react-hooks";
+
+import { __PusherContext } from "../core/PusherProvider";
+import { NOT_IN_CONTEXT_WARNING, usePusher } from "../core/usePusher";
 
 describe("usePusher()", () => {
   test("should warn when outside provider", () => {

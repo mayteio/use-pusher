@@ -5,7 +5,6 @@ import {
 } from "../../testUtils";
 
 import { PusherMock } from "pusher-js-mock";
-import { __PusherContext } from "../PusherProvider";
 import { act } from "@testing-library/react-hooks";
 import {
   usePresenceChannel,
@@ -13,7 +12,8 @@ import {
   presenceChannelReducer,
   ADD_MEMBER,
   REMOVE_MEMBER,
-} from "../usePresenceChannel";
+} from "../core/usePresenceChannel";
+import { __PusherContext } from "../core/PusherProvider";
 
 describe("presenceChannelReducer", () => {
   /** Default state */

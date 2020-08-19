@@ -1,7 +1,7 @@
 import { Channel } from "pusher-js";
 import { PusherPresenceChannelMock } from "pusher-js-mock";
 import { renderHook } from "@testing-library/react-hooks";
-import { useClientTrigger } from "../useClientTrigger";
+import { useClientTrigger } from "../core/useClientTrigger";
 
 describe("useClientTrigger()", () => {
   test("should trigger client events on the channel", async () => {

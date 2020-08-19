@@ -8,7 +8,7 @@ node_modules
 coverage
 build
 dist
-react-native
+/react-native
 .rpt2_cache
 
 # misc

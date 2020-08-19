@@ -1,4 +1,4 @@
-import Pusher, { Options } from "pusher-js";
+import { default as Pusher, Options } from "pusher-js";
 import * as React from "react";
 import "jest-fetch-mock";
 

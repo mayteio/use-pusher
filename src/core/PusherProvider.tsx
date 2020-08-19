@@ -1,8 +1,8 @@
-import Pusher, { Options } from "pusher-js";
+import { Options } from "pusher-js";
 import { PusherContextValues, PusherProviderProps } from "./types";
 import React, { useEffect, useRef, useState } from "react";
 
-import dequal from "dequal";
+import { dequal } from "dequal";
 
 // context setup
 const PusherContext = React.createContext<PusherContextValues>({});
@@ -15,13 +15,13 @@ export const __PusherContext = PusherContext;
  * @param props Config for Pusher client
  */
 
-export const PusherProvider: React.FC<PusherProviderProps> = ({
+export const CorePusherProvider: React.FC<PusherProviderProps> = ({
   clientKey,
   cluster,
   triggerEndpoint,
   defer = false,
   children,
-  _PusherRuntime = Pusher,
+  _PusherRuntime,
   ...props
 }) => {
   // errors when required props are not passed.
@@ -37,11 +37,12 @@ export const PusherProvider: React.FC<PusherProviderProps> = ({
   useEffect(() => {
     previousConfig.current = props;
   });
-  const [client, setClient] = useState<Pusher | undefined>();
+  const [client, setClient] = useState<any | undefined>();
 
   useEffect(() => {
     // Skip creation of client if deferring, a value prop is passed, or config props are the same.
     if (
+      !_PusherRuntime ||
       defer ||
       props.value ||
       (dequal(previousConfig.current, props) && client !== undefined)
