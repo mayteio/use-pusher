@@ -1,9 +1,9 @@
 import { PusherChannelMock } from "pusher-js-mock";
 import React from "react";
-import { __PusherContext } from "../PusherProvider";
 import { renderHook } from "@testing-library/react-hooks";
 import { renderHookWithProvider } from "../testUtils";
-import { useChannel, NO_CHANNEL_NAME_WARNING } from "../useChannel";
+import { useChannel, NO_CHANNEL_NAME_WARNING } from "../core/useChannel";
+import { __PusherContext } from "../core/PusherProvider";
 
 describe("useChannel()", () => {
   test("should throw an error when no channelName present", () => {

@@ -1,10 +1,10 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react-dom/test-utils";
+import React from "react";
 
 import Pusher from "pusher-js";
 import { PusherMock } from "pusher-js-mock";
-import React from "react";
-import { __PusherContext } from "./PusherProvider";
+import { __PusherContext } from "./core/PusherProvider";
 
 /**
  * Flushes async promises in mocks
@@ -42,6 +42,6 @@ export const makeAuthPusherConfig = (id: string = "my-id", info: any = {}) => ({
     authorize: (
       socketId: string,
       callback: (errored: boolean, info: any) => void
-    ) => callback(socketId === "errored", { id, info })
-  })
+    ) => callback(socketId === "errored", { id, info }),
+  }),
 });

@@ -1,7 +1,7 @@
 import { Channel } from "pusher-js";
 import { PusherChannelMock } from "pusher-js-mock";
 import { renderHook } from "@testing-library/react-hooks";
-import { useEvent } from "../useEvent";
+import { useEvent } from "../core/useEvent";
 
 describe("useEvent()", () => {
   test("should bind to events when the hook is called", () => {

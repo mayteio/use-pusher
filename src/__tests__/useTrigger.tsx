@@ -1,12 +1,10 @@
 import "jest-fetch-mock";
-
-import { NO_AUTH_HEADERS_WARNING, useTrigger } from "../useTrigger";
-
+import React from "react";
 import Pusher from "pusher-js";
 import { PusherMock } from "pusher-js-mock";
-import React from "react";
-import { __PusherContext } from "../PusherProvider";
 import { renderHook } from "@testing-library/react-hooks";
+import { __PusherContext } from "../core/PusherProvider";
+import { NO_AUTH_HEADERS_WARNING, useTrigger } from "../core/useTrigger";
 
 describe("useTrigger()", () => {
   beforeEach(() => {
@@ -19,7 +17,7 @@ describe("useTrigger()", () => {
       <__PusherContext.Provider
         value={{
           client: (new PusherMock("key") as unknown) as Pusher,
-          triggerEndpoint: "http://example.com"
+          triggerEndpoint: "http://example.com",
         }}
       >
         {children}
@@ -27,7 +25,7 @@ describe("useTrigger()", () => {
     );
 
     const { result } = await renderHook(() => useTrigger("presence-channel"), {
-      wrapper
+      wrapper,
     });
 
     result.current("event", {});
@@ -43,11 +41,11 @@ describe("useTrigger()", () => {
           client: (new PusherMock("key", {
             auth: {
               headers: {
-                Authorization: "Bearer token"
-              }
-            }
+                Authorization: "Bearer token",
+              },
+            },
           }) as unknown) as Pusher,
-          triggerEndpoint: "http://example.com"
+          triggerEndpoint: "http://example.com",
         }}
       >
         {children}
@@ -55,7 +53,7 @@ describe("useTrigger()", () => {
     );
 
     const { result } = await renderHook(() => useTrigger("public-channel"), {
-      wrapper
+      wrapper,
     });
 
     result.current("event", {});
@@ -67,12 +65,12 @@ describe("useTrigger()", () => {
         body: JSON.stringify({
           channelName: "public-channel",
           eventName: "event",
-          data: {}
+          data: {},
         }),
         headers: {
-          Authorization: "Bearer token"
-        }
-      }
+          Authorization: "Bearer token",
+        },
+      },
     ]);
   });
 });
