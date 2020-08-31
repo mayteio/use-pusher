@@ -1,0 +1,12 @@
+{
+  "name": "native-use-pusher-example",
+  "displayName": "native-use-pusher-example",
+  "expo": {
+    "name": "native-use-pusher-example",
+    "slug": "native-use-pusher-example",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
