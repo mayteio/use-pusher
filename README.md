@@ -131,9 +131,9 @@ A helper function to create a **server triggered** event. BYO server (See [Trigg
 import { useTrigger } from '@harelpls/use-pusher';
 
 const Example = () => {.
-  const trigger = useTrigger();
+  const trigger = useTrigger("channel-name");
   const handleClick = () =>
-    trigger("channel-name", "event-name", "hello");
+    trigger("event-name", "hello");
 
   return (
     <button onClick={handleClick}>Say Hello</button>
