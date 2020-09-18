@@ -12,7 +12,7 @@ import { useEffect } from "react";
 export function useEvent<D>(
   channel: Channel | PresenceChannel | undefined,
   eventName: string,
-  callback: (data?: D) => void
+  callback: (data?: D, metadata?: { user_id: string }) => void
 ) {
   // error when required arguments aren't passed.
   invariant(eventName, "Must supply eventName and callback to onEvent");
