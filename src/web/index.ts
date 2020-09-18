@@ -6,3 +6,4 @@ export * from "../core/useEvent";
 export * from "../core/useClientTrigger";
 export * from "../core/useTrigger";
 export * from "./PusherProvider";
+export { __PusherContext } from "../core/PusherProvider";
