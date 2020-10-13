@@ -96,9 +96,9 @@ const Example = () => {
     <ul>
       {Object.entries(members)
         // filter self from members
-        .filter([id] => id !== myID)
+        .filter(([id]) => id !== myID)
         // map them to a list
-        .map([id, info] => (
+        .map(([id, info]) => (
           <li key={id}>{info.name}</li>
         ))
       }
