@@ -1,4 +1,4 @@
-import { Options } from "pusher-js";
+import { default as Pusher, Options } from "pusher-js";
 import { PusherContextValues, PusherProviderProps } from "./types";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -20,6 +20,7 @@ export const CorePusherProvider: React.FC<PusherProviderProps> = ({
   cluster,
   triggerEndpoint,
   defer = false,
+  logToConsole = false,
   children,
   _PusherRuntime,
   ...props
@@ -29,6 +30,8 @@ export const CorePusherProvider: React.FC<PusherProviderProps> = ({
     if (!clientKey) console.error("A client key is required for pusher");
     if (!cluster) console.error("A cluster is required for pusher");
   }, [clientKey, cluster]);
+
+  Pusher.logToConsole = logToConsole;
 
   const config: Options = { cluster, ...props };
 

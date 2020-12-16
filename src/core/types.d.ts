@@ -24,6 +24,7 @@ export interface PusherProviderProps extends Options {
     | undefined;
   triggerEndpoint?: string;
   defer?: boolean;
+  logToConsole?: boolean;
   // for testing purposes
   value?: PusherContextValues;
 }
