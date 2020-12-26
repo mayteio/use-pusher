@@ -39,7 +39,6 @@
     "release": "yarn test && yarn build && yarn types && yarn publish"
   },
   "dependencies": {
-    "@react-native-community/netinfo": "^5.9.3",
     "@types/react-dom": "^16.9.8",
     "dequal": "^2.0.1",
     "invariant": "^2.2.4",
