@@ -156,9 +156,9 @@
     &lt;ul&gt;
       {<span class="hljs-built_in">Object</span>.entries(members)
         <span class="hljs-comment">// filter self from members</span>
-        .filter([id] =&gt; id !== myID)
+        .filter(([id]) =&gt; id !== myID)
         <span class="hljs-comment">// map them to a list</span>
-        .map([id, info] =&gt; (
+        .map(([id, info]) =&gt; (
           &lt;li key={id}&gt;{info.name}&lt;/li&gt;
         ))
       }
