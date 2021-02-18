@@ -1,6 +1,5 @@
-import { renderHook } from "@testing-library/react-hooks";
-import { act } from "react-dom/test-utils";
 import React from "react";
+import { renderHook, act } from "@testing-library/react-hooks";
 
 import Pusher from "pusher-js";
 import { PusherMock } from "pusher-js-mock";
