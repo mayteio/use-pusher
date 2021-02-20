@@ -1314,6 +1314,7 @@ exports.NO_CHANNEL_NAME_WARNING = NO_CHANNEL_NAME_WARNING;
 exports.PusherProvider = PusherProvider;
 exports.REMOVE_MEMBER = REMOVE_MEMBER;
 exports.SET_STATE = SET_STATE;
+exports.__PusherContext = __PusherContext;
 exports.presenceChannelReducer = presenceChannelReducer;
 exports.useChannel = useChannel;
 exports.useClientTrigger = useClientTrigger;
