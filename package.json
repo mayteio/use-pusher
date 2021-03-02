@@ -1,6 +1,6 @@
 {
   "name": "@harelpls/use-pusher",
-  "version": "7.1.0",
+  "version": "7.2.1",
   "description": "A wrapper around pusher-js for easy-as hooks in React.",
   "author": "@mayteio",
   "keywords": [
@@ -33,6 +33,7 @@
     "test:native": "JEST_ENV=rn jest --config=jest.rn.config.js",
     "build": "rimraf dist react-native && rollup -c",
     "start": "rollup -c -w",
+    "types": "yarn types:web && yarn types:native",
     "types:web": "dts-bundle-generator -o ./dist/index.d.ts ./src/web/index.ts --external-imports pusher-js",
     "types:native": "dts-bundle-generator -o ./react-native/index.d.ts ./src/native/index.ts --external-imports=pusher-js",
     "docs": "typedoc --options ./typedoc.js ./src && netlify deploy --prod",

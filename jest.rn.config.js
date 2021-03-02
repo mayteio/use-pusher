@@ -13,7 +13,10 @@ module.exports = {
       babelConfig: true,
     },
   },
-  testPathIgnorePatterns: ["<rootDir>/src/__tests__/useTrigger.tsx"],
+  testPathIgnorePatterns: [
+    "<rootDir>/src/__tests__/useTrigger.tsx",
+    "<rootDir>/examples/native-use-pusher-example/__tests__/App.js",
+  ],
   // This is the only part which you can keep
   // from the above linked tutorial's config:
   cacheDirectory: ".jest/cache",
