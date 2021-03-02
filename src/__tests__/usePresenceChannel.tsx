@@ -2,7 +2,7 @@ import {
   actAndFlushPromises,
   makeAuthPusherConfig,
   renderHookWithProvider,
-} from "../../testUtils";
+} from "../testUtils";
 
 import { PusherMock } from "pusher-js-mock";
 import { act } from "@testing-library/react-hooks";
