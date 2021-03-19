@@ -10,7 +10,7 @@ import { useEffect } from "react";
  * @param callback Callback to call on a new event
  */
 export function useEvent<D>(
-  channel: Channel | Channel[] | PresenceChannel | undefined,
+  channel: Channel | Channel[] | PresenceChannel | PresenceChannel[] | undefined,
   eventName: string,
   callback: (data?: D, metadata?: { user_id: string }) => void
 ) {
@@ -24,11 +24,16 @@ export function useEvent<D>(
       return;
     } else if (Array.isArray(channel)) {
       channel.forEach((cn) => cn.bind(eventName, callback));
-    } else channel.bind(eventName, callback);
+    } else {
+      channel.bind(eventName, callback);
+    }
+
     return () => {
       if (Array.isArray(channel)) {
-        channel.forEach((cn) => cn.bind(eventName, callback));
-      } else channel.unbind(eventName, callback);
+        channel.forEach((cn) => cn.unbind(eventName, callback));
+      } else {
+        channel.unbind(eventName, callback);
+      }
     };
   }, [channel, eventName, callback]);
 }

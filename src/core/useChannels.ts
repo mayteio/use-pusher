@@ -20,13 +20,20 @@ export const NO_CHANNEL_NAME_WARNING =
   "No channel name passed to useChannel. No channel has been subscribed to.";
 
 export function useChannels<T extends Channel & PresenceChannel>(
-  channelNames: string[]
+  channelNames: string[] | undefined
 ) {
   const { client } = usePusher();
   const [channels, setChannels] = useState<T[] | undefined>();
+  const sortedJoinedChannelNames = (channelNames || []).sort().join(".");
   useEffect(() => {
     /** Return early if there's no client */
     if (!client) return;
+
+    /** Return early and warn if there's no channels */
+    if (channelNames === undefined || channelNames.length === 0) {
+      console.warn(NO_CHANNEL_NAME_WARNING);
+      return;
+    }
 
     /** Subscribe to channels and set it in state */
     const pusherChannels = channelNames.map((cn) => client.subscribe(cn));
@@ -34,7 +41,7 @@ export function useChannels<T extends Channel & PresenceChannel>(
 
     /** Cleanup on unmount/re-render */
     return () => channelNames.forEach((cn) => client?.unsubscribe(cn));
-  }, [channelNames.sort().join("."), client]);
+  }, [sortedJoinedChannelNames, client]);
 
   /** Return the channel for use. */
   return channels;
