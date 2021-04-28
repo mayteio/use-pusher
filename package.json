@@ -1,6 +1,6 @@
 {
   "name": "@harelpls/use-pusher",
-  "version": "7.2.1",
+  "version": "7.2.2",
   "description": "A wrapper around pusher-js for easy-as hooks in React.",
   "author": "@mayteio",
   "keywords": [
@@ -43,9 +43,6 @@
     "dequal": "^2.0.1",
     "invariant": "^2.2.4",
     "pusher-js": "^7.0.0"
-  },
-  "peerDependencies": {
-    "react": "^16.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
