@@ -88,9 +88,6 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="no_channel_name_warning" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> NO_<wbr>CHANNEL_<wbr>NAME_<wbr>WARNING</h3>
-					<div class="tsd-signature tsd-kind-icon">NO_<wbr>CHANNEL_<wbr>NAME_<wbr>WARNING<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"No channel name passed to useChannel. No channel has been subscribed to."</span><span class="tsd-signature-symbol"> = &quot;No channel name passed to useChannel. No channel has been subscribed to.&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in core/useChannel.ts:19</li>
@@ -108,7 +105,7 @@
 							<dd><p>of channel you&#39;re subscribing to. Can be one of <code>Channel</code> or <code>PresenceChannel</code> from <code>pusher-js</code>.</p>
 							</dd>
 							<dt>returns</dt>
-							<dd><p>Instance of the channel you just subscribed to.</p>
+              <dd><p>Instance of the channel you just subscribed to (or <code>undefined</code> if the channel name provided is falsy).</p>
 							</dd>
 							<dt>example</dt>
 							<dd><pre><code class="language-javascript"><span class="hljs-keyword">const</span> channel = useChannel(<span class="hljs-string">&quot;my-channel&quot;</span>)

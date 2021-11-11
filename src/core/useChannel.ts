@@ -16,9 +16,6 @@ import { usePusher } from "./usePusher";
  * ```
  */
 
-export const NO_CHANNEL_NAME_WARNING =
-  "No channel name passed to useChannel. No channel has been subscribed to.";
-
 export function useChannel<T extends Channel & PresenceChannel>(
   channelName: string | undefined
 ) {
@@ -28,11 +25,8 @@ export function useChannel<T extends Channel & PresenceChannel>(
     /** Return early if there's no client */
     if (!client) return;
 
-    /** Return early and warn if there's no channel */
-    if (!channelName) {
-      console.warn(NO_CHANNEL_NAME_WARNING);
-      return;
-    }
+    /** Return early if channel name is falsy */
+    if (!channelName) return;
 
     /** Subscribe to channel and set it in state */
     const pusherChannel = client.subscribe(channelName);

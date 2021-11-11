@@ -2,18 +2,20 @@ import { PusherChannelMock } from "pusher-js-mock";
 import React from "react";
 import { renderHook } from "@testing-library/react-hooks";
 import { renderHookWithProvider } from "../testUtils";
-import { useChannel, NO_CHANNEL_NAME_WARNING } from "../core/useChannel";
+import { useChannel } from "../core/useChannel";
 import { __PusherContext } from "../core/PusherProvider";
 
 describe("useChannel()", () => {
-  test("should throw an error when no channelName present", () => {
+  test("should return undefined when channelName is falsy", () => {
     const wrapper: React.FC = (props) => (
       <__PusherContext.Provider value={{ client: {} as any }} {...props} />
     );
 
-    jest.spyOn(console, "warn");
-    renderHook(() => useChannel(undefined), { wrapper });
-    expect(console.warn).toHaveBeenCalledWith(NO_CHANNEL_NAME_WARNING);
+    const { result } = renderHook(() => useChannel(""), {
+      wrapper,
+    });
+
+    expect(result.current).toBeUndefined();
   });
 
   test("should return undefined if no pusher client present", () => {
