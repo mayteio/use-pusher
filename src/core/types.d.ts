@@ -27,6 +27,7 @@ export interface ChannelsContextValues {
 
 export interface PusherProviderProps extends Options {
   _PusherRuntime?: typeof Pusher;
+  children: React.ReactNode;
   clientKey: string | undefined;
   cluster:
     | "mt1"

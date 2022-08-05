@@ -1,7 +1,6 @@
 import { Channel, PresenceChannel } from "pusher-js";
 import { useEffect, useState } from "react";
 import { useChannels } from "./useChannels";
-import { usePusher } from "./usePusher";
 
 /**
  * Subscribe to a channel
@@ -20,19 +19,16 @@ import { usePusher } from "./usePusher";
 export function useChannel<T extends Channel & PresenceChannel>(
   channelName: string | undefined
 ) {
-  const { client } = usePusher();
-  const [channel, setChannel] = useState<T>();
+  const [channel, setChannel] = useState<Channel & PresenceChannel>();
   const { subscribe, unsubscribe } = useChannels();
 
   useEffect(() => {
     if (!channelName || !subscribe || !unsubscribe) return;
 
-    const channel = subscribe<T>(channelName);
-    setChannel(channel);
+    const _channel = subscribe<T>(channelName);
+    setChannel(_channel);
     return () => unsubscribe(channelName);
-  }, [channelName, client, subscribe, unsubscribe]);
-
-  if (!channelName) return undefined;
+  }, [channelName, subscribe, unsubscribe]);
 
   /** Return the channel for use. */
   return channel;

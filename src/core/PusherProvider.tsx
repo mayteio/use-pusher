@@ -1,8 +1,7 @@
 import { Options } from "pusher-js";
-import { PusherContextValues, PusherProviderProps } from "./types";
-import React, { useEffect, useRef, useState } from "react";
-
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { dequal } from "dequal";
+import { PusherContextValues, PusherProviderProps } from "./types";
 
 // context setup
 const PusherContext = React.createContext<PusherContextValues>({});
@@ -30,7 +29,10 @@ export const CorePusherProvider: React.FC<PusherProviderProps> = ({
     if (!cluster) console.error("A cluster is required for pusher");
   }, [clientKey, cluster]);
 
-  const config: Options = { cluster, ...props };
+  const config: Options = useMemo(
+    () => ({ cluster, ...props }),
+    [cluster, props]
+  );
 
   // track config for comparison
   const previousConfig = useRef<Options | undefined>(props);
@@ -44,24 +46,26 @@ export const CorePusherProvider: React.FC<PusherProviderProps> = ({
     if (
       !_PusherRuntime ||
       defer ||
+      !clientKey ||
       props.value ||
       (dequal(previousConfig.current, props) && client !== undefined)
     ) {
       return;
     }
 
-    // @ts-ignore
     setClient(new _PusherRuntime(clientKey, config));
-  }, [client, clientKey, props, defer]);
+  }, [client, clientKey, props, defer, _PusherRuntime, config]);
 
+  console.log(client);
   return (
     <PusherContext.Provider
       value={{
         client,
         triggerEndpoint,
       }}
-      children={children}
       {...props}
-    />
+    >
+      {children}
+    </PusherContext.Provider>
   );
 };
