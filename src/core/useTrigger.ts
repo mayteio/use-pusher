@@ -33,10 +33,13 @@ export function useTrigger<TData = {}>(channelName: string) {
     (eventName: string, data?: TData) => {
       const fetchOptions: RequestInit = {
         method: "POST",
-        body: JSON.stringify({ channelName, eventName, data })
+        body: JSON.stringify({ channelName, eventName, data }),
       };
 
+      // @ts-expect-error deprecated since 7.1.0, but still supported for backwards compatibility
+      // now it should use channelAuthorization instead
       if (client && client.config?.auth) {
+        // @ts-expect-error deprecated
         fetchOptions.headers = client.config.auth.headers;
       } else {
         console.warn(NO_AUTH_HEADERS_WARNING);
