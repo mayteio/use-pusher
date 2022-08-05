@@ -42,10 +42,10 @@
   "dependencies": {
     "dequal": "^2.0.1",
     "invariant": "^2.2.4",
-    "pusher-js": "^7.0.0"
+    "pusher-js": "^7.3.0"
   },
   "peerDependencies": {
-    "react": "^16.9.0"
+    "react": ">=16.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
