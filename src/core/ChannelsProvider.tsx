@@ -26,10 +26,7 @@ export const ChannelsProvider: React.FC<{ children: React.ReactNode }> = ({
   const subscribe = useCallback(
     <T extends Channel & PresenceChannel>(channelName: string) => {
       /** Return early if there's no client */
-      if (!client) return;
-
-      /** Return early if channel name is falsy */
-      if (!channelName) return;
+      if (!client || !channelName) return;
 
       /** Subscribe to channel and set it in state */
       const pusherChannel = client.subscribe(channelName);
@@ -44,13 +41,13 @@ export const ChannelsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const unsubscribe = useCallback(
     (channelName: string) => {
-      /** Return early if there's no client */
-      if (!client) return;
-      /** Return early if channel name is falsy */
-      if (!channelName) return;
-      /** If no connection, just skip*/
-      if (!connectedChannels.current[channelName]?.length) return;
-
+      /** Return early if there's no props */
+      if (
+        !client ||
+        !channelName ||
+        !(channelName in connectedChannels.current)
+      )
+        return;
       /** If just one connection, unsubscribe totally*/
       if (connectedChannels.current[channelName].length === 1) {
         client.unsubscribe(channelName);
@@ -65,11 +62,12 @@ export const ChannelsProvider: React.FC<{ children: React.ReactNode }> = ({
   const getChannel = useCallback(
     <T extends Channel & PresenceChannel>(channelName: string) => {
       /** Return early if there's no client */
-      if (!client) return;
-      /** Return early if channel name is falsy */
-      if (!channelName) return;
-      /** Return early if channel is not in state */
-      if (!connectedChannels.current[channelName]) return;
+      if (
+        !client ||
+        !channelName ||
+        !(channelName in connectedChannels.current)
+      )
+        return;
       /** Return channel */
       return connectedChannels.current[channelName][0] as T;
     },

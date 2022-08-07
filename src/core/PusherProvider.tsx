@@ -56,7 +56,6 @@ export const CorePusherProvider: React.FC<PusherProviderProps> = ({
     setClient(new _PusherRuntime(clientKey, config));
   }, [client, clientKey, props, defer, _PusherRuntime, config]);
 
-  console.log(client);
   return (
     <PusherContext.Provider
       value={{
