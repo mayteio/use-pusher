@@ -2,6 +2,7 @@ import { Options } from "pusher-js";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { dequal } from "dequal";
 import { PusherContextValues, PusherProviderProps } from "./types";
+import { ChannelsProvider } from "./ChannelsProvider";
 
 // context setup
 const PusherContext = React.createContext<PusherContextValues>({});
@@ -64,7 +65,7 @@ export const CorePusherProvider: React.FC<PusherProviderProps> = ({
       }}
       {...props}
     >
-      {children}
+      <ChannelsProvider>{children}</ChannelsProvider>
     </PusherContext.Provider>
   );
 };
