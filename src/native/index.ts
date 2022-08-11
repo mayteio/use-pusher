@@ -5,5 +5,7 @@ export * from "../core/usePresenceChannel";
 export * from "../core/useEvent";
 export * from "../core/useClientTrigger";
 export * from "../core/useTrigger";
+export * from "../core/useChannels";
+export * from "../core/ChannelsProvider";
 export * from "./PusherProvider";
 export { __PusherContext } from "../core/PusherProvider";

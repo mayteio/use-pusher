@@ -1,24 +1,30 @@
-import { PusherChannelMock } from "pusher-js-mock";
+import { PusherChannelMock, PusherMock } from "pusher-js-mock";
 import React from "react";
 import { renderHook } from "@testing-library/react-hooks";
 import { renderHookWithProvider } from "../testUtils";
-import { useChannel, NO_CHANNEL_NAME_WARNING } from "../core/useChannel";
+import { useChannel } from "../core/useChannel";
 import { __PusherContext } from "../core/PusherProvider";
+import { ChannelsProvider } from "../web";
 
 describe("useChannel()", () => {
-  test("should throw an error when no channelName present", () => {
-    const wrapper: React.FC = (props) => (
-      <__PusherContext.Provider value={{ client: {} as any }} {...props} />
+  test("should return undefined when channelName is falsy", () => {
+    const wrapper: React.FC = ({ children }) => (
+      <__PusherContext.Provider value={{ client: {} as any }}>
+        <ChannelsProvider>{children}</ChannelsProvider>
+      </__PusherContext.Provider>
     );
+    const { result } = renderHook(() => useChannel(""), {
+      wrapper,
+    });
 
-    jest.spyOn(console, "warn");
-    renderHook(() => useChannel(undefined), { wrapper });
-    expect(console.warn).toHaveBeenCalledWith(NO_CHANNEL_NAME_WARNING);
+    expect(result.current).toBeUndefined();
   });
 
   test("should return undefined if no pusher client present", () => {
-    const wrapper: React.FC = (props) => (
-      <__PusherContext.Provider value={{ client: undefined }} {...props} />
+    const wrapper: React.FC = ({ children }) => (
+      <__PusherContext.Provider value={{ client: undefined }}>
+        <ChannelsProvider>{children}</ChannelsProvider>
+      </__PusherContext.Provider>
     );
     const { result } = renderHook(() => useChannel("public-channel"), {
       wrapper,
@@ -35,19 +41,18 @@ describe("useChannel()", () => {
   });
 
   test("should unsubscribe on unmount", async () => {
-    const mockUnsubscribe = jest.fn();
-    const client = {
-      subscribe: jest.fn(),
-      unsubscribe: mockUnsubscribe,
-    };
-    const wrapper: React.FC = (props) => (
-      <__PusherContext.Provider value={{ client: client as any }} {...props} />
+    const client = new PusherMock("key");
+    client.unsubscribe = jest.fn();
+    const wrapper: React.FC = ({ children, ...props }) => (
+      <__PusherContext.Provider value={{ client: client as any }} {...props}>
+        <ChannelsProvider>{children}</ChannelsProvider>
+      </__PusherContext.Provider>
     );
-    const { unmount } = await renderHook(() => useChannel("public-channel"), {
+    const { unmount } = renderHook(() => useChannel("public-channel"), {
       wrapper,
     });
     unmount();
 
-    expect(mockUnsubscribe).toHaveBeenCalled();
+    expect(client.unsubscribe).toHaveBeenCalled();
   });
 });

@@ -1,4 +1,9 @@
-import { default as Pusher, Options } from "pusher-js";
+import {
+  Channel,
+  default as Pusher,
+  Options,
+  PresenceChannel,
+} from "pusher-js";
 import * as React from "react";
 import "jest-fetch-mock";
 
@@ -8,8 +13,21 @@ export interface PusherContextValues {
   triggerEndpoint?: string;
 }
 
+export interface ChannelsContextValues {
+  subscribe?: <T extends Channel & PresenceChannel>(
+    channelName: string
+  ) => T | undefined;
+  unsubscribe?: <T extends Channel & PresenceChannel>(
+    channelName: string
+  ) => void;
+  getChannel?: <T extends Channel & PresenceChannel>(
+    channelName: string
+  ) => T | undefined;
+}
+
 export interface PusherProviderProps extends Options {
   _PusherRuntime?: typeof Pusher;
+  children: React.ReactNode;
   clientKey: string | undefined;
   cluster:
     | "mt1"

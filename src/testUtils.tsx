@@ -4,6 +4,7 @@ import React from "react";
 import Pusher from "pusher-js";
 import { PusherMock } from "pusher-js-mock";
 import { __PusherContext } from "./core/PusherProvider";
+import { ChannelsProvider } from "./core/ChannelsProvider";
 
 /**
  * Flushes async promises in mocks
@@ -21,9 +22,9 @@ export async function renderHookWithProvider<T>(
   clientConfig: Record<string, any> = {}
 ) {
   const client = new PusherMock("key", clientConfig) as unknown;
-  const wrapper: React.FC = ({ children }) => (
-    <__PusherContext.Provider value={{ client: client as Pusher }}>
-      {children}
+  const wrapper: React.FC = ({ children, ...props }) => (
+    <__PusherContext.Provider value={{ client: client as Pusher }} {...props}>
+      <ChannelsProvider>{children}</ChannelsProvider>
     </__PusherContext.Provider>
   );
   const result = renderHook(hook, { wrapper });

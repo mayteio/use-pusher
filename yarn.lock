@@ -6309,10 +6309,10 @@ pusher-js-mock@mayteio/pusher-js-mock#feature/presence-channels-release:
   version "0.2.1"
   resolved "https://codeload.github.com/mayteio/pusher-js-mock/tar.gz/1b426161901b736b729efeb256f573426eae56a2"
 
-pusher-js@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/pusher-js/-/pusher-js-7.0.0.tgz#9716ae3f79ca7f87a269764f278a8e14494a4e20"
-  integrity sha512-2ZSw8msMe6EKNTebQSthRInrWUK9bo3zXPmQx0bfeDFJdSnTWUROhdAhmpRQREHzqrL+l4imv/3uwgIQHUO0oQ==
+pusher-js@^7.3.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/pusher-js/-/pusher-js-7.3.0.tgz#0d4334bc67fb16b599cff7a1464016dfbd6d5658"
+  integrity sha512-N7uFRZGK6PKFfKd8e1aKsQ81OrilATGNhIbj42xJKmK+3zhstGBCQ110ZiF2nIngPTEKxQQqf15SJsVnQfNuqQ==
   dependencies:
     tweetnacl "^1.0.3"
 

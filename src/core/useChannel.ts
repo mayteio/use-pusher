@@ -1,6 +1,6 @@
 import { Channel, PresenceChannel } from "pusher-js";
 import { useEffect, useState } from "react";
-import { usePusher } from "./usePusher";
+import { useChannels } from "./useChannels";
 
 /**
  * Subscribe to a channel
@@ -16,31 +16,19 @@ import { usePusher } from "./usePusher";
  * ```
  */
 
-export const NO_CHANNEL_NAME_WARNING =
-  "No channel name passed to useChannel. No channel has been subscribed to.";
-
 export function useChannel<T extends Channel & PresenceChannel>(
   channelName: string | undefined
 ) {
-  const { client } = usePusher();
-  const [channel, setChannel] = useState<T | undefined>();
+  const [channel, setChannel] = useState<Channel & PresenceChannel>();
+  const { subscribe, unsubscribe } = useChannels();
+
   useEffect(() => {
-    /** Return early if there's no client */
-    if (!client) return;
+    if (!channelName || !subscribe || !unsubscribe) return;
 
-    /** Return early and warn if there's no channel */
-    if (!channelName) {
-      console.warn(NO_CHANNEL_NAME_WARNING);
-      return;
-    }
-
-    /** Subscribe to channel and set it in state */
-    const pusherChannel = client.subscribe(channelName);
-    setChannel(pusherChannel as T);
-
-    /** Cleanup on unmount/re-render */
-    return () => client?.unsubscribe(channelName);
-  }, [channelName, client]);
+    const _channel = subscribe<T>(channelName);
+    setChannel(_channel);
+    return () => unsubscribe(channelName);
+  }, [channelName, subscribe, unsubscribe]);
 
   /** Return the channel for use. */
   return channel;
