@@ -130,7 +130,7 @@ A helper function to create a **server triggered** event. BYO server (See [Trigg
 ```typescript
 import { useTrigger } from '@harelpls/use-pusher';
 
-const Example = () => {.
+const Example = () => {
   const trigger = useTrigger("channel-name");
   const handleClick = () =>
     trigger("event-name", "hello");
